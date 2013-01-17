@@ -1,0 +1,8 @@
+#! /bin/sh
+# script a remplir pour arotd
+# 
+# ce script permet d'executer des commandes utiles lors de la phase d'integration
+# (tests, stats sur le code, etc.).
+# - ce peut etre autre chose qu'un script shell
+# - la sortie standard et la sortie d'erreur sont capturees et envoyees automatiquement.
+# Le script n'a pas besoin de s'en charger.
