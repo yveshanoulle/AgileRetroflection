@@ -1,8 +1,8 @@
 #! /bin/sh
-# script a remplir pour arotd
+# script to fill for arotd
 # 
-# ce script permet d'executer des commandes utiles lors de la phase d'integration
-# (tests, stats sur le code, etc.).
-# - ce peut etre autre chose qu'un script shell
-# - la sortie standard et la sortie d'erreur sont capturees et envoyees automatiquement.
-# Le script n'a pas besoin de s'en charger.
+# this script allows the execution of usefull in the intergration phase
+# (tests, stats of the code, etc.).
+# - this can be something else then a shell script 
+# - the standard output and error output are captured and automaticly send.
+# The script does not need to take care of this .
