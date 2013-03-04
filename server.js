@@ -1,4 +1,4 @@
 var connect = require('connect');
 connect.createServer(
     connect.static(__dirname)
-).listen(PORT);
+).listen(process.env.PORT || 5000);
