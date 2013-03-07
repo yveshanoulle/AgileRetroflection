@@ -1,8 +1,0 @@
-#! /bin/sh
-# script to fill for arotd
-# 
-# this script allows the execution of usefull in the intergration phase
-# (tests, stats of the code, etc.).
-# - this can be something else then a shell script 
-# - the standard output and error output are captured and automaticly send.
-# The script does not need to take care of this .
