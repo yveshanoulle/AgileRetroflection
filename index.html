@@ -1,60 +1,73 @@
 <!DOCTYPE html>
-<html manifest="arotd.appcache">
+<html manifest=retroflection.appcache>
     <head>
     	<meta charset="utf-8" />
 	    <meta name=viewport content="user-scalable=no, width=device-width, minimum-scale=1, maximum-scale=1"/>
         <meta name="apple-mobile-web-app-capable" content="yes" />
 		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
 		<link rel="stylesheet" href="jquery.mobile-1.3.0.min.css" />
-		<link rel="apple-touch-icon-precomposed" href="images/arotd-icon.png"/>
+		<link rel="stylesheet" href="icons.css" />
+		<link rel="apple-touch-icon-precomposed" href="images/retroflection-icon.png"/>
 		<link rel="apple-touch-startup-image" href="images/Default.png">
 		<script src="jquery-1.9.1.min.js"></script>
 		<script src="jquery.mobile-1.3.0.min.js"></script>
-
-        <script type="text/javascript" src="questions.json.js"></script>
-        <script type="text/javascript" src="arotd.js"></script>
+        <script src="swipeUpDown.js"></script>
+		
+        <script src="questions.json"></script>
+        <script src="retroflection.js"></script>
         <script>
         $(document).ready(function(){
-            $("body").arotd()
+            $("body").retroflection()
             $("#authors-page").contrib()
         });
         </script>
 
-		<style type=text/css>
-		    .ui-icon-first {
-		      background-image: url(images/first-last.png);
-		      background-size: 72px 18px;
-		      background-position:  -36px 0px;
-		    }
-		    .ui-icon-last {
-		      background-image: url(images/first-last.png);
-		      background-size: 72px 18px;
-		      background-position:  -0px 0px;
-		    }
-		  </style>
-		<title>AROTD</title>		
+		<title>Retroflection</title>		
     </head>
 
     <body>
-        <div data-role="page" id="jqm-home">
+        <div data-role="page" id="page1">
         	<div data-role="header" data-position=fixed id='header'>
-				<p align="center">Agile Retroflection of the Day</p>
+				<p align="center">Retroflection of the Day</p>
         	</div>
         	
         	<div data-role="content" id="content">
-				<h1 id="number"></h1>
-                <p id="question"></p>
-                <p align="right" id="author"></p>
+				<h1 id="number1"></h1>
+                <p id="question1"></p>
+                <p align="right" id="author1"></p>
             </div>
         
         	<div data-role="footer" data-position=fixed id="footer">
 				<div data-role="controlgroup" data-type="horizontal" align="center">
-	                <a href="#" id="first" data-role=button data-icon="first" data-iconpos="notext"></a>
-	                <a href="#" id="previous" data-role=button data-icon="arrow-l" data-iconpos="notext"></a>
+	                <a href="#page2" data-transition="slide" data-direction="reverse" id="first1" data-role=button data-icon="first" data-iconpos="notext"></a>
+	                <a href="#page2" data-transition="slide" data-direction="reverse" id="previous1" data-role=button data-icon="arrow-l" data-iconpos="notext"></a>
                 	<a href="#authors-page" data-role=button data-transition="slideup" data-icon="info" data-iconpos="notext"></a>
-                	<a href="#" id="random" data-role=button data-icon="refresh" data-iconpos="notext"></a>
-                	<a href="#" id="next" data-role=button data-icon="arrow-r" data-iconpos="notext"></a>
-                	<a href="#" id="last" data-role=button data-icon="last" data-iconpos="notext"></a>
+                	<a href="#page2" id="random1" data-transition="slidedown" data-role=button data-icon="refresh" data-iconpos="notext"></a>
+                	<a href="#page2" data-transition="slide" id="next1" data-role=button data-icon="arrow-r" data-iconpos="notext"></a>
+                	<a href="#page2" data-transition="slide" id="last1" data-role=button data-icon="last" data-iconpos="notext"></a>
+				</div>
+            </div>
+        </div>
+     
+        <div data-role="page" id="page2">
+        	<div data-role="header" data-position=fixed id='header'>
+				<p align="center">Retroflection of the Day</p>
+        	</div>
+        	
+        	<div data-role="content" id="content">
+				<h1 id="number2"></h1>
+                <p id="question2"></p>
+                <p align="right" id="author2"></p>
+            </div>
+        
+        	<div data-role="footer" data-position=fixed id="footer">
+				<div data-role="controlgroup" data-type="horizontal" align="center">
+	                <a href="#page1" data-transition="slide" data-direction="reverse" id="first2" data-role=button data-icon="first" data-iconpos="notext"></a>
+	                <a href="#page1" data-transition="slide" data-direction="reverse" id="previous2" data-role=button data-icon="arrow-l" data-iconpos="notext"></a>
+                	<a href="#authors-page" data-role=button data-transition="slideup" data-icon="info" data-iconpos="notext"></a>
+                	<a href="#page1" id="random2" data-transition="slidedown" data-role=button data-icon="refresh" data-iconpos="notext"></a>
+                	<a href="#page1" data-transition="slide" id="next2" data-role=button data-icon="arrow-r" data-iconpos="notext"></a>
+                	<a href="#page1" data-transition="slide" id="last2" data-role=button data-icon="last" data-iconpos="notext"></a>
 				</div>
             </div>
         </div>

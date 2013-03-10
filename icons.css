@@ -1,0 +1,10 @@
+.ui-icon-first {
+  background-image: url(images/first-last.png);
+  background-size: 72px 18px;
+  background-position:  -36px 0px;
+}
+.ui-icon-last {
+  background-image: url(images/first-last.png);
+  background-size: 72px 18px;
+  background-position:  -0px 0px;
+}

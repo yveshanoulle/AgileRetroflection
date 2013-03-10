@@ -1,12 +1,12 @@
 CACHE MANIFEST
 
-arotd.js
-questions.json.js
+retroflection.js
+questions.json
 jquery.mobile-1.3.0.min.css
 jquery.mobile-1.3.0.min.js
 jquery-1.9.1.min.js
 images/ajax-loader.gif
-images/arotd-icon.png
+images/retroflection-icon.png
 images/Default.png
 images/icons-18-black.png
 images/icons-18-white.png
