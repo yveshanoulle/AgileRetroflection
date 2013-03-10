@@ -81,36 +81,48 @@ var display = {};
 	this.show = function(number) {
 		var current = retroflection.currentQuestion();
 		$("#question" + number).html(current.question);
-		$("#author" + number).html(this.linkToTwitter(current.author));
-		$("#number" + number).html("Question #" + current.number);
+		$("#author" + number).html(this.linkToTwitter(current.author) + " (#" + current.number + ")");
 	}
 
-	this.bindButtons = function(buttonNumber, number) {
-		this.bindButtonsNumbered(1,2);
-		this.bindButtonsNumbered(2,1);
+	this.bindEvents = function() {
+		bindButtonsNumbered(1,2);
+		bindButtonsNumbered(2,1);
+		bindGesturesForPage(1);
+		bindGesturesForPage(2);
 	}
 
-
-	this.bindButtonsNumbered = function(buttonNumber, number) {
+	var bindButtonsNumbered = function(buttonNumber, number) {
 		$("#next" + buttonNumber).click(function() {
 			retroflection.nextQuestion(number);
 		})
-
 		$("#previous" + buttonNumber).click(function() {
 			retroflection.previousQuestion(number);
 		})
-
 		$("#random" + buttonNumber).click(function() {
 			retroflection.randomQuestion(number);
 		})
-
 		$("#first" + buttonNumber).click(function() {
 			retroflection.firstQuestion(number);
 		})
-
 		$("#last" + buttonNumber).click(function() {
 			retroflection.lastQuestion(number);
 		})
+	}
+	
+	var bindGesturesForPage = function(pageNumber) {
+		bindGestureToButtonOnPage("swipeleft", "#next", pageNumber);
+		bindGestureToButtonOnPage("swiperight", "#previous", pageNumber);
+		bindGestureToButtonOnPage("swipedown", "#random", pageNumber);
+		bindGestureToButtonOnPage("swipeup", "#random", pageNumber);
+	}
+	
+	var bindGestureToButtonOnPage = function(gesture, button, pageNumber) {
+		$("#page" + pageNumber).bind (gesture, function (event)
+		{
+			event.stopImmediatePropagation();
+			$(button + pageNumber).trigger("click");
+			return false;
+		});
 	}
 
 	this.link = function(name) {
@@ -120,9 +132,8 @@ var display = {};
 	this.linkToTwitter = function(name) {
 		if (name.charAt(0) == "@") {
 			return "<a href='http://twitter.com/" + name.substr(1) + "'>" + name + "</a>";
-		} else {
-			return name;
 		}
+		return name;
 	}
 
 }).apply(display)
@@ -130,64 +141,7 @@ var display = {};
 jQuery.fn.retroflection = function() {
 	display.show(1);
 	display.show(2);
-	display.bindButtons();
-
-	$("#page1").children("#content").bind ("swipeleft", function (event)
-	{
-		event.stopImmediatePropagation();
-		$("#next" + 1).trigger("click");
-		return false;
-	});
-
-	$("#page2").children("#content").bind ("swipeleft", function (event)
-	{
-		event.stopImmediatePropagation();
-		$("#next" + 2).trigger("click");
-		return false;
-	});
-
-	$("#page1").children("#content").bind ("swiperight", function (event)
-	{
-		event.stopImmediatePropagation();
-		$("#previous" + 1).trigger("click");
-		return false;
-	});
-	
-	$("#page2").children("#content").bind ("swiperight", function (event)
-	{
-		event.stopImmediatePropagation();
-		$("#previous" + 2).trigger("click");
-		return false;
-	});
-	
-	$("#page1").children("#content").bind ("swipedown", function (event)
-	{
-		event.stopImmediatePropagation();
-		$("#random" + 1).trigger("click");
-		return false;
-	});
-	
-	$("#page2").children("#content").bind ("swipedown", function (event)
-	{
-		event.stopImmediatePropagation();
-		$("#random" + 2).trigger("click");
-		return false;
-	});
-	
-	$("#page1").children("#content").bind ("swipeup", function (event)
-	{
-		event.stopImmediatePropagation();
-		$("#random" + 1).trigger("click");
-		return false;
-	});
-	
-	$("#page2").children("#content").bind ("swipeup", function (event)
-	{
-		event.stopImmediatePropagation();
-		$("#random" + 2).trigger("click");
-		return false;
-	});
-	
+	display.bindEvents();
 }
 
 jQuery.fn.contrib = function() {
