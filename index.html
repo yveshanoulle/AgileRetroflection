@@ -1,124 +1,150 @@
 <!DOCTYPE html>
-<html manifest=retroflection.appcache>
-    <head>
-    	<meta charset="utf-8" />
-	    <meta name=viewport content="user-scalable=no, width=device-width, minimum-scale=1, maximum-scale=1"/>
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
-		<link rel="stylesheet" href="jquery.mobile-1.3.0.min.css" />
-		<link rel="stylesheet" href="icons.css" />
-		<link rel="icon" href="images/favicon.ico">
-		<link rel="apple-touch-icon" href="images/Icon.png" />
-		<link rel="apple-touch-icon" sizes="72x72" href="images/Icon-72.png" />
-		<link rel="apple-touch-icon" sizes="114x114" href="images/Icon@2x.png" />
-		<link rel="apple-touch-icon" sizes="144x144" href="images/Icon-72@2x.png" />
-		<script src="jquery-1.9.1.min.js"></script>
-		<script src="jquery.mobile-1.3.0.min.js"></script>
-        <script src="swipeUpDown.js"></script>
-		
-        <script src="questions.json"></script>
-        <script src="retroflection.js"></script>
-        <script>
-        $(document).ready(function(){
+<html> <!--manifest=retroflection.appcache-->
+<head>
+    <meta charset="utf-8"/>
+    <meta name=viewport content="user-scalable=no, width=device-width, minimum-scale=1, maximum-scale=1"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <link rel="stylesheet" href="jquery.mobile-1.3.0.min.css"/>
+    <link rel="stylesheet" href="icons.css"/>
+    <link rel="stylesheet" href="retroflection.css"/>
+    <link rel="icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/Icon.png"/>
+    <link rel="apple-touch-icon" sizes="72x72" href="images/Icon-72.png"/>
+    <link rel="apple-touch-icon" sizes="114x114" href="images/Icon@2x.png"/>
+    <link rel="apple-touch-icon" sizes="144x144" href="images/Icon-72@2x.png"/>
+    <script src="jquery-1.9.1.min.js"></script>
+    <script src="jquery.mobile-1.3.0.min.js"></script>
+    <script src="swipeUpDown.js"></script>
+
+    <script src="questions.json"></script>
+    <script src="retroflection.js"></script>
+    <script>
+        $(document).ready(function () {
             $("body").retroflection()
             $("#authors-page").contrib()
         });
-        </script>
+    </script>
 
-		<title>Retroflection</title>		
-    </head>
+    <title>Retroflection</title>
+</head>
 
-    <body>
-        <div data-role="page" id="page1">
-		    <div data-role="panel" data-theme="a" data-position="right" data-position-fixed="true" data-display="overlay" id="menu1">
-		        <ul data-role="listview" data-theme="a">
-		            <li data-icon="delete"><a href="#page1" data-rel="close" data-iconpos="notext"></a></li>
-		            <li><a href="#authors-page">Authors</a></li>
-		            <li><a href="#about-page">About</a></li>
-		        </ul>
-		    </div>
+<body>
+<div data-role="page" id="page1">
+    <div data-role="panel" data-theme="a" data-position="right" data-position-fixed="true" data-display="overlay"
+         id="menu1">
+        <ul data-role="listview" data-theme="a">
+            <li data-icon="delete"><a href="#page1" data-rel="close">Back</a></li>
+            <li><a href="#authors-page">Authors</a></li>
+            <li><a href="#about-page">About</a></li>
+        </ul>
+    </div>
 
-        	<div data-role="header" data-position=fixed id='header'>
-				<h1>Retroflection</h1>
-            	<a href="#menu1" data-role=button data-transition="slideup" data-icon="gear" data-iconpos="notext" data-iconshadow="false" class="ui-icon-nodisc, ui-btn-right"></a>
-        	</div>
-        	
-        	<div data-role="content" id="content">
-				<h3 id="question1"></h3>
-           		<p align="right" id="author1"></p>
-            </div>
+    <div data-id="header" data-role="header" data-position=fixed id='header1'>
+        <h1>Retroflection</h1>
+        <a href="#menu1" data-role=button data-transition="slideup" data-icon="gear"
+           data-iconshadow="false" class="ui-icon-nodisc, ui-btn-right">More</a>
+    </div>
 
-        	<div data-role="footer" data-position=fixed id="footer">
-				<div data-role="controlgroup" data-type="horizontal" align="center">
-	                <a href="#page2" data-transition="slide" data-direction="reverse" id="first1" data-role=button data-icon="first" data-iconpos="notext"></a>
-	                <a href="#page2" data-transition="slide" data-direction="reverse" id="previous1" data-role=button data-icon="arrow-l" data-iconpos="notext"></a>
-                	<a href="#page2" id="random1" data-transition="slidedown" data-role=button data-icon="refresh" data-iconpos="notext"></a>
-                	<a href="#page2" data-transition="slide" id="next1" data-role=button data-icon="arrow-r" data-iconpos="notext"></a>
-                	<a href="#page2" data-transition="slide" id="last1" data-role=button data-icon="last" data-iconpos="notext"></a>
-				</div>
-            </div>
+    <div data-role="content" id="content1">
+        <h3 id="question1"></h3>
+
+        <p align="right" id="author1"></p>
+    </div>
+
+    <div data-id="footer" data-role="footer" data-position=fixed id="footer1">
+        <div data-role="navbar">
+            <ul>
+                <li><a href="#page2" data-transition="slide" data-direction="reverse" id="first1" data-role=button
+                       data-icon="first">First</a></li>
+                <li><a href="#page2" data-transition="slide" data-direction="reverse" id="previous1" data-role=button
+                       data-icon="arrow-l">Previous</a></li>
+                <li><a href="#page2" id="random1" data-transition="slidedown" data-role=button data-icon="refresh">Random</a>
+                </li>
+                <li><a href="#page2" data-transition="slide" id="next1" data-role=button data-icon="arrow-r">Next</a>
+                </li>
+                <li><a href="#page2" data-transition="slide" id="last1" data-role=button data-icon="last">Last</a></li>
+            </ul>
         </div>
-     
-        <div data-role="page" id="page2">
-		    <div data-role="panel" data-theme="a" data-position="right" data-position-fixed="true" data-display="overlay" id="menu2">
-		        <ul data-role="listview" data-theme="a">
-		            <li data-icon="delete"><a href="#page2" data-rel="close" data-iconpos="notext"></a></li>
-		            <li><a href="#authors-page">Authors</a></li>
-		            <li><a href="#about-page">About</a></li>
-		        </ul>
-		    </div>
+    </div>
 
-        	<div data-role="header" data-position=fixed id='header'>
-				<h1>Retroflection</h1>
-            	<a href="#menu2" data-role=button data-transition="slideup" data-icon="gear" data-iconpos="notext" data-iconshadow="false" class="ui-icon-nodisc, ui-btn-right"></a>
-        	</div>
-        	
-        	<div data-role="content" id="content">
-				<h3 id="question2"></h3>
-                <p align="right" id="author2"></p>
-            </div>
-        
-        	<div data-role="footer" data-position=fixed id="footer">
-				<div data-role="controlgroup" data-type="horizontal" align="center">
-	                <a href="#page1" data-transition="slide" data-direction="reverse" id="first2" data-role=button data-icon="first" data-iconpos="notext"></a>
-	                <a href="#page1" data-transition="slide" data-direction="reverse" id="previous2" data-role=button data-icon="arrow-l" data-iconpos="notext"></a>
-                	<a href="#page1" id="random2" data-transition="slidedown" data-role=button data-icon="refresh" data-iconpos="notext"></a>
-                	<a href="#page1" data-transition="slide" id="next2" data-role=button data-icon="arrow-r" data-iconpos="notext"></a>
-                	<a href="#page1" data-transition="slide" id="last2" data-role=button data-icon="last" data-iconpos="notext"></a>
-				</div>
-            </div>
-        </div>
-     
-        <div data-role="page" id="authors-page" data-add-back-btn=true>
-        	<div  data-role="header" id='header'>
-                <h1>Authors</h1>
-        	</div>
-        	
-        	<div data-role="content" id="contrib"> 
-				<div data-role="collapsible-set" id="authors" data-theme="a" data-content-theme="c">				</div>
-            </div> 
-        </div>
+</div>
 
-        <div data-role="page" id="about-page" data-add-back-btn=true>
-        	<div  data-role="header" id='header'>
-                <h1>About</h1>
-        	</div>
-        	
-        	<div data-role="content" id="contrib">
-				<p>Please support us by:</p>
-				<ul>
-					<li>Adding questions on the 
-						<a href="https://docs.google.com/spreadsheet/viewform?formkey=dFg2aXdNbE5qdzlzNjBmM1pKaFJFYkE6MQ" target="_blank">google doc</a>.</li>
-					<li>Contributing to the code on 
-						<a href="https://github.com/yveshanoulle/AgileRetroflection" target="_blank">github</a></li>
-					<li>Correcting the spelling of the questions. Just leave us a 
-						<a href="mailto:Yves@PairCoaching.net?subject=Retroflection corrected question">note.</a> 
-						Please include the question number in your email.</li>
-				</ul>
-                <p>Originally tweeted by <a href="http://twitter.com/retroflection">@Retroflection</a></p>
-                <p>Site by <a href="http://www.twitter.com/leiderleider">@leiderleider</a>, based on work by <a href="http://www.yaal.fr">Yaal</a></p>
-                <p>Artwork by <a href="http://www.dot26.com">artix studio</a></p>
-            </div> 
+<div data-role="page" id="page2">
+    <div data-role="panel" data-theme="a" data-position="right" data-position-fixed="true" data-display="overlay"
+         id="menu2">
+        <ul data-role="listview" data-theme="a">
+            <li data-icon="delete"><a href="#page2" data-rel="close" data-iconpos="notext"></a></li>
+            <li><a href="#authors-page">Authors</a></li>
+            <li><a href="#about-page">About</a></li>
+        </ul>
+    </div>
+
+    <div data-id="header" data-role="header" data-position=fixed id='header2'>
+        <h1>Retroflection</h1>
+        <a href="#menu2" data-role=button data-transition="slideup" data-icon="gear" data-iconpos="notext"
+           data-iconshadow="false" class="ui-icon-nodisc, ui-btn-right"></a>
+    </div>
+
+    <div data-role="content" id="content2">
+        <h3 id="question2"></h3>
+
+        <p align="right" id="author2"></p>
+    </div>
+
+    <div data-id="footer" data-role="footer" data-position=fixed id="footer2">
+        <div data-role="navbar">
+            <ul>
+                <li><a href="#page1" data-transition="slide" data-direction="reverse" id="first2" data-role=button
+                       data-icon="first">First</a></li>
+                <li><a href="#page1" data-transition="slide" data-direction="reverse" id="previous2" data-role=button
+                       data-icon="arrow-l">Previous</a></li>
+                <li><a href="#page1" id="random2" data-transition="slidedown" data-role=button data-icon="refresh">Random</a>
+                </li>
+                <li><a href="#page1" data-transition="slide" id="next2" data-role=button data-icon="arrow-r">Next</a>
+                </li>
+                <li><a href="#page1" data-transition="slide" id="last2" data-role=button data-icon="last">Last</a></li>
+            </ul>
         </div>
-    </body>
+    </div>
+</div>
+
+<div data-role="page" id="authors-page" data-add-back-btn=true>
+    <div data-role="header" id='header3' data-position=fixed data-fullscreen="true">
+        <h1>Authors</h1>
+    </div>
+
+    <div data-role="content" id="contrib-authors">
+        <div data-role="collapsible-set" id="authors" data-theme="a" data-content-theme="c"></div>
+    </div>
+</div>
+
+<div data-role="page" id="about-page" data-add-back-btn=true>
+    <div data-role="header" id='header'>
+        <h1>About</h1>
+    </div>
+
+    <div data-role="content" id="contrib-about">
+        <p>Please support us by:</p>
+        <ul>
+            <li>Adding questions on the
+                <a href="https://docs.google.com/spreadsheet/viewform?formkey=dFg2aXdNbE5qdzlzNjBmM1pKaFJFYkE6MQ"
+                   target="_blank">google doc</a>.
+            </li>
+            <li>Contributing to the code on
+                <a href="https://github.com/yveshanoulle/AgileRetroflection" target="_blank">github</a></li>
+            <li>Correcting the spelling of the questions. Just leave us a
+                <a href="mailto:Yves@PairCoaching.net?subject=Retroflection corrected question">note.</a>
+                Please include the question number in your email.
+            </li>
+        </ul>
+        <p>Originally tweeted by <a href="http://twitter.com/retroflection">@Retroflection</a></p>
+
+        <p>Site by <a href="http://www.twitter.com/leiderleider">@leiderleider</a>, based on work by <a
+                href="http://www.yaal.fr">Yaal</a></p>
+
+        <p>Artwork by <a href="http://www.dot26.com">artix studio</a></p>
+    </div>
+</div>
+</body>
 </html>
