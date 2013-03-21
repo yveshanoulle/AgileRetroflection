@@ -18,6 +18,8 @@
     <script src="swipeUpDown.js"></script>
 
     <script src="questions.json"></script>
+    <script src="author.js"></script>
+    <script src="authors.js"></script>
     <script src="retroflection.js"></script>
     <script>
         $(document).ready(function () {
@@ -31,39 +33,25 @@
 
 <body>
 <div data-role="page" id="page1">
-    <div data-role="panel" data-theme="a" data-position="right" data-position-fixed="true" data-display="overlay"
-         id="menu1">
-        <ul data-role="listview" data-theme="a">
-            <li data-icon="delete"><a href="#page1" data-rel="close">Back</a></li>
-            <li><a href="#authors-page">Authors</a></li>
-            <li><a href="#about-page">About</a></li>
-        </ul>
-    </div>
-
-    <div data-id="header" data-role="header" data-position=fixed id='header1'>
+    <div data-id="header" data-role="header" data-position=fixed data-fullscreen="true" id='header1'>
         <h1>Retroflection</h1>
-        <a href="#menu1" data-role=button data-transition="slideup" data-icon="gear"
-           data-iconshadow="false" class="ui-icon-nodisc, ui-btn-right">More</a>
     </div>
 
     <div data-role="content" id="content1">
-        <h3 id="question1"></h3>
+        <h3 class="question" id="question1"></h3>
 
-        <p align="right" id="author1"></p>
+        <p class="author" id="author1"></p>
     </div>
 
     <div data-id="footer" data-role="footer" data-position=fixed id="footer1">
         <div data-role="navbar">
             <ul>
-                <li><a href="#page2" data-transition="slide" data-direction="reverse" id="first1" data-role=button
-                       data-icon="first">First</a></li>
-                <li><a href="#page2" data-transition="slide" data-direction="reverse" id="previous1" data-role=button
-                       data-icon="arrow-l">Previous</a></li>
-                <li><a href="#page2" id="random1" data-transition="slidedown" data-role=button data-icon="refresh">Random</a>
+                <li><a href="#authors-page" data-role=button
+                       data-icon="search">Authors</a></li>
+                <li><a href="#page2" id="random1" data-transition="slidedown" data-role=button
+                       data-icon="home" class="ui-btn-active ui-state-persist">Random</a></li>
+                <li><a href="#about-page" data-role=button data-icon="info">About</a>
                 </li>
-                <li><a href="#page2" data-transition="slide" id="next1" data-role=button data-icon="arrow-r">Next</a>
-                </li>
-                <li><a href="#page2" data-transition="slide" id="last1" data-role=button data-icon="last">Last</a></li>
             </ul>
         </div>
     </div>
@@ -71,60 +59,58 @@
 </div>
 
 <div data-role="page" id="page2">
-    <div data-role="panel" data-theme="a" data-position="right" data-position-fixed="true" data-display="overlay"
-         id="menu2">
-        <ul data-role="listview" data-theme="a">
-            <li data-icon="delete"><a href="#page2" data-rel="close" data-iconpos="notext"></a></li>
-            <li><a href="#authors-page">Authors</a></li>
-            <li><a href="#about-page">About</a></li>
-        </ul>
-    </div>
-
-    <div data-id="header" data-role="header" data-position=fixed id='header2'>
+    <div data-id="header" data-role="header" data-position=fixed data-fullscreen="true" id='header2'>
         <h1>Retroflection</h1>
-        <a href="#menu2" data-role=button data-transition="slideup" data-icon="gear" data-iconpos="notext"
-           data-iconshadow="false" class="ui-icon-nodisc, ui-btn-right"></a>
     </div>
 
     <div data-role="content" id="content2">
-        <h3 id="question2"></h3>
+        <h3 class="question" id="question2"></h3>
 
-        <p align="right" id="author2"></p>
+        <p class="author" id="author2"></p>
     </div>
 
     <div data-id="footer" data-role="footer" data-position=fixed id="footer2">
         <div data-role="navbar">
             <ul>
-                <li><a href="#page1" data-transition="slide" data-direction="reverse" id="first2" data-role=button
-                       data-icon="first">First</a></li>
-                <li><a href="#page1" data-transition="slide" data-direction="reverse" id="previous2" data-role=button
-                       data-icon="arrow-l">Previous</a></li>
-                <li><a href="#page1" id="random2" data-transition="slidedown" data-role=button data-icon="refresh">Random</a>
+                <li><a href="#authors-page" data-role=button
+                       data-icon="search">Authors</a></li>
+                <li><a href="#page1" id="random2" data-transition="slidedown" data-role=button
+                       data-icon="home" class="ui-btn-active ui-state-persist">Random</a></li>
+                <li><a href="#about-page" data-role=button data-icon="info">About</a>
                 </li>
-                <li><a href="#page1" data-transition="slide" id="next2" data-role=button data-icon="arrow-r">Next</a>
-                </li>
-                <li><a href="#page1" data-transition="slide" id="last2" data-role=button data-icon="last">Last</a></li>
             </ul>
         </div>
     </div>
 </div>
 
-<div data-role="page" id="authors-page" data-add-back-btn=true>
-    <div data-role="header" id='header3' data-position=fixed data-fullscreen="true">
+<div data-role="page" id="authors-page">
+    <div data-role="header" data-id="header" id='header3' data-position=fixed data-fullscreen="true">
         <h1>Authors</h1>
     </div>
 
     <div data-role="content" id="contrib-authors">
-        <div data-role="collapsible-set" id="authors" data-theme="a" data-content-theme="c"></div>
+        <div data-role="collapsible-set" data-theme="a" data-content-theme="d" data-corners="false" id="authors"></div>
+    </div>
+
+    <div data-id="footer" data-role="footer" data-position=fixed id="footer3">
+        <div data-role="navbar">
+            <ul>
+                <li><a href="#authors-page" data-role=button
+                       data-icon="search" class="ui-btn-active ui-state-persist">Authors</a></li>
+                <li><a href="#page1" data-role=button data-transition="slidedown" data-icon="home">Random</a></li>
+                <li><a href="#about-page" data-role=button data-icon="info">About</a>
+                </li>
+            </ul>
+        </div>
     </div>
 </div>
 
-<div data-role="page" id="about-page" data-add-back-btn=true>
-    <div data-role="header" id='header'>
+<div data-role="page" id="about-page">
+    <div data-id="header" data-role="header" data-position=fixed data-fullscreen="true" id='header4'>
         <h1>About</h1>
     </div>
 
-    <div data-role="content" id="contrib-about">
+    <div class="about" data-role="content" id="contrib-about">
         <p>Please support us by:</p>
         <ul>
             <li>Adding questions on the
@@ -144,6 +130,18 @@
                 href="http://www.yaal.fr">Yaal</a></p>
 
         <p>Artwork by <a href="http://www.dot26.com">artix studio</a></p>
+    </div>
+    <div data-id="footer" data-role="footer" data-position=fixed id="footer4">
+        <div data-role="navbar">
+            <ul>
+                <li><a href="#authors-page" data-role=button
+                       data-icon="search">Authors</a></li>
+                <li><a href="#page1" data-role=button data-transition="slidedown" data-icon="home">Random</a></li>
+                <li><a href="#about-page" data-role=button data-icon="info"
+                       class="ui-btn-active ui-state-persist">About</a>
+                </li>
+            </ul>
+        </div>
     </div>
 </div>
 </body>
