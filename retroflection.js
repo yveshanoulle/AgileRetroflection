@@ -31,18 +31,22 @@ var display = {};
     }
 
     var createEmail = function (question) {
-        return '<a href=\'mailto:?subject=Retroflection #' + question.number +
-            '&body=' + escape('"' + question.question + '"' + ' by ' + question.author) +
+//        return '<a data-role="button" data-icon="edit" data-iconpos="notext"' +
+//          'href=\'mailto:?subject=Retroflection #' + question.number +
+//            '&body=' + escape('"' + question.question + '"' + ' by ' + question.author) +
+//            encodeURIComponent('\n\n---\nThis retroflection was originally twittered by @retroflection' +
+//                '\nand is sent via the retroflection app available at http://retroflection.org') + '\'/>';
+        return 'mailto:?subject=Retroflection Question ' + question.number +
+            '&body=' + encodeURIComponent('"' + question.question + '"' + ' by ' + question.author) +
             encodeURIComponent('\n\n---\nThis retroflection was originally twittered by @retroflection' +
-                '\nand is sent via the retroflection app available at http://retroflection.org') + '\'>' +
-            'mail it</a>';
+                '\nand is sent via the retroflection app available at http://retroflection.org');
     }
 
     this.show = function (number) {
         var current = retroflection.currentQuestion();
         $("#question" + number).html(current.question);
         $("#author" + number).html(linkToTwitter(current.author) + " (#" + current.number + ")");
-        $("#emaillink" + number).html(createEmail(current));
+        $("#emaillink" + number).attr('href', createEmail(current));
     }
 
     this.bindEvents = function () {

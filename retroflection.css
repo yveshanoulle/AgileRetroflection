@@ -29,6 +29,8 @@
     margin-right: 0;
     margin-left: 0;
     margin-bottom: .5em;
+    text-align: right;
+    float: right;
 }
 
 .ui-li-aside {

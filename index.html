@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html> <!--manifest=retroflection.appcache-->
+<html manifest=retroflection.appcache>
 <head>
     <meta charset="utf-8"/>
     <meta name=viewport content="user-scalable=no, width=device-width, minimum-scale=1, maximum-scale=1"/>
@@ -35,13 +35,13 @@
 <div data-role="page" id="page1">
     <div data-id="header" data-role="header" data-position=fixed data-fullscreen="true" id='header1'>
         <h1>Retroflection</h1>
+        <a id="emaillink1" data-role="button" data-icon="edit" class="ui-btn-right" data-transition="none">Mail It</a>
     </div>
 
     <div data-role="content" id="content1">
         <h3 class="question" id="question1"></h3>
 
         <p class="author" id="author1"></p>
-        <p class="emaillink" id="emaillink1"></p>
     </div>
 
     <div data-id="footer" data-role="footer" data-position=fixed id="footer1">
@@ -62,13 +62,13 @@
 <div data-role="page" id="page2">
     <div data-id="header" data-role="header" data-position=fixed data-fullscreen="true" id='header2'>
         <h1>Retroflection</h1>
+        <a id="emaillink2" data-role="button" data-icon="edit" class="ui-btn-right" data-transition="none">Mail It</a>
     </div>
 
     <div data-role="content" id="content2">
         <h3 class="question" id="question2"></h3>
 
         <p class="author" id="author2"></p>
-        <p class="emaillink" id="emaillink2"></p>
     </div>
 
     <div data-id="footer" data-role="footer" data-position=fixed id="footer2">
@@ -122,8 +122,10 @@
             <li>Contributing to the code on
                 <a href="https://github.com/yveshanoulle/AgileRetroflection" target="_blank">github</a></li>
             <li>Correcting the spelling of the questions. Just leave us a
-                <a href="mailto:Yves@PairCoaching.net?subject=Retroflection corrected question">note.</a>
+                 note by clicking this button.
                 Please include the question number in your email.
+                <a data-role="button" data-icon="edit" data-iconpos="notext" class="mailbutton"
+                   href="mailto:Yves@PairCoaching.net?subject=Retroflection corrected question"></a>
             </li>
         </ul>
         <p>Originally tweeted by <a href="http://twitter.com/retroflection">@Retroflection</a></p>

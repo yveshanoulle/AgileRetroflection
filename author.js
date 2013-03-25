@@ -11,7 +11,6 @@ function Author(name) {
             this.twitterNames.push(each.trim());
         }
     }
-    console.log(this);
 
     if (typeof(this.addQuestion) == 'undefined') //guarantees one time prototyping
     {
@@ -23,7 +22,7 @@ function Author(name) {
     function createCorrection(question) {
         return '<a data-role="button" data-icon="edit" data-iconpos="notext" class="mailbutton" href=\'mailto:Yves@PairCoaching.net' +
             '?subject=Retroflection corrected question' +
-            '&body=' + escape("I have a proposal on improving the spelling of retroflection #" + question.number +
+            '&body=' + encodeURIComponent("I have a proposal on improving the spelling of retroflection question " + question.number +
             ': \n' + '"' + question.question + '"' + ' by ' + question.author) +
             encodeURIComponent('\n\nI would write it as follows:\n\n\n---\n' +
                 'This retroflection was originally twittered by @retroflection' +
