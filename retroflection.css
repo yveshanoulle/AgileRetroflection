@@ -1,0 +1,42 @@
+.ui-content {
+    margin-top: 35px;
+}
+
+.question {
+    margin: 10px;
+    margin-top: 22px;
+}
+
+.author {
+    margin: 10px;
+    text-align: right;
+}
+
+.emaillink {
+    margin: 10px;
+    text-align: right;
+    margin-bottom: 10px;
+}
+
+.about {
+    margin: 15px;
+    margin-top: 42px;
+}
+
+.mailbutton {
+    padding-top: 0;
+    margin-top: 0;
+    margin-right: 0;
+    margin-left: 0;
+    margin-bottom: .5em;
+    text-align: right;
+    float: right;
+}
+
+.ui-li-aside {
+    float: right;
+    width: 10%;
+    text-align: right;
+    margin-top: 0;
+}
+
