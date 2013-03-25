@@ -3,6 +3,7 @@ CACHE MANIFEST
 author.js
 authors.js
 retroflection.js
+helpers.js
 retroflection.css
 questions.json
 jquery.mobile-1.3.0.min.css
@@ -22,4 +23,3 @@ images/icons-36-black.png
 images/icons-36-white.png
 swipeUpDown.js
 icons.css
-dum-for-cache.html
