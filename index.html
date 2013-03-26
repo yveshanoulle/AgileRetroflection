@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html manifest=retroflection.appcache>
+<html> <!--manifest=retroflection.appcache-->
 <head>
     <meta charset="utf-8"/>
     <meta name=viewport content="user-scalable=no, width=device-width, minimum-scale=1, maximum-scale=1"/>
@@ -51,9 +51,9 @@
             <ul>
                 <li><a href="#authors-page" data-role=button
                        data-icon="search">Authors</a></li>
-                <li><a href="#page2" id="random1" data-transition="slidedown" data-role=button
+                <li><a href="#page2" id="random1" data-transition="slide" data-role=button
                        data-icon="home" class="ui-btn-active ui-state-persist">Random</a></li>
-                <li><a href="#about-page" data-role=button data-icon="info">About</a>
+                <li><a href="#about-page" id="about1" data-role=button data-transition="slidedown" data-icon="info">About</a>
                 </li>
             </ul>
         </div>
@@ -79,9 +79,9 @@
             <ul>
                 <li><a href="#authors-page" data-role=button
                        data-icon="search">Authors</a></li>
-                <li><a href="#page1" id="random2" data-transition="slidedown" data-role=button
+                <li><a href="#page1" id="random2" data-transition="slide" data-role=button
                        data-icon="home" class="ui-btn-active ui-state-persist">Random</a></li>
-                <li><a href="#about-page" data-role=button data-icon="info">About</a>
+                <li><a href="#about-page" id="about2" data-role=button data-transition="slidedown" data-icon="info">About</a>
                 </li>
             </ul>
         </div>
@@ -102,8 +102,8 @@
             <ul>
                 <li><a href="#authors-page" data-role=button
                        data-icon="search" class="ui-btn-active ui-state-persist">Authors</a></li>
-                <li><a href="#page1" data-role=button data-transition="slidedown" data-icon="home">Random</a></li>
-                <li><a href="#about-page" data-role=button data-icon="info">About</a>
+                <li><a href="#page1" data-role=button data-transition="slide" data-icon="home">Random</a></li>
+                <li><a href="#about-page" data-role=button data-transition="slidedown" data-icon="info">About</a>
                 </li>
             </ul>
         </div>
@@ -143,8 +143,8 @@
             <ul>
                 <li><a href="#authors-page" data-role=button
                        data-icon="search">Authors</a></li>
-                <li><a href="#page1" data-role=button data-transition="slidedown" data-icon="home">Random</a></li>
-                <li><a href="#about-page" data-role=button data-icon="info"
+                <li><a href="#page1" data-role=button data-transition="slide" data-icon="home">Random</a></li>
+                <li><a href="#about-page" data-role=button data-icon="info" data-transition="slidedown"
                        class="ui-btn-active ui-state-persist">About</a>
                 </li>
             </ul>
