@@ -1,16 +1,56 @@
 var
-  store = require('store')('questionstore'),
+  async = require('async'),
   connectRoute = require('connect-route'),
   connect = require('connect'),
   app = connect(),
+  fs = require('fs'),
   quest = [];
 
-  store.list(function (err, result) {
-    if (err) {
-      console.log(err);
-    }
-    quest = result;
+var readdir = function(dir, cb) {
+  fs.readdir(dir, function(err, files) {
+    if (err) return cb(err);
+    files = files.map(function(file) {
+      return dir + '/' + file;
+    });
+    cb(null, files);
   });
+};
+
+var loadFile = function (file, cb) {
+  fs.readFile(file, 'utf8', function (err, code) {
+    if (err) {
+      return cb("error loading file " + err);
+    }
+    try {
+      cb(null, JSON.parse(code));
+    }
+    catch (e) {
+      cb("Error parsing " + file + ": " + e);
+    }
+  });
+};
+
+
+function tasks() {
+  readdir('questionstore', function (err, files) {
+    if (err) {
+      return cb(err);
+    }
+    var fileLoaders = files.map(function (file) {
+      return function (cb) {
+        loadFile(file, cb);
+      };
+    });
+    async.parallelLimit(fileLoaders, 50, function (err, objs) {
+      if (err) {
+        throw err;
+      }
+      quest = objs;
+    });
+  })
+}
+
+tasks();
 
 app.use(connectRoute(function (router) {
   router.get('questions.json', function (req, res, next) {

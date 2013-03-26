@@ -4,7 +4,7 @@
   "dependencies": {
     "connect": "2.7.x",
     "connect-route": "0.1.x",
-    "node-store": "git://github.com/alexkwolfe/node-store.git#master"
+    "async": ">= 0.1.x"
   },
   "engines": {
     "node": "0.8.x",
