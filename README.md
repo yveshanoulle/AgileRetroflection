@@ -14,7 +14,7 @@ The app is designed to run on mobile phones and depends on javascript and HTML5.
 1. Then choose the option in the middle. Probably your phone qon't be in German. See Image 2 below.
 1. If you have had the app installed previously, you must delete it first.
 
-![image 1](./screen1.png) ![image 2](./screen2.png)
+![image 1](./screenshots/screen1.png) ![image 2](./screenshots/screen2.png)
 
 ### Android
 

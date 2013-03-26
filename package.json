@@ -2,7 +2,9 @@
   "name": "retroflection",
   "version": "0.0.1",
   "dependencies": {
-    "connect": "2.7.x"
+    "connect": "2.7.x",
+    "connect-route": "0.1.x",
+    "node-store": "git://github.com/alexkwolfe/node-store.git#master"
   },
   "engines": {
     "node": "0.8.x",
