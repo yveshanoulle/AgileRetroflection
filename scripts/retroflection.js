@@ -4,7 +4,7 @@ var retroflection = {};
   var questionNumbers = [];
   randomQuestion();
 
-  function randomQuestion () {
+  function randomQuestion() {
     questionNumbers.push(Math.floor(Math.random() * questions.length));
     currentIndex++;
   }
@@ -39,12 +39,12 @@ var display = {};
     return name;
   }
 
-  this.show = function (number) {
+  this.show = function () {
     var current = retroflection.currentQuestion();
-    $('#question' + number).html(current.question);
-    $('#author' + number).html(linkToTwitter(current.author) + ' (#' + current.id + ')');
-    $('#emaillink' + number).attr('href', createMailURL(current));
-    $('#correctlink' + number).attr('href', createCorrectionMailURL(current));
+    $('.question').html(current.question);
+    $('.author').html(linkToTwitter(current.author) + ' (#' + current.id + ')');
+    $('.emaillink').attr('href', createMailURL(current));
+    $('.correctlink').attr('href', createCorrectionMailURL(current));
   }
 
   this.bindEvents = function () {
@@ -67,16 +67,16 @@ var display = {};
 
   function back(pageNumber) {
     retroflection.previousQuestion();
-    $.mobile.changePage(pageNumber === 1 ? '#page2' : '', { transition: 'slide', reverse: 'true' });
+    $.mobile.changePage(pageNumber === 1 ? '#page2' : '', {transition: 'slide', reverse: 'true'});
   }
 
   function next(pageNumber) {
     retroflection.nextQuestion();
-    $.mobile.changePage(pageNumber === 1 ? '#page2' : '', { transition: 'slide' });
+    $.mobile.changePage(pageNumber === 1 ? '#page2' : '', {transition: 'slide'});
   }
 
   function about() {
-    $.mobile.changePage('#about-page', { transition: 'slidedown', reverse: 'true' });
+    $.mobile.changePage('#about-page', {transition: 'slidedown'});
   }
 
   var bindGesturesForPage = function (pageNumber) {
@@ -99,14 +99,10 @@ var display = {};
 
 }).apply(display)
 
-jQuery.fn.retroflection = function () {
-  display.show(1);
-  display.show(2);
+function start() {
+  display.show();
   display.bindEvents();
-}
-
-jQuery.fn.contrib = function () {
-  var map = new Authors(questions).internal;
+  var map = authors(questions);
   for (index in map) {
     var author = map[index];
     $('#authors').append(author.asListItem());

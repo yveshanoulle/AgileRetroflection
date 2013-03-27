@@ -31,7 +31,7 @@ var loadFile = function (file, cb) {
 };
 
 
-function tasks() {
+function initQuestions() {
   readdir('questionstore', function (err, files) {
     if (err) {
       return cb(err);
@@ -50,11 +50,11 @@ function tasks() {
   })
 }
 
-tasks();
+initQuestions();
 
 app.use(connectRoute(function (router) {
   router.get('questions.json', function (req, res, next) {
-    res.writeHead(200, { 'Content-Type': 'text/plain' });
+    res.writeHead(200, { 'Content-Type': 'application/javascript' });
     res.end('questions = ' + JSON.stringify(quest));
   });
 

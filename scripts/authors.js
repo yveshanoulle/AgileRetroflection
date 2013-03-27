@@ -1,42 +1,37 @@
-function Authors(questions) {
-    this.internal = [];
+function authors(questions) {
+  var internal = [];
 
-    this.addAuthor = function (author) {
-        this.internal.push(author);
-    };
+  function addAuthor(author) {
+    internal.push(author);
+  };
 
-    this.containsAuthorNamed = function (name) {
-        for (i in this.internal) {
-            if (this.internal[i].name == name) {
-                return true;
-            }
-        }
-        return false;
-    };
+  function containsAuthorNamed(name) {
+    return getAuthorNamed(name) !== null;
+  };
 
-    this.getAuthorNamed = function (name) {
-        for (i in this.internal) {
-            if (this.internal[i].name == name) {
-                return this.internal[i];
-            }
-        }
-        return null;
+  function getAuthorNamed(name) {
+    for (i in internal) {
+      if (internal[i].name == name) {
+        return internal[i];
+      }
     }
+    return null;
+  }
 
-    this.sort = function () {
-        this.internal.sort(function (a, b) {
-            return a.name.localeCompare( b.name);
-        });
+  function sort() {
+    internal.sort(function (a, b) {
+      return a.name.localeCompare(b.name);
+    });
+  }
+
+  for (var i in questions) {
+    var question = questions[i];
+    var name = question.author;
+    if (!containsAuthorNamed(name)) {
+      addAuthor(new Author(name));
     }
-
-    for (var i in questions) {
-        var question = questions[i];
-        var name = question.author;
-        if (!this.containsAuthorNamed(name)) {
-            this.addAuthor(new Author(name));
-        }
-        this.getAuthorNamed(name).addQuestion(question);
-    }
-    this.sort();
-
+    getAuthorNamed(name).addQuestion(question);
+  }
+  sort();
+  return internal;
 }
