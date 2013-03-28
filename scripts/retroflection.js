@@ -52,6 +52,12 @@ var display = {};
     bindButtonsNumbered(2);
     bindGesturesForPage(1);
     bindGesturesForPage(2);
+    $('#about-page').bind('swipeup', function (event) {
+      event.stopImmediatePropagation();
+      $.mobile.changePage('', {transition: 'slideup'});
+      return false;
+    });
+
   }
 
   var bindButtonsNumbered = function (number) {

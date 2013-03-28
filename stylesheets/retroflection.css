@@ -3,13 +3,16 @@
 }
 
 .question {
-    margin: 10px;
-    margin-top: 22px;
+    position: absolute;
+    margin-right: 20px;
+    top: 45px;
+    left: 20px;
 }
 
 .author {
-    margin: 10px;
-    text-align: right;
+    position: absolute;
+    bottom: 60px;
+    right: 10px;
 }
 
 .emaillink {
