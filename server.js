@@ -1,20 +1,32 @@
 var
+  express = require('express'),
+  path = require('path'),
+  app = express(),
   async = require('async'),
-  connectRoute = require('connect-route'),
-  connect = require('connect'),
-  app = connect(),
   fs = require('fs'),
-  quest = [];
+  mongo = require('mongodb'),
+  mongoUri = process.env.MONGOLAB_URI ||
+    process.env.MONGOHQ_URL ||
+    'mongodb://localhost/test?safe=true';
+  adminName = process.env.ADMIN_NAME || 'admin';
+  adminPass = process.env.ADMIN_PASS || '12345';
 
-var readdir = function(dir, cb) {
-  fs.readdir(dir, function(err, files) {
-    if (err) return cb(err);
-    files = files.map(function(file) {
-      return dir + '/' + file;
-    });
-    cb(null, files);
-  });
-};
+
+app.configure(function () {
+  app.set('view engine', 'jade');
+  app.set('views', path.join(__dirname, 'views'));
+  app.use(express.favicon());
+  app.use(express.logger('dev'));
+  app.use(express.bodyParser());
+  app.use(express.methodOverride());
+  app.use(app.router);
+  app.use(express.static(path.join(__dirname)));
+});
+
+
+var basicAuth = express.basicAuth(function (username, password) {
+  return (username == adminName && password == adminPass);
+}, 'Restrict area, please identify');
 
 var loadFile = function (file, cb) {
   fs.readFile(file, 'utf8', function (err, code) {
@@ -30,35 +42,89 @@ var loadFile = function (file, cb) {
   });
 };
 
-
-function initQuestions() {
-  readdir('questionstore', function (err, files) {
+function getQuestions(callback) {
+  mongo.Db.connect(mongoUri, function (err, db) {
     if (err) {
-      return cb(err);
+      return loadFile('static/questions-all.json', function (error, result) {
+        if (error) {
+          callback(error);
+        }
+        callback(null, result);
+      });
     }
-    var fileLoaders = files.map(function (file) {
-      return function (cb) {
-        loadFile(file, cb);
-      };
-    });
-    async.parallelLimit(fileLoaders, 50, function (err, objs) {
-      if (err) {
-        throw err;
+    var test = db.collection('test');
+    test.find().toArray(function (error, result) {
+      if (error) {
+        next(error);
       }
-      quest = objs;
-    });
-  })
+      result.sort(function (a, b) {
+        return a.id.localeCompare(b.id);
+      })
+      callback(null, result);
+    })
+  });
 }
 
-initQuestions();
-
-app.use(connectRoute(function (router) {
-  router.get('questions.json', function (req, res, next) {
-    res.writeHead(200, { 'Content-Type': 'application/javascript' });
-    res.end('questions = ' + JSON.stringify(quest));
+function getQuestion(id, callback) {
+  mongo.Db.connect(mongoUri, function (err, db) {
+    var test = db.collection('test');
+    test.find({id: id}).toArray(function (error, result) {
+      if (error) {
+        next(error);
+      }
+      callback(null, result[0]);
+    })
   });
+}
 
-}));
-app.use(connect.static(__dirname));
+function saveQuestion(req, res) {
+  var question = req.body;
+  mongo.Db.connect(mongoUri, function (err, db) {
+    var test = db.collection('test');
+    test.update({id: question.id}, {$set: {question: question.question}}, {w: 1}, function (err, result) {
+      if (result === 1) {
+        res.render('updated', {question: question});
+      } else {
+        res.redirect('/questions/' + question.id + '/edit');
+      }
+    });
+  });
+}
 
-app.listen(process.env.PORT || 5000);
+app.get('/questions.json', function (req, res, next) {
+  getQuestions(function (err, result) {
+    if (err) {
+      next(err);
+    }
+//    res.writeHead(200, { 'Content-Type': 'application/javascript' });
+    res.send('questions = ' + JSON.stringify(result));
+  })
+});
+
+app.get('/questions/', basicAuth, function (req, res, next) {
+  getQuestions(function (err, result) {
+    res.render('index', {questions: result});
+  })
+});
+
+app.get('/questions', basicAuth, function (req, res, next) {
+  res.redirect('/questions/');
+});
+
+app.get('/questions/:id/edit', basicAuth, function (req, res) {
+  getQuestion(req.params.id, function (err, result) {
+    res.render('edit', {question: result});
+  })
+});
+
+app.post('/questions/:id/submit', basicAuth, function (req, res) {
+  saveQuestion(req, res);
+});
+
+var http = require('http');
+var server = http.createServer(app);
+
+
+server.listen(process.env.PORT || 5000, function () {
+  console.log('Server running');
+});

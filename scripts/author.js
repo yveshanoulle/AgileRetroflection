@@ -25,7 +25,7 @@ function Author(name) {
       }
       ul += '</ul>';
       return '<div data-role=\'collapsible\'>'
-        + '<h3>' + this.name + '  (' + this.questions.length + ')</h3>'
+        + '<h3>' + this.name +  ' (' + this.questions.length + ')</h3>'
         + ul + '</div>';
     };
   }

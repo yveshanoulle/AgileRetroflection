@@ -2,9 +2,10 @@
   "name": "retroflection",
   "version": "0.0.1",
   "dependencies": {
-    "connect": "2.7.x",
-    "connect-route": "0.1.x",
-    "async": ">= 0.1.x"
+    "express": "~3.1",
+    "jade": "~0.28.2",
+    "async": ">= 0.1.x",
+    "mongodb": "1.1.x"
   },
   "engines": {
     "node": "0.8.x",

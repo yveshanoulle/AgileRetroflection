@@ -1,0 +1,19 @@
+textarea, input
+{
+    display: block;
+    width: 400px;
+    float: left;
+    margin-bottom: 10px;
+}
+label
+{
+    display: block;
+    width: 100px;
+    float: left;
+    margin-bottom: 10px;
+}
+
+br
+{
+    clear: left;
+}

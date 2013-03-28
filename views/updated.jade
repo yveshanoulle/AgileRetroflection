@@ -1,0 +1,17 @@
+extends layout
+
+block title
+  | Question Saved
+
+block content
+  div(data-role="header")
+    h1 Saved #{question.id}
+  div(data-role="content")
+    ul(data-role="listview", data-inset="true", data-divider-theme="a")
+      li(data-role="list-divider") Question
+      li #{question.question}
+      li(data-role="list-divider") Author
+      li #{question.author}
+      li
+        fieldset
+            a(href="/questions/", data-role="button") Continue
