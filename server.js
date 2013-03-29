@@ -77,7 +77,7 @@ app.get('/questions.json', function (req, res, next) {
     if (err) {
       next(err);
     }
-    res.send('questions = ' + JSON.stringify(result));
+    res.send(JSON.stringify(result));
   })
 });
 

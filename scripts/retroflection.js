@@ -1,8 +1,8 @@
-var retroflection = {};
+var questions,
+  retroflection = {};
 (function () {
   var currentIndex = -1;
   var questionNumbers = [];
-  randomQuestion();
 
   function randomQuestion() {
     questionNumbers.push(Math.floor(Math.random() * questions.length));
@@ -10,6 +10,9 @@ var retroflection = {};
   }
 
   function currentQuestionNumber() {
+    if (currentIndex === -1) {
+      randomQuestion();
+    }
     return questionNumbers[Math.max(0, currentIndex)];
   }
 
@@ -106,11 +109,26 @@ var display = {};
 }).apply(display)
 
 function start() {
-  display.show();
-  display.bindEvents();
-  var map = authors(questions);
-  for (index in map) {
-    var author = map[index];
-    $('#authors').append(author.asListItem());
+  function completeStart() {
+    display.show();
+    display.bindEvents();
+    var map = authors(questions);
+    for (index in map) {
+      var author = map[index];
+      $('#authors').append(author.asListItem());
+    }
   }
+
+  $.ajax({
+    url: "questions.json",
+    success: function (result) {
+      questions = JSON.parse(result);
+      localStorage.setItem("questions", JSON.stringify(questions));
+      completeStart();
+    },
+    error: function (result) {
+      questions = JSON.parse(localStorage.getItem("questions"));
+      completeStart();
+    }
+  });
 }
