@@ -1,6 +1,8 @@
 Retroflection, formerly AgileRetroflection
 ==========================================
 
+[![Build Status](https://travis-ci.org/leider/AgileRetroflection.png)](https://travis-ci.org/leider/AgileRetroflection)
+
 This is the master folder for the Retroflection of the day App.
 
 To experience the currently deployed version, visit [retroflection.org](http://retroflection.org)
