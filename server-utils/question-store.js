@@ -7,7 +7,7 @@ var mongo = require('mongodb');
 
 var mongoUri = process.env.MONGOLAB_URI ||
   process.env.MONGOHQ_URL ||
-  'mongodb://localhost/test';
+  'mongodb://localhost/retroflection';
 
 
 var readdir = function(dir, cb) {
@@ -57,7 +57,7 @@ function initQuestions() {
 initQuestions();
 
 mongo.Db.connect(mongoUri + '?safe=true', function (err, db) {
-  var test = db.collection('test');
+  var test = db.collection('questions');
   test.remove({}, function (err, result) {
 
   });
