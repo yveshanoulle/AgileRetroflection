@@ -72,3 +72,51 @@ describe('authors function', function () {
     }
   });
 });
+
+describe('helpers function for standard emails', function () {
+  var result;
+  var question = questions[0];
+  beforeEach(function() {
+    result = createMailURL(question);
+  })
+
+  it('creates mailto: without address', function () {
+    result.should.contain('mailto:?');
+  });
+
+  it('contains the question text', function () {
+    result.should.contain(question.question);
+  });
+
+  it('contains the question author', function () {
+    result.should.contain(question.author);
+  });
+
+  it('contains the question id', function () {
+    result.should.contain(question.id);
+  });
+});
+
+describe('helpers function for correction emails', function () {
+  var result;
+  var question = questions[0];
+  beforeEach(function() {
+    result = createCorrectionMailURL(question);
+  })
+
+  it('creates mailto: with address "retroflections@hanoulle.be"', function () {
+    result.should.contain('mailto:retroflections@hanoulle.be?');
+  });
+
+  it('contains the question text', function () {
+    result.should.contain(question.question);
+  });
+
+  it('contains the question author', function () {
+    result.should.contain(question.author);
+  });
+
+  it('contains the question id', function () {
+    result.should.contain(question.id);
+  });
+});
