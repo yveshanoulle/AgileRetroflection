@@ -15,8 +15,7 @@
     "chai": "~1.5.0",
     "request": "~2.16.6",
     "mocha": "*",
-    "mocha-phantomjs": "*",
-    "grunt-mocha-phantomjs": "~0.1.1"
+    "mocha-phantomjs": "*"
   },
   "engines": {
     "node": "0.8.x",
