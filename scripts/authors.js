@@ -3,15 +3,15 @@ function authors(questions) {
 
   function addAuthor(author) {
     internal.push(author);
-  };
+  }
 
   function containsAuthorNamed(name) {
     return getAuthorNamed(name) !== null;
-  };
+  }
 
   function getAuthorNamed(name) {
-    for (i in internal) {
-      if (internal[i].name == name) {
+    for (var i in internal) {
+      if (internal[i].name === name) {
         return internal[i];
       }
     }

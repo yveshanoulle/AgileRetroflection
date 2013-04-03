@@ -18,29 +18,29 @@ var questions,
 
   this.currentQuestion = function () {
     return questions[currentQuestionNumber()];
-  }
+  };
 
   this.nextQuestion = function () {
     randomQuestion();
-  }
+  };
 
   this.previousQuestion = function () {
     if (currentIndex > 0) {
       questionNumbers.pop();
       currentIndex--;
     }
-  }
+  };
 
-}).apply(retroflection)
+}).apply(retroflection);
 
 var display = {};
 (function () {
   var linkToTwitter = function (name) {
-    if (name.charAt(0) == '@') {
+    if (name.charAt(0) === '@') {
       return '<a href=\'http://twitter.com/' + name.substr(1) + '\'>' + name + '</a>';
     }
     return name;
-  }
+  };
 
   this.show = function () {
     var current = retroflection.currentQuestion();
@@ -48,7 +48,7 @@ var display = {};
     $('.author').html(linkToTwitter(current.author) + ' (#' + current.id + ')');
     $('.emaillink').attr('href', createMailURL(current));
     $('.correctlink').attr('href', createCorrectionMailURL(current));
-  }
+  };
 
   this.bindEvents = function () {
     bindButtonsNumbered(1);
@@ -60,8 +60,7 @@ var display = {};
       $.mobile.changePage('', {transition: 'slideup'});
       return false;
     });
-
-  }
+  };
 
   var bindButtonsNumbered = function (number) {
     $('#page' + number).bind('pagebeforeshow', function () {
@@ -72,7 +71,7 @@ var display = {};
       next(number);
       return false;
     });
-  }
+  };
 
   function back(pageNumber) {
     retroflection.previousQuestion();
@@ -104,16 +103,16 @@ var display = {};
       about();
       return false;
     });
-  }
+  };
 
-}).apply(display)
+}).apply(display);
 
 function start() {
   function completeStart() {
     display.show();
     display.bindEvents();
     var map = authors(questions);
-    for (index in map) {
+    for (var index in map) {
       var author = map[index];
       $('#authors').append(author.asListItem());
     }

@@ -5,7 +5,7 @@ var request = require('request');
 var port = 5000;
 var base_uri = "http://localhost:" + port;
 
-describe('Server started in different process', function () {
+describe('Server', function () {
   var child;
 
   var waitForServerRunning = function (child, callback) {
@@ -23,7 +23,6 @@ describe('Server started in different process', function () {
 
   var serverShouldDeliverStartPage = function (done) {
     request({uri: base_uri}, function (req, resp) {
-      should.exist(resp);
       resp.statusCode.should.equal(200);
       resp.body.should.contain('Retroflection');
       done();
