@@ -11,7 +11,7 @@ function start() {
   $.ajax({
     url    : "questions.json",
     success: function (result) {
-      questions = JSON.parse(result);
+      questions = result;
       localStorage.setItem("questions", JSON.stringify(questions));
       completeStart();
     },
