@@ -30,6 +30,11 @@
     "authors": true,
     "chai": true,
     "createMailURL": true,
-    "escape": true
+    "escape": true,
+    "currentQuestion": true,
+    "nextQuestion": true,
+    "previousQuestion": true,
+    "linkToTwitter": true,
+    "ui": true
   }
 }

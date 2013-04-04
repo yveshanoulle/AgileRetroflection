@@ -16,3 +16,11 @@ function createMailURL(question) {
     '\nand is sent via the retroflection app available at http://retroflection.org');
   return result;
 }
+
+function linkToTwitter(name) {
+  if (name.charAt(0) === '@') {
+    return '<a href=\'http://twitter.com/' + name.substr(1) + '\'>' + name + '</a>';
+  }
+  return name;
+}
+

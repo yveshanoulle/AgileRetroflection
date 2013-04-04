@@ -1,36 +1,19 @@
 var should = chai.should();
-var questions = [
-  {"question": "Q1","author": "@deborahh","id": "976","_id": "515445d0ad390ec17100046a"},
-  {"question": "Q2","author": "@mfloryan","id": "977","_id": "515445d0ad390ec17100046b"},
-  {"question": "Q3","author": "@yveshanoulle","id": "978","_id": "515445d0ad390ec17100046c"},
-  {"question": "Q4","author": "@philagile","id": "979","_id": "515445d0ad390ec17100046d"},
-  {"question": "Q5","author": "@didierkoc","id": "98","_id": "515445d0ad390ec17100046e"},
-  {"question": "Q6","author": "@yveshanoulle","id": "980","_id": "515445d0ad390ec17100046f"},
-  {"question": "Q7","author": "@vinylbaustein","id": "981","_id": "515445d0ad390ec171000470"},
-  {"question": "Q8","author": "@k_ravlani","id": "982","_id": "515445d0ad390ec171000471"},
-  {"question": "Q9","author": "@yveshanoulle","id": "983","_id": "515445d0ad390ec171000472"},
-  {"question": "Q10","author": "@yveshanoulle","id": "984","_id": "515445d0ad390ec171000473"},
-  {"question": "Q11 with \"escapes\"","author": "@yveshanoulle","id": "985","_id": "515445d0ad390ec171000474"},
-  {"question": "Q12","author": "@vinylbaustein","id": "986","_id": "515445d0ad390ec171000475"},
-  {"question": "Q13","author": "@didierkoc","id": "987","_id": "515445d0ad390ec171000476"},
-  {"question": "Q14","author": "@vinylbaustein","id": "988","_id": "515445d0ad390ec171000477"},
-  {"question": "Q15","author": "@k_ravlani","id": "989","_id": "515445d0ad390ec171000478"}
-];
 
-describe('Author Yves', function () {
+describe('author Yves', function () {
   var authorName = '@yveshanoulle';
   var author = new Author(authorName);
 
   beforeEach(function(){
     author = new Author(authorName);
-    for (var i in questions) {
-      if (questions[i].author === authorName) {
-        author.addQuestion(questions[i]);
+    for (var i in test_questions) {
+      if (test_questions[i].author === authorName) {
+        author.addQuestion(test_questions[i]);
       }
     };
   });
 
-  it('has 5 questions', function () {
+  it('has 5 test_questions', function () {
     author.questions.length.should.equal(5);
   });
 
@@ -45,17 +28,17 @@ describe('Author Yves', function () {
 describe('authors function', function () {
   var result;
   beforeEach(function() {
-    result = authors(questions);
+    result = authors(test_questions);
   })
 
-  it('parses the questions to 7 authors', function() {
+  it('parses the test_questions to 7 authors', function() {
     result.length.should.equal(7);
     for (var i in result) {
       result[i].should.be.instanceOf(Author);
     }
   });
 
-  it('contains Yves with 5 questions', function() {
+  it('contains Yves with 5 test_questions', function() {
     for (var i in result) {
       if (result[i].name === '@yveshanoulle') {
         result[i].questions.length.should.equal(5);
@@ -70,53 +53,5 @@ describe('authors function', function () {
       lastName.localeCompare(currentName).should.be.below(0);
       lastName = currentName;
     }
-  });
-});
-
-describe('helpers function for standard emails', function () {
-  var result;
-  var question = questions[0];
-  beforeEach(function() {
-    result = createMailURL(question);
-  })
-
-  it('creates mailto: without address', function () {
-    result.should.contain('mailto:?');
-  });
-
-  it('contains the question text', function () {
-    result.should.contain(question.question);
-  });
-
-  it('contains the question author', function () {
-    result.should.contain(question.author);
-  });
-
-  it('contains the question id', function () {
-    result.should.contain(question.id);
-  });
-});
-
-describe('helpers function for correction emails', function () {
-  var result;
-  var question = questions[0];
-  beforeEach(function() {
-    result = createCorrectionMailURL(question);
-  })
-
-  it('creates mailto: with address "retroflections@hanoulle.be"', function () {
-    result.should.contain('mailto:retroflections@hanoulle.be?');
-  });
-
-  it('contains the question text', function () {
-    result.should.contain(question.question);
-  });
-
-  it('contains the question author', function () {
-    result.should.contain(question.author);
-  });
-
-  it('contains the question id', function () {
-    result.should.contain(question.id);
   });
 });
