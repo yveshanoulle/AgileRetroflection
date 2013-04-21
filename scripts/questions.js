@@ -2,6 +2,15 @@ var currentIndex = -1;
 var questionNumbers = [];
 var questions = [];
 
+var indexOfQuestionWithId = function (id) {
+  for (var i = 0; i < questions.length; i++) {
+    if (id === questions[i].id) {
+      return i;
+    }
+  }
+  return -1;
+};
+
 function randomQuestion() {
   questionNumbers.push(Math.floor(Math.random() * questions.length));
   currentIndex++;
@@ -40,21 +49,12 @@ function latestUpdate() {
 }
 
 function replaceOrAddQuestions(newQuestions) {
-  newQuestions.forEach(function(question) {
+  newQuestions.forEach(function (question) {
     var index = indexOfQuestionWithId(question.id);
     if (index > -1) {
-        questions[index] = question;
+      questions[index] = question;
     } else {
       questions.push(question);
     }
   });
-}
-
-var indexOfQuestionWithId = function (id) {
-  for (var i = 0; i < questions.length; i++) {
-    if (id === questions[i].id) {
-      return i;
-    }
-  };
-  return -1;
 }
