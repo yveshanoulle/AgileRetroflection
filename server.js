@@ -26,51 +26,53 @@ var basicAuth = express.basicAuth(function (username, password) {
 }, 'Restrict area, please identify');
 
 
-//app.get('/questions.json', function (req, res, next) {
-//  persistence.getQuestions(function (err, result) {
-//    if (err) {
-//      next(err);
-//    }
-//    res.send(JSON.stringify(result));
-//  })
-//});
-//
-//app.get('/questions/', basicAuth, function (req, res, next) {
-//  persistence.getQuestions(function (err, result) {
-//    if (err) {
-//      next(err);
-//    }
-//    res.render('index', {questions: result});
-//  })
-//});
-//
-//app.get('/questions', basicAuth, function (req, res) {
-//  res.redirect('/questions/');
-//});
-//
-//app.get('/questions/:id/edit', basicAuth, function (req, res, next) {
-//  persistence.getQuestion(req.params.id, function (err, result) {
-//    if (err) {
-//      next(err);
-//    }
-//    res.render('edit', {question: result});
-//  })
-//});
-//
-//app.post('/questions/:id/submit', basicAuth, function (req, res, next) {
-//  var question = req.body;
-//  persistence.saveQuestion(question, function (err, result) {
-//    if (err) {
-//      return next(err);
-//    }
-//    if (result === 1) {
-//      res.render('updated', {question: question});
-//    } else {
-//      res.redirect('/test_questions/' + question.id + '/edit');
-//    }
-//  });
-//
-//});
+app.get('/questions.json/:lastSave', function (req, res, next) {
+  var lastSave = parseInt(req.params.lastSave, 10);
+  persistence.getQuestionsSince(lastSave, function (err, result) {
+    if (err) {
+      next(err);
+    }
+    res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
+    res.send(JSON.stringify(result));
+  })
+});
+
+app.get('/questions/', basicAuth, function (req, res, next) {
+  persistence.getQuestions(function (err, result) {
+    if (err) {
+      next(err);
+    }
+    res.render('index', {questions: result});
+  })
+});
+
+app.get('/questions', basicAuth, function (req, res) {
+  res.redirect('/questions/');
+});
+
+app.get('/questions/:id/edit', basicAuth, function (req, res, next) {
+  persistence.getQuestion(req.params.id, function (err, result) {
+    if (err) {
+      next(err);
+    }
+    res.render('edit', {question: result});
+  })
+});
+
+app.post('/questions/:id/submit', basicAuth, function (req, res, next) {
+  var question = req.body;
+  persistence.saveQuestion(question, function (err, result) {
+    if (err) {
+      return next(err);
+    }
+    if (result === 1) {
+      res.render('updated', {question: question});
+    } else {
+      res.redirect('/test_questions/' + question.id + '/edit');
+    }
+  });
+
+});
 
 var http = require('http');
 var server = http.createServer(app);

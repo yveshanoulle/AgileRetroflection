@@ -27,7 +27,9 @@ var loadFile = function (file, cb) {
       return cb("error loading file " + err);
     }
     try {
-      cb(null, JSON.parse(code));
+      var question = JSON.parse(code);
+      question.lastSave = Date.now();
+      cb(null, question);
     }
     catch (e) {
       cb("Error parsing " + file + ": " + e);
