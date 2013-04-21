@@ -1,0 +1,17 @@
+extends layout
+
+block title
+  | Login
+
+block content
+  div(data-role="header")
+    h1 Please Login
+  div(data-role="content")
+    p In order to update questions, please allow us to ask you to authenticate using Google. We will save your email
+      | address with your changes.
+    fieldset.ui-grid-a
+      div.ui-block-a
+        a(href="javascript:history.back()", data-role="button") Cancel
+      div.ui-block-b
+        a(href="/auth/openid?openid_identifier=" + encodeURIComponent("https://www.google.com/accounts/o8/id"), rel="external", data-theme="a", data-role="button") Authenticate
+        
