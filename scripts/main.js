@@ -1,3 +1,5 @@
+var questions;
+
 function start() {
   var completeStart = function () {
     authors(questions).forEach(function (author) {
@@ -6,18 +8,15 @@ function start() {
     ui.setup();
   };
 
-  questions = JSON.parse(localStorage.getItem("questions"));
-  if (!questions) {
-    questions = [];
-  }
   $.ajax({
-    url: "questions.json/" + latestUpdate(),
+    url    : "questions.json",
     success: function (result) {
-      replaceOrAddQuestions(JSON.parse(result));
+      questions = result;
       localStorage.setItem("questions", JSON.stringify(questions));
       completeStart();
     },
-    error: function (result, textStatus, error) {
+    error  : function (result) {
+      questions = JSON.parse(localStorage.getItem("questions"));
       completeStart();
     }
   });
