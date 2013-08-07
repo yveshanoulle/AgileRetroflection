@@ -4,50 +4,27 @@ var
   app = express(),
   async = require('async'),
   fs = require('fs'),
-  passport = require('passport'),
-  OpenIDStrategy = require('passport-openid').Strategy,
-  ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn,
-  persistence = require('./lib/persistence.js');
+  persistence = require('./lib/persistence.js'),
+  adminName = process.env.ADMIN_NAME || 'admin',
+  adminPass = process.env.ADMIN_PASS || '12345';
 
-var port = 5000;
 
-passport.use(new OpenIDStrategy({
-    returnURL: 'http://localhost:5000/auth/openid/return',
-    realm: 'http://localhost:5000/',
-    profile: true
-  },
-  function (identifier, profile, done) {
-    process.nextTick(function () {
-      var user = { identifier: identifier, profile: profile};
-      done(null, user);
-    });
-  }
-));
-passport.serializeUser(function (user, done) {
-  done(null, user);
-});
-
-passport.deserializeUser(function (user, done) {
-  done(null, user);
-});
-
-app.configure(function () {
+  app.configure(function () {
   app.set('view engine', 'jade');
   app.set('views', path.join(__dirname, 'views'));
+  app.use(express.favicon());
   app.use(express.logger('dev'));
-  app.use(express.cookieParser());
   app.use(express.bodyParser());
   app.use(express.methodOverride());
-  app.use(express.session({secret: 'ReTrOfLeCtIoN'}));
-  app.use(passport.initialize());
-  app.use(passport.session());
   app.use(app.router);
   app.use(express.static(path.join(__dirname)));
 });
 
-app.get('/auth/openid', passport.authenticate('openid'));
 
-app.get('/auth/openid/return', passport.authenticate('openid', { successReturnToOrRedirect: '/', failureRedirect: '/login' }));
+var basicAuth = express.basicAuth(function (username, password) {
+  return (username == adminName && password == adminPass);
+}, 'Restrict area, please identify');
+
 
 app.get('/questions.json/:lastSave', function (req, res, next) {
   var lastSave = parseInt(req.params.lastSave, 10);
@@ -60,7 +37,7 @@ app.get('/questions.json/:lastSave', function (req, res, next) {
   })
 });
 
-app.get('/questions/', ensureLoggedIn('/login'), function (req, res, next) {
+app.get('/questions/', basicAuth, function (req, res, next) {
   persistence.getQuestions(function (err, result) {
     if (err) {
       next(err);
@@ -69,11 +46,11 @@ app.get('/questions/', ensureLoggedIn('/login'), function (req, res, next) {
   })
 });
 
-app.get('/questions', ensureLoggedIn('/login'), function (req, res) {
+app.get('/questions', basicAuth, function (req, res) {
   res.redirect('/questions/');
 });
 
-app.get('/questions/:id/edit', ensureLoggedIn('/login'), function (req, res, next) {
+app.get('/questions/:id/edit', basicAuth, function (req, res, next) {
   persistence.getQuestion(req.params.id, function (err, result) {
     if (err) {
       next(err);
@@ -82,7 +59,7 @@ app.get('/questions/:id/edit', ensureLoggedIn('/login'), function (req, res, nex
   })
 });
 
-app.post('/questions/:id/submit', ensureLoggedIn('/login'), function (req, res, next) {
+app.post('/questions/:id/submit', basicAuth, function (req, res, next) {
   var question = req.body;
   persistence.saveQuestion(question, function (err, result) {
     if (err) {
@@ -97,13 +74,10 @@ app.post('/questions/:id/submit', ensureLoggedIn('/login'), function (req, res, 
 
 });
 
-app.get('/login', function (req, res) {
-  res.render('login');
-});
-
 var http = require('http');
 var server = http.createServer(app);
 
-server.listen(process.env.PORT || port, function () {
+
+server.listen(process.env.PORT || 5000, function () {
   console.log('Server running');
 });
