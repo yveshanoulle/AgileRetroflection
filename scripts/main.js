@@ -1,5 +1,3 @@
-/* global questions, latestUpdate, replaceOrAddQuestions */
-
 function start() {
   var completeStart = function () {
     authors(questions).forEach(function (author) {
@@ -8,9 +6,9 @@ function start() {
     ui.setup();
   };
 
-  var qs = JSON.parse(localStorage.getItem("questions"));
-  if (qs) {
-    questions.concat(qs);
+  questions = JSON.parse(localStorage.getItem("questions"));
+  if (!questions) {
+    questions = [];
   }
   $.ajax({
     url: "questions.json/" + latestUpdate(),
