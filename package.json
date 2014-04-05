@@ -24,7 +24,7 @@
     "mocha": "*"
   },
   "engines": {
-    "node": ">0.10"
+    "node": "~0.10"
   },
   "scripts": {
     "test": "grunt travis --verbose"
