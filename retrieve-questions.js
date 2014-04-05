@@ -41,18 +41,19 @@ function loadSheet(worksheetId, idCol, questionCol, authorCol, dateCol, callback
   });
 }
 
-async.parallel(
-  [
-    function (callback) {loadSheet('od9', '2', '4', '5', '9', callback)},
-    function (callback) {loadSheet('od8', '2', '4', '5', '9', callback)},
-    function (callback) {loadSheet('odb', '2', '4', '5', '9', callback)},
-    function (callback) {loadSheet('ocx', '1', '3', '4', '8', callback)},
-    function (callback) {loadSheet('od6', '1', '3', '4', '7', callback)}
-  ],
-  function (err, questions) {
-    if (err) {return console.log(err);}
-    fs.writeFileSync('questions.json', JSON.stringify(_.flatten(questions)));
-    console.log("questions updated")
-  }
-)
+module.exports = function () {
+  async.parallel(
+    [
+      function (callback) {loadSheet('od9', '2', '4', '5', '9', callback)},
+      function (callback) {loadSheet('od8', '2', '4', '5', '9', callback)},
+      function (callback) {loadSheet('odb', '2', '4', '5', '9', callback)},
+      function (callback) {loadSheet('ocx', '1', '3', '4', '8', callback)},
+      function (callback) {loadSheet('od6', '1', '3', '4', '7', callback)}
+    ],
+    function (err, questions) {
+      if (err) {return console.log(err);}
+      fs.writeFileSync('questions.json', JSON.stringify(_.flatten(questions)));
+      console.log("questions updated")
+    });
+}
 
