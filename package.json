@@ -1,6 +1,11 @@
 {
   "name": "retroflection",
   "version": "0.3.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yveshanoulle/AgileRetroflection"
+  },
+  "author": "Andreas Leidig",
   "dependencies": {
     "async": "~0.2",
     "edit-google-spreadsheet": "~0.2",
