@@ -14,6 +14,7 @@ nconf.file({ file: 'config/emailAndKey.json' });
 function loadSheet(worksheetId, idCol, questionCol, authorCol, dateCol, callback) {
   var key = nconf.get('GOOGLE_PEM');
   var email = nconf.get('GOOGLE_DEV_EMAIL');
+  if (!key || !email) { return callback(new Error()); }
   Spreadsheet.load({
     spreadsheetId: '0AjzWaZIjE9dYdFg2aXdNbE5qdzlzNjBmM1pKaFJFYkE',
     worksheetId: worksheetId,
@@ -36,7 +37,7 @@ function loadSheet(worksheetId, idCol, questionCol, authorCol, dateCol, callback
         questionrow.question = row[questionCol];
         questionrow.author = row[authorCol];
         return questionrow;
-      }).filter(function (row) {return !!row.author && row.author.match(/^@/);}).value());
+      }).filter(function (row) { return !!row.author && row.author.match(/^@/); }).value());
     });
   });
 }
@@ -44,16 +45,16 @@ function loadSheet(worksheetId, idCol, questionCol, authorCol, dateCol, callback
 module.exports = function () {
   async.parallel(
     [
-      function (callback) {loadSheet('od9', '2', '4', '5', '9', callback)},
-      function (callback) {loadSheet('od8', '2', '4', '5', '9', callback)},
-      function (callback) {loadSheet('odb', '2', '4', '5', '9', callback)},
-      function (callback) {loadSheet('ocx', '1', '3', '4', '8', callback)},
-      function (callback) {loadSheet('od6', '1', '3', '4', '7', callback)}
+      function (callback) { loadSheet('od9', '2', '4', '5', '9', callback); },
+      function (callback) { loadSheet('od8', '2', '4', '5', '9', callback); },
+      function (callback) { loadSheet('odb', '2', '4', '5', '9', callback); },
+      function (callback) { loadSheet('ocx', '1', '3', '4', '8', callback); },
+      function (callback) { loadSheet('od6', '1', '3', '4', '7', callback); }
     ],
     function (err, questions) {
-      if (err) {return console.log(err);}
+      if (err) { return err; }
       fs.writeFileSync('questions.json', JSON.stringify(_.flatten(questions)));
-      console.log("questions updated")
+      console.log("questions updated");
     });
-}
+};
 
