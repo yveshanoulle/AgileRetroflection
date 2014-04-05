@@ -5,15 +5,10 @@ var path = require('path');
 var app = express();
 var retrieve_questions = require('./retrieve-questions');
 
-app.configure(function () {
-  app.set('views', path.join(__dirname, 'views'));
-  app.use(express.favicon());
-  app.use(express.logger('dev'));
-  app.use(express.static(path.join(__dirname)));
-});
+app.use(express.favicon());
+app.use(express.static(path.join(__dirname, 'public')));
 
-var http = require('http');
-var server = http.createServer(app);
+var server = require('http').createServer(app);
 
 server.listen(process.env.PORT || 5000, function () {
   console.log('Server running');
