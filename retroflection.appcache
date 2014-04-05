@@ -5,6 +5,7 @@ scripts/authors.js
 scripts/helpers.js
 scripts/main.js
 scripts/ui.js
+scripts/questions.js
 stylesheets/retroflection.css
 stylesheets/jquery.mobile-1.3.0.min.css
 scripts/jquery.mobile-1.3.0.min.js
