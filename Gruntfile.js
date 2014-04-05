@@ -13,7 +13,7 @@ module.exports = function (grunt) {
       ' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */\n',
     // Task configuration.
     jshint      : {
-      files  : ['scripts/*', '.jshintrc', '!node_modules/**/*.js*', '!scripts/*.min.js*', '!scripts/swipe*.js*'],
+      files  : ['*.js', 'scripts/*', '.jshintrc', '!node_modules/**/*.js*', '!scripts/*.min.js*', '!scripts/swipe*.js*'],
       options: {
         jshintrc: '.jshintrc'
       }
@@ -30,10 +30,6 @@ module.exports = function (grunt) {
       all: { src: 'test/**/*.js' }
     },
     'mocha_phantomjs': {
-      options: {
-        'reporter': 'xunit',
-        'output': 'tests/results/result.xml'
-      },
       all: ['browser-test/**/*.html']
     }
   });
