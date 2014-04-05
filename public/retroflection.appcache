@@ -1,15 +1,18 @@
 CACHE MANIFEST
 
+CACHE:
 scripts/author.js
 scripts/authors.js
 scripts/helpers.js
 scripts/main.js
 scripts/ui.js
 scripts/questions.js
-stylesheets/retroflection.css
-stylesheets/jquery.mobile-1.3.0.min.css
 scripts/jquery.mobile-1.3.0.min.js
 scripts/jquery-1.9.1.min.js
+scripts/swipeUpDown.js
+stylesheets/icons.css
+stylesheets/jquery.mobile-1.3.0.min.css
+stylesheets/retroflection.css
 images/ajax-loader.gif
 images/Default.png
 images/favicon.ico
@@ -22,5 +25,6 @@ images/icons-18-black.png
 images/icons-18-white.png
 images/icons-36-black.png
 images/icons-36-white.png
-scripts/swipeUpDown.js
-stylesheets/icons.css
+
+NETWORK:
+questions.json

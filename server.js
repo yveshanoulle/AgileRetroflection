@@ -7,6 +7,7 @@ var retrieve_questions = require('./retrieve-questions');
 
 app.use(express.favicon());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.compress());
 
 var server = require('http').createServer(app);
 
