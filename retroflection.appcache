@@ -2,7 +2,6 @@ CACHE MANIFEST
 
 scripts/author.js
 scripts/authors.js
-scripts/retroflection.js
 scripts/helpers.js
 stylesheets/retroflection.css
 stylesheets/jquery.mobile-1.3.0.min.css
