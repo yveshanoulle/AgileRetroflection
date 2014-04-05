@@ -18,10 +18,6 @@ module.exports = function (grunt) {
         jshintrc: '.jshintrc'
       }
     },
-    watch       : {
-      files: ['<%= jshint.files %>', '**/*.jade'],
-      tasks: ['default']
-    },
     'mocha-hack': {
       options: {
         globals    : ['should'],
@@ -32,32 +28,23 @@ module.exports = function (grunt) {
       },
 
       all: { src: 'test/**/*.js' }
+    },
+    'mocha_phantomjs': {
+      options: {
+        'reporter': 'xunit',
+        'output': 'tests/results/result.xml'
+      },
+      all: ['browser-test/**/*.html']
     }
   });
 
   // These plugins provide necessary tasks.
   grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-mocha-hack');
   grunt.loadNpmTasks('grunt-mocha-phantomjs');
 
   // Default task.
-  grunt.registerTask('default', ['jshint', 'mocha-hack',  'client-tests']);
-
-  // Browser-Tests
-  grunt.registerTask('client-tests', 'Run the client-side Mocha tests through PhantomJS', function () {
-    var done = this.async();
-    var mocha = grunt.util.spawn({
-      cmd : 'node',
-      args: [
-        'node_modules/mocha-phantomjs/bin/mocha-phantomjs', 'browser-test/tests-without-jquery.html'
-      ]
-    }, function (error, result, code) {
-      done(!code);
-    });
-    mocha.stdout.pipe(process.stdout);
-    mocha.stderr.pipe(process.stderr);
-  });
+  grunt.registerTask('default', ['jshint', 'mocha-hack',  'mocha_phantomjs']);
 
   // Travis-CI task
   grunt.registerTask('travis', ['default']);

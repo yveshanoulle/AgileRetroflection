@@ -13,7 +13,6 @@
   "node": true,
   "browser": true,
   "jquery": true,
-  "es5": true,
   "strict": false,
   "indent": 2,
   "white": true,
