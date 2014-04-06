@@ -1,15 +1,7 @@
 CACHE MANIFEST
 
 CACHE:
-scripts/author.js
-scripts/authors.js
-scripts/helpers.js
-scripts/main.js
-scripts/ui.js
-scripts/questions.js
-scripts/jquery.mobile-1.4.2.min.js
-scripts/jquery-1.11.0.min.js
-scripts/swipeUpDown.js
+scripts/global.js
 stylesheets/jquery.mobile-1.4.2.min.css
 stylesheets/images/ajax-loader.gif
 stylesheets/retroflection.css

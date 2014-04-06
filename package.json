@@ -15,13 +15,14 @@
     "nconf": "~0.6"
   },
   "devDependencies": {
-    "grunt": "~0.4",
-    "grunt-contrib-jshint": "~0.9",
-    "grunt-mocha-hack": "~0.1.0",
-    "grunt-mocha-phantomjs": "~0.4.0",
     "chai": "~1.5.0",
-    "request": "~2.16.6",
-    "mocha": "*"
+    "grunt": "~0.4",
+    "grunt-contrib-concat": "~0.3.0",
+    "grunt-mocha-hack": "~0.1.0",
+    "grunt-contrib-jshint": "~0.9",
+    "grunt-mocha-phantomjs": "~0.4.0",
+    "mocha": "*",
+    "request": "~2.16.6"
   },
   "engines": {
     "node": "~0.10"

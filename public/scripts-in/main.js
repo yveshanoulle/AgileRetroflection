@@ -1,6 +1,6 @@
 var questions;
 
-function start() {
+$(document).ready(function () {
   var completeStart = function () {
     authors(questions).forEach(function (author) {
       $('#authors').append(author.asListItem());
@@ -9,15 +9,15 @@ function start() {
   };
 
   $.ajax({
-    url    : "questions.json",
+    url: "questions.json",
     success: function (result) {
       questions = result;
       localStorage.setItem("questions", JSON.stringify(questions));
       completeStart();
     },
-    error  : function (result) {
+    error: function (result) {
       questions = JSON.parse(localStorage.getItem("questions"));
       completeStart();
     }
   });
-}
+});
