@@ -10,11 +10,9 @@ scripts/questions.js
 scripts/jquery.mobile-1.4.2.min.js
 scripts/jquery-1.11.0.min.js
 scripts/swipeUpDown.js
-stylesheets/icons.css
 stylesheets/jquery.mobile-1.4.2.min.css
 stylesheets/images/ajax-loader.gif
 stylesheets/retroflection.css
-images/ajax-loader.gif
 images/Default.png
 images/favicon.ico
 images/Icon-72.png
