@@ -15,8 +15,29 @@ var ui = {};
   };
 
   var bindEvents = function () {
-    bindEventsForPage(1);
-    bindEventsForPage(2);
+    $("#question-page").bind('pagebeforeshow', function () {
+      show();
+    });
+    $('#random').bind('click', function (event) {
+      event.stopImmediatePropagation();
+      next();
+      return false;
+    });
+    $("#question-page").bind('swipeleft', function (event) {
+      event.stopImmediatePropagation();
+      next();
+      return false;
+    });
+    $("#question-page").bind('swiperight', function (event) {
+      event.stopImmediatePropagation();
+      back();
+      return false;
+    });
+    $("#question-page").bind('swipedown', function (event) {
+      event.stopImmediatePropagation();
+      $.mobile.changePage('#about-page', {transition: 'slidedown'});
+      return false;
+    });
     $('#about-page').bind('swipeup', function (event) {
       event.stopImmediatePropagation();
       $.mobile.changePage('', {transition: 'slideup'});
@@ -24,40 +45,14 @@ var ui = {};
     });
   };
 
-  var bindEventsForPage = function (number) {
-    $('#page' + number).bind('pagebeforeshow', function () {
-      show(number);
-    });
-    $('#random' + number).bind('click', function (event) {
-      event.stopImmediatePropagation();
-      next(number);
-      return false;
-    });
-    $('#page' + number).bind('swipeleft', function (event) {
-      event.stopImmediatePropagation();
-      next(number);
-      return false;
-    });
-    $('#page' + number).bind('swiperight', function (event) {
-      event.stopImmediatePropagation();
-      back(number);
-      return false;
-    });
-    $('#page' + number).bind('swipedown', function (event) {
-      event.stopImmediatePropagation();
-      $.mobile.changePage('#about-page', {transition: 'slidedown'});
-      return false;
-    });
-  };
-
-  var back = function (pageNumber) {
+  var back = function (page) {
+    $("body").pagecontainer("change", $("#question-page"), {transition: "slide", reverse: "true", allowSamePageTransition: "true"});
     previousQuestion();
-    $.mobile.changePage(pageNumber === 1 ? '#page2' : '', {transition: 'slide', reverse: 'true'});
   };
 
-  var next = function (pageNumber) {
+  var next = function (page) {
+    $("body").pagecontainer("change", $("#question-page"), {transition: "slide", allowSamePageTransition: "true"});
     nextQuestion();
-    $.mobile.changePage(pageNumber === 1 ? '#page2' : '', {transition: 'slide'});
   };
 
 }).apply(ui);
