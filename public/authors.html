@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Ratchet template page</title>
+
+  <!-- Sets initial viewport load and disables zooming  -->
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+
+  <!-- Makes your prototype chrome-less once bookmarked to your phone's home screen -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <!-- Include the compiled Ratchet CSS -->
+  <link href="css/ratchet.css" rel="stylesheet">
+
+  <!-- Include the compiled Ratchet JS -->
+  <script src="js/ratchet.js"></script>
+  <script src="js/angular.js"></script>
+  
+  <script src="js/helpers.js"></script>
+  <script src="scripts/author.js"></script>
+  <script src="scripts/authors.js"></script>
+  <script src="scripts/questions.js"></script>
+  <script src="scripts/ui.js"></script>
+  <script src="scripts/main.js"></script>
+  <script>
+    $(document).ready(function () {
+      start();
+    });
+  </script>
+
+</head>
+<body>
+
+<!-- Make sure all your bars are the first things in your <body> -->
+<header class="bar bar-nav">
+  <button class="btn btn-link btn-nav pull-left">
+    <span class="icon icon-edit"></span>
+    Correct It
+  </button>
+  <button class="btn btn-link btn-nav pull-right">
+    Mail
+    <span class="icon icon-compose"></span>
+  </button>
+  <h1 class="title">Retroflection</h1>
+</header>
+
+<!-- Wrap all non-bar HTML in the .content div (this is actually what scrolls) -->
+<div class="content">
+  <div class="content-padded">
+    <h3 class="question">Frage</h3>
+
+    <p class="author">Autor</p>
+  </div>
+</div>
+
+
+<nav class="bar bar-tab">
+  <a class="tab-item" href="authors.html">
+    <span class="icon icon-person"></span>
+    <span class="tab-label">Authors</span>
+  </a>
+  <a class="tab-item active" id="random" href="index2.html" data-transition="fade">
+    <span class="icon icon-refresh"></span>
+    <span class="tab-label">Random</span>
+  </a>
+  <a class="tab-item" href="#">
+    <span class="icon icon-info"></span>
+    <span class="tab-label">About</span>
+  </a>
+</nav>
+</body>
+</html>

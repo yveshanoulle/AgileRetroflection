@@ -15,8 +15,7 @@ var ui = {};
   };
 
   var bindEvents = function () {
-    bindEventsForPage(1);
-    bindEventsForPage(2);
+    bindEventsForPage();
     $('#about-page').bind('swipeup', function (event) {
       event.stopImmediatePropagation();
       $.mobile.changePage('', {transition: 'slideup'});
@@ -24,26 +23,26 @@ var ui = {};
     });
   };
 
-  var bindEventsForPage = function (number) {
-    $('#page' + number).bind('pagebeforeshow', function () {
-      show(number);
+  var bindEventsForPage = function () {
+    $("#random").bind('pagebeforeshow', function () {
+      show();
     });
-    $('#random' + number).bind('click', function (event) {
+    $("#random").bind('click', function (event) {
       event.stopImmediatePropagation();
-      next(number);
+      next();
       return false;
     });
-    $('#page' + number).bind('swipeleft', function (event) {
+    $("#random").bind('swipeleft', function (event) {
       event.stopImmediatePropagation();
-      next(number);
+      next();
       return false;
     });
-    $('#page' + number).bind('swiperight', function (event) {
+    $("#random").bind('swiperight', function (event) {
       event.stopImmediatePropagation();
-      back(number);
+      back();
       return false;
     });
-    $('#page' + number).bind('swipedown', function (event) {
+    $("#random").bind('swipedown', function (event) {
       event.stopImmediatePropagation();
       $.mobile.changePage('#about-page', {transition: 'slidedown'});
       return false;
@@ -52,12 +51,12 @@ var ui = {};
 
   var back = function (pageNumber) {
     previousQuestion();
-    $.mobile.changePage(pageNumber === 1 ? '#page2' : '', {transition: 'slide', reverse: 'true'});
+    show();
   };
 
   var next = function (pageNumber) {
-    nextQuestion();
-    $.mobile.changePage(pageNumber === 1 ? '#page2' : '', {transition: 'slide'});
+//    nextQuestion();
+//    show();
   };
 
 }).apply(ui);
