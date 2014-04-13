@@ -1,18 +1,6 @@
-<!-- Make sure all your bars are the first things in your <body> -->
-<header class="bar bar-nav">
-  <button class="btn btn-link btn-nav pull-left">
-    <span class="icon icon-edit"></span>
-    Correct It
-  </button>
-  <button class="btn btn-link btn-nav pull-right">
-    Mail
-    <span class="icon icon-compose"></span>
-  </button>
-  <h1 class="title">Retroflection</h1>
-</header>
+<header ui-view="nav-bar" class="bar bar-nav"></header>
 
-<!-- Wrap all non-bar HTML in the .content div (this is actually what scrolls) -->
-<div ui-view class="content"></div>
+<div ui-view="content" class="content"></div>
 
 
 <nav class="bar bar-tab">

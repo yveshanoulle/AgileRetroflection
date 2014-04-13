@@ -1,4 +1,9 @@
 <!-- Wrap all non-bar HTML in the .content div (this is actually what scrolls) -->
 <div class="content-padded">
   <h2>{{author.name}}</h2>
+  <ul class="table-view">
+    <li ng-repeat="question in author.questions" class="table-view-cell">
+        {{question.question}}
+    </li>
+  </ul>
 </div>

@@ -22,26 +22,53 @@ angular.module('retroflection', ['ui.router', 'app', 'questionstore'])
       })
       .state('retro.question', {
         url: '/question/:id',
-        templateUrl: 'question.tpl.html',
-        controller: function ($scope, $stateParams) {
-          if (!$stateParams.id) { $scope.nextQuestion(); }
-          $scope.current = _.find($scope.questions, {"id": $stateParams.id});
-          $scope.twitterlink = linkToTwitter;
+        views: {
+          'nav-bar': {
+            templateUrl: 'question-header.tpl.html',
+            controller: function ($scope, $stateParams) {
+              $scope.current = _.find($scope.questions, {"id": $stateParams.id});
+              $scope.createMailURL = createMailURL($scope.current);
+              $scope.createCorrectionMailURL = createCorrectionMailURL($scope.current);
+            }
+          },
+          'content': {
+            templateUrl: 'question.tpl.html',
+            controller: function ($scope, $stateParams) {
+              if (!$stateParams.id) { $scope.nextQuestion(); }
+              $scope.current = _.find($scope.questions, {"id": $stateParams.id});
+              $scope.twitterlink = linkToTwitter;
+            }
+          }
         }
       })
       .state('retro.authors', {
         url: '/authors',
-        templateUrl: 'authors.tpl.html',
-        controller: function ($scope) {
-          $scope.normname = function (name) { 
-            return name.substr(1); };
+        views: {
+          'nav-bar': {
+            template: '<h1 class="title">Authors</h1>'
+          },
+          'content': {
+            templateUrl: 'authors.tpl.html',
+            controller: function ($scope) {
+              $scope.normname = function (name) {
+                return name.substr(1);
+              };
+            }
+          }
         }
       })
-      .state('retro.authors.author', {
+      .state('retro.author', {
         url: '/authors/:name',
-        templateUrl: 'author.tpl.html',
-        controller: function ($scope, $stateParams) {
-          $scope.author = _.find($scope.authors, {"name": $stateParams.name});
+        views: {
+          'nav-bar': {
+            template: '<h1 class="title">Author</h1>'
+          },
+          'content': {
+            templateUrl: 'author.tpl.html',
+            controller: function ($scope, $stateParams) {
+              $scope.author = _.find($scope.authors, {"name": $stateParams.name});
+            }
+          }
         }
       });
     $urlRouterProvider.when('', '/index');
@@ -49,8 +76,7 @@ angular.module('retroflection', ['ui.router', 'app', 'questionstore'])
   }
 )
 
-  .
-  service('QuestionService', function ($state) {
+  .service('QuestionService', function ($state) {
     var questionNumbers = [];
 
     function nextQuestion(questionsize) {
