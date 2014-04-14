@@ -1,7 +1,7 @@
 /* global _, angular, questions */
 "use strict";
 
-angular.module('retroflection', ['ui.router', 'app', 'questionstore'])
+angular.module('retroflection', ['ui.router', 'app', 'questionstore', 'ngTouch'])
 
   .config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
@@ -18,6 +18,7 @@ angular.module('retroflection', ['ui.router', 'app', 'questionstore'])
           $scope.questions = questions.data;
           $scope.authors = authors($scope.questions);
           $scope.nextQuestion = function () {QuestionService.next($scope.questions.length); };
+          $scope.previousQuestion = function () {QuestionService.previous(); };
         }
       })
       .state('retro.question', {
@@ -37,6 +38,18 @@ angular.module('retroflection', ['ui.router', 'app', 'questionstore'])
               if (!$stateParams.id) { $scope.nextQuestion(); }
               $scope.current = _.find($scope.questions, {"id": $stateParams.id});
               $scope.twitterlink = linkToTwitter;
+              $scope.swipeleft = function () {
+                $scope.nextQuestion();
+              };
+              $scope.swiperight = function () {
+                $scope.previousQuestion();
+              };
+            }
+          },
+          'buttons': {
+            templateUrl: 'buttons.tpl.html',
+            controller: function ($scope) {
+              $scope.showQuestion = true;
             }
           }
         }
@@ -54,6 +67,12 @@ angular.module('retroflection', ['ui.router', 'app', 'questionstore'])
                 return name.substr(1);
               };
             }
+          },
+          'buttons': {
+            templateUrl: 'buttons.tpl.html',
+            controller: function ($scope) {
+              $scope.showAuthors = true;
+            }
           }
         }
       })
@@ -61,12 +80,40 @@ angular.module('retroflection', ['ui.router', 'app', 'questionstore'])
         url: '/authors/:name',
         views: {
           'nav-bar': {
-            template: '<h1 class="title">Author</h1>'
+            template: '<h1 class="title">{{author.name}}</h1>',
+            controller: function ($scope, $stateParams) {
+              $scope.author = _.find($scope.authors, {"name": $stateParams.name});
+            }
           },
           'content': {
             templateUrl: 'author.tpl.html',
             controller: function ($scope, $stateParams) {
-              $scope.author = _.find($scope.authors, {"name": $stateParams.name});
+              $scope.questions = _.find($scope.authors, {"name": $stateParams.name}).questions;
+              $scope.createCorrectionMailURL = createCorrectionMailURL;
+            }
+          },
+          'buttons': {
+            templateUrl: 'buttons.tpl.html',
+            controller: function ($scope) {
+              $scope.showAuthors = true;
+            }
+          }
+        }
+      })
+      .state('retro.about', {
+        url: '/about',
+        views: {
+          'nav-bar': {
+            template: '<h1 class="title">About</h1>'
+          },
+          'content': {
+            templateUrl: 'about.tpl.html',
+            controller: function () {}
+          },
+          'buttons': {
+            templateUrl: 'buttons.tpl.html',
+            controller: function ($scope) {
+              $scope.showAbout = true;
             }
           }
         }

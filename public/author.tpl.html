@@ -1,9 +1,5 @@
-<!-- Wrap all non-bar HTML in the .content div (this is actually what scrolls) -->
-<div class="content-padded">
-  <h2>{{author.name}}</h2>
   <ul class="table-view">
-    <li ng-repeat="question in author.questions" class="table-view-cell">
-        {{question.question}}
+    <li ng-repeat="question in questions" class="table-view-cell">
+        {{question.question}} <a class="btn" href="{{createCorrectionMailURL(question)}}"><span class="icon icon-compose"></span></a>
     </li>
   </ul>
-</div>

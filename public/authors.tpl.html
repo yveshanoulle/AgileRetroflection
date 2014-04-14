@@ -1,9 +1,7 @@
-<div class="content-padded">
-  <ul class="table-view">
-    <li ng-repeat="author in authors" class="table-view-cell">
-      <a class="navigate-right" ui-sref="retro.author({name:author.name})">
-        <span class="badge">{{author.questions.length}}</span> {{author.name}}
-      </a>
-    </li>
-  </ul>
-</div>
+<ul class="table-view">
+  <li ng-repeat="author in authors" class="table-view-cell">
+    <a class="navigate-right" ui-sref="retro.author({name:author.name})">
+      <span class="badge">{{author.questions.length}}</span> {{author.name}}
+    </a>
+  </li>
+</ul>
