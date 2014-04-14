@@ -1,7 +1,7 @@
 /* global _, angular, questions */
 "use strict";
 
-angular.module('retroflection', ['ui.router', 'app', 'questionstore', 'ngTouch'])
+angular.module('retroflection', ['ui.router', 'app', 'questionstore', 'ngTouch', 'ngAnimate'])
 
   .config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
@@ -17,8 +17,15 @@ angular.module('retroflection', ['ui.router', 'app', 'questionstore', 'ngTouch']
         controller: function ($scope, $state, questions, QuestionService) {
           $scope.questions = questions.data;
           $scope.authors = authors($scope.questions);
-          $scope.nextQuestion = function () {QuestionService.next($scope.questions.length); };
-          $scope.previousQuestion = function () {QuestionService.previous(); };
+          QuestionService.numberOfQuestions($scope.questions.length);
+          $scope.nextQuestion = function () {
+            $scope.animationclass = 'fade-left';
+            QuestionService.next();
+          };
+          $scope.previousQuestion = function () {
+            $scope.animationclass = 'fade-right';
+            QuestionService.previous();
+          };
         }
       })
       .state('retro.question', {
@@ -28,8 +35,10 @@ angular.module('retroflection', ['ui.router', 'app', 'questionstore', 'ngTouch']
             templateUrl: 'question-header.tpl.html',
             controller: function ($scope, $stateParams) {
               $scope.current = _.find($scope.questions, {"id": $stateParams.id});
-              $scope.createMailURL = createMailURL($scope.current);
-              $scope.createCorrectionMailURL = createCorrectionMailURL($scope.current);
+              if ($scope.current) {
+                $scope.createMailURL = createMailURL($scope.current);
+                $scope.createCorrectionMailURL = createCorrectionMailURL($scope.current);
+              }
             }
           },
           'content': {
@@ -38,12 +47,8 @@ angular.module('retroflection', ['ui.router', 'app', 'questionstore', 'ngTouch']
               if (!$stateParams.id) { $scope.nextQuestion(); }
               $scope.current = _.find($scope.questions, {"id": $stateParams.id});
               $scope.twitterlink = linkToTwitter;
-              $scope.swipeleft = function () {
-                $scope.nextQuestion();
-              };
-              $scope.swiperight = function () {
-                $scope.previousQuestion();
-              };
+              $scope.swipeleft = function () { $scope.nextQuestion(); };
+              $scope.swiperight = function () { $scope.previousQuestion(); };
             }
           },
           'buttons': {
@@ -66,6 +71,7 @@ angular.module('retroflection', ['ui.router', 'app', 'questionstore', 'ngTouch']
               $scope.normname = function (name) {
                 return name.substr(1);
               };
+              $scope.animationclass = '';
             }
           },
           'buttons': {
@@ -80,8 +86,8 @@ angular.module('retroflection', ['ui.router', 'app', 'questionstore', 'ngTouch']
         url: '/authors/:name',
         views: {
           'nav-bar': {
-            template: '<h1 class="title">{{author.name}}</h1>',
-            controller: function ($scope, $stateParams) {
+            template: '<a class="btn pull-left" ui-sref="retro.authors">back</a><h1 class="title">{{author.name}}</h1>',
+            controller: function ($scope, $stateParams, $state) {
               $scope.author = _.find($scope.authors, {"name": $stateParams.name});
             }
           },
@@ -90,6 +96,7 @@ angular.module('retroflection', ['ui.router', 'app', 'questionstore', 'ngTouch']
             controller: function ($scope, $stateParams) {
               $scope.questions = _.find($scope.authors, {"name": $stateParams.name}).questions;
               $scope.createCorrectionMailURL = createCorrectionMailURL;
+              $scope.animationclass = 'fade-left-right';
             }
           },
           'buttons': {
@@ -108,7 +115,9 @@ angular.module('retroflection', ['ui.router', 'app', 'questionstore', 'ngTouch']
           },
           'content': {
             templateUrl: 'about.tpl.html',
-            controller: function () {}
+            controller: function ($scope) {
+              $scope.animationclass = '';
+            }
           },
           'buttons': {
             templateUrl: 'buttons.tpl.html',
@@ -125,14 +134,22 @@ angular.module('retroflection', ['ui.router', 'app', 'questionstore', 'ngTouch']
 
   .service('QuestionService', function ($state) {
     var questionNumbers = [];
+    var questionsize;
 
-    function nextQuestion(questionsize) {
+    function numberOfQuestions(number) {
+      questionsize = number;
+    }
+
+    function nextQuestion() {
       questionNumbers.push(Math.floor(Math.random() * questionsize));
       currentQuestionNumber();
     }
 
     function previousQuestion() {
       questionNumbers.pop();
+      if (questionNumbers.length === 0) {
+        return nextQuestion();
+      }
       currentQuestionNumber();
     }
 
@@ -142,7 +159,8 @@ angular.module('retroflection', ['ui.router', 'app', 'questionstore', 'ngTouch']
 
     return {
       next: nextQuestion,
-      previous: previousQuestion
+      previous: previousQuestion,
+      numberOfQuestions: numberOfQuestions
     };
 
   });
