@@ -24,7 +24,7 @@ describe('Server', function () {
   var serverShouldDeliverStartPage = function (done) {
     request({uri: base_uri}, function (req, resp) {
       resp.statusCode.should.equal(200);
-      resp.body.should.contain('Retroflection');
+      resp.body.should.contain('ng-app="retroflection"');
       done();
     });
   };
