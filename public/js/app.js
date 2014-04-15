@@ -5,7 +5,7 @@ angular.module('retroflection', ['ui.router', 'questionstore', 'ngTouch', 'ngAni
 
   .config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
     function ($stateProvider, $urlRouterProvider, $locationProvider) {
-      //$locationProvider.html5Mode(true);
+      $locationProvider.html5Mode(true);
       $stateProvider
         .state('retro', {
           abstract: true,

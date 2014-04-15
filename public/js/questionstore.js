@@ -4,7 +4,7 @@
 angular.module('questionstore', [])
 
   .factory('questionstore', ['$http', function ($http) {
-    var store = $http.get('questions.json')
+    var store = $http.get('/questions.json')
       .success(function (result) {
         localStorage.setItem("questions", JSON.stringify(result));
         return result;
