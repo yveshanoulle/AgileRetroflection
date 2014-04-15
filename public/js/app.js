@@ -1,4 +1,4 @@
-/* global _, angular, questions */
+/* global _, angular, questions, templates */
 "use strict";
 
 angular.module('retroflection', ['ui.router', 'questionstore', 'ngTouch', 'ngAnimate'])
@@ -14,7 +14,7 @@ angular.module('retroflection', ['ui.router', 'questionstore', 'ngTouch', 'ngAni
               return questionstore.questions();
             }
           },
-          templateUrl: 'retro.tpl.html',
+          template: templates.retrotpl,
           controller: function ($scope, $state, questions, QuestionService) {
             $scope.questions = questions.data;
             $scope.authors = authors($scope.questions);
@@ -33,27 +33,25 @@ angular.module('retroflection', ['ui.router', 'questionstore', 'ngTouch', 'ngAni
           url: '/question/:id',
           views: {
             'nav-bar': {
-              templateUrl: 'question-header.tpl.html',
+              template: templates.questionheadertpl,
               controller: function ($scope, $stateParams) {
                 $scope.current = _.find($scope.questions, {"id": $stateParams.id});
-                if ($scope.current) {
-                  $scope.createMailURL = createMailURL($scope.current);
-                  $scope.createCorrectionMailURL = createCorrectionMailURL($scope.current);
-                }
+                $scope.createMailURL = $scope.current ? createMailURL($scope.current) : '#';
+                $scope.createCorrectionMailURL = $scope.current ? createCorrectionMailURL($scope.current) : '#';
               }
             },
             'content': {
-              templateUrl: 'question.tpl.html',
+              template: templates.questiontpl,
               controller: function ($scope, $stateParams) {
-                if (!$stateParams.id) { $scope.nextQuestion(); }
+                if (!$stateParams.id) { return $scope.nextQuestion(); }
                 $scope.current = _.find($scope.questions, {"id": $stateParams.id});
                 $scope.twitterlink = linkToTwitter;
-                $scope.swipeleft = function () { $scope.nextQuestion(); };
-                $scope.swiperight = function () { $scope.previousQuestion(); };
+                $scope.swipeleft = $scope.nextQuestion;
+                $scope.swiperight = $scope.previousQuestion;
               }
             },
             'buttons': {
-              templateUrl: 'buttons.tpl.html',
+              template: templates.buttontpl,
               controller: function ($scope) {
                 $scope.showQuestion = true;
               }
@@ -67,7 +65,7 @@ angular.module('retroflection', ['ui.router', 'questionstore', 'ngTouch', 'ngAni
               template: '<h1 class="title">Authors</h1>'
             },
             'content': {
-              templateUrl: 'authors.tpl.html',
+              template: templates.authorstpl,
               controller: function ($scope) {
                 $scope.normname = function (name) {
                   return name.substr(1);
@@ -76,7 +74,7 @@ angular.module('retroflection', ['ui.router', 'questionstore', 'ngTouch', 'ngAni
               }
             },
             'buttons': {
-              templateUrl: 'buttons.tpl.html',
+              template: templates.buttontpl,
               controller: function ($scope) {
                 $scope.showAuthors = true;
               }
@@ -93,7 +91,7 @@ angular.module('retroflection', ['ui.router', 'questionstore', 'ngTouch', 'ngAni
               }
             },
             'content': {
-              templateUrl: 'author.tpl.html',
+              template: templates.authortpl,
               controller: function ($scope, $stateParams) {
                 $scope.questions = _.find($scope.authors, {"name": $stateParams.name}).questions;
                 $scope.createCorrectionMailURL = createCorrectionMailURL;
@@ -101,7 +99,7 @@ angular.module('retroflection', ['ui.router', 'questionstore', 'ngTouch', 'ngAni
               }
             },
             'buttons': {
-              templateUrl: 'buttons.tpl.html',
+              template: templates.buttontpl,
               controller: function ($scope) {
                 $scope.showAuthors = true;
               }
@@ -115,13 +113,13 @@ angular.module('retroflection', ['ui.router', 'questionstore', 'ngTouch', 'ngAni
               template: '<h1 class="title">About</h1>'
             },
             'content': {
-              templateUrl: 'about.tpl.html',
+              template: templates.abouttpl,
               controller: function ($scope) {
-                $scope.animationclass = '';
+                $scope.animationclass = 'fade-left-right';
               }
             },
             'buttons': {
-              templateUrl: 'buttons.tpl.html',
+              template: templates.buttontpl,
               controller: function ($scope) {
                 $scope.showAbout = true;
               }

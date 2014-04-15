@@ -46,6 +46,7 @@ module.exports = function (grunt) {
           "public/js/angular-ui-router.js",
           "public/js/helpers.js",
           "public/js/questionstore.js",
+          "public/js/templates.js",
           "public/js/app.js"
         ],
         dest: "public/js/global.js"

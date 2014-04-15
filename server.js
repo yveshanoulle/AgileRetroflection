@@ -20,12 +20,20 @@ app.use(detectBrowser);
 app.use(express.compress());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/', function (req, res) {
-  res.render('index');
+app.get('/question*', function (req, res) {
+  res.redirect('/');
 });
 
-app.get('*', function (req, res) {
+app.get('/authors*', function (req, res) {
   res.redirect('/');
+});
+
+app.get('/about', function (req, res) {
+  res.redirect('/');
+});
+
+app.get('/', function (req, res) {
+  res.render('index');
 });
 
 var server = require('http').createServer(app);
