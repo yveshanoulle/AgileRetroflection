@@ -15,17 +15,13 @@ function detectBrowser(req, res, next) {
 
 app.set('view engine', 'jade');
 app.set('views', path.join(__dirname, 'views'));
-app.use(express.favicon());
+app.use(express.favicon(path.join(__dirname, 'public/images/favicon.ico')));
 app.use(detectBrowser);
 app.use(express.compress());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', function (req, res) {
   res.render('index');
-});
-
-app.use(function (req, res) {
-  res.redirect('/');
 });
 
 var server = require('http').createServer(app);
