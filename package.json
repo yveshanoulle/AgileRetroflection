@@ -23,7 +23,8 @@
     "grunt-mocha-phantomjs": "~0.4.0",
     "chai": "~1.5.0",
     "request": "~2.16.6",
-    "mocha": "*"
+    "mocha": "*",
+    "grunt-contrib-concat": "~0.3.0"
   },
   "engines": {
     "node": "~0.10"
