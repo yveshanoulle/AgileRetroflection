@@ -41,3 +41,8 @@
     left: -100%;
     width: 100%;
 }
+
+.bar-tab {
+    top: auto;
+    bottom: 0;
+}

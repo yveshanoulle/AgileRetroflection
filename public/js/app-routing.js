@@ -1,9 +1,10 @@
 /* global _, angular, questions */
 "use strict";
 
-angular.module('retroflection', ['ui.router', 'app', 'questionstore', 'ngTouch', 'ngAnimate'])
+angular.module('retroflection', ['ui.router', 'questionstore', 'ngTouch', 'ngAnimate'])
 
-  .config(function ($stateProvider, $urlRouterProvider) {
+  .config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
+    //$locationProvider.html5Mode(true);
     $stateProvider
       .state('retro', {
         abstract: true,
