@@ -1,4 +1,3 @@
-/*global describe, afterEach, it */
 var child_process = require("child_process");
 var should = require('chai').should();
 var request = require('request');

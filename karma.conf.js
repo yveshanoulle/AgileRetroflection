@@ -7,17 +7,17 @@ module.exports = function (config) {
 
     // list of files / patterns to load in the browser
     files: [
-      "public/js/lodash.min.js",
-      "public/js/ratchet.min.js",
-      "public/js/angular.min.js",
-      "public/js/angular-animate.min.js",
-      "public/js/angular-touch.min.js",
-      "public/js/angular-ui-router.js",
-      "public/js/helpers.js",
-      "public/js/questionstore.js",
-      "public/js/templates.js",
-      "public/js/app.js",
-      "test/**/*Spec.js"
+      "src/3rd-party/lodash.min.js",
+      "src/3rd-party/ratchet.min.js",
+      "src/3rd-party/angular.min.js",
+      "src/3rd-party/angular-animate.min.js",
+      "src/3rd-party/angular-touch.min.js",
+      "src/3rd-party/angular-ui-router.js",
+      "src/helpers.js",
+      "src/questionstore.js",
+      "src/templates.js",
+      "src/app.js",
+      "test/**/*.js"
     ],
 
     // list of files to exclude

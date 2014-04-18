@@ -36,21 +36,6 @@ function Author(name) {
     return '<a data-role=\'button\' data-icon=\'edit\' data-iconpos=\'notext\' class=\'mailbutton\' href=\'' + url + '\'></a>';
   }
 
-  if (typeof(this.asListItem) === 'undefined') {
-    Author.prototype.asListItem = function () {
-      var ul = '<ul data-role=\'listview\'>';
-      for (var questionIndex in this.questions) {
-        var question = this.questions[questionIndex];
-        ul += '<li><small>';
-        ul += question.question;
-        ul += '</small><p class=\'ui-li-aside\'>';
-        ul += createCorrection(question) + '</p></li>';
-      }
-      ul += '</ul>';
-      return '<div data-role=\'collapsible\'>' + '<h3>' + this.name + ' (' + this.questions.length + ')</h3>' + ul + '</div>';
-    };
-  }
-
 }
 
 function authors(questions) {
