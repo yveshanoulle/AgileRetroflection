@@ -6,6 +6,9 @@ var app = express();
 var retrieve_questions = require('./retrieve-questions');
 var useragent = require('useragent');
 var jade = require("jade");
+var favicon = require('static-favicon');
+var compress = require('compression');
+var serveStatic = require('serve-static');
 
 function detectBrowser(req, res, next) {
   res.locals.ios = !!useragent.parse(req.headers['user-agent']).os.family.match(/iOS|iPhone|iPad|iPod/);
@@ -15,9 +18,9 @@ function detectBrowser(req, res, next) {
 
 app.set('view engine', 'jade');
 app.set('views', path.join(__dirname, 'views'));
-app.use(express.favicon(path.join(__dirname, 'public/images/favicon.ico')));
+app.use(favicon(path.join(__dirname, 'public/images/favicon.ico')));
 app.use(detectBrowser);
-app.use(express.compress());
+app.use(compress());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', function (req, res) {

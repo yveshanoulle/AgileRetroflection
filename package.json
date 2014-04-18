@@ -8,8 +8,9 @@
   "author": "Andreas Leidig",
   "dependencies": {
     "async": "~0.7",
+    "compression": "~1.0",
     "edit-google-spreadsheet": "~0.2",
-    "express": "~3.5",
+    "express": "~4.0",
     "grunt": "~0.4",
     "grunt-cli": "0.1.13",
     "grunt-contrib-concat": "~0.4.0",
@@ -17,6 +18,8 @@
     "lodash": "~2.4",
     "moment": "~2.6",
     "nconf": "~0.6",
+    "serve-static": "~1.0",
+    "static-favicon": "~1.0",
     "useragent": "~2.0"
   },
   "devDependencies": {
