@@ -46,3 +46,7 @@
     top: auto;
     bottom: 0;
 }
+
+.content {
+    padding-bottom: 50px;
+}
