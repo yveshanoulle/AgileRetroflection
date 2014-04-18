@@ -1,9 +1,10 @@
 "use strict";
 
+/*
+* Use this file to retrieve metadata for new pages in the spreadsheet and then transfer the infor to retrieve-questions.js
+*/
+
 var Spreadsheet = require('edit-google-spreadsheet');
-var _ = require('lodash');
-var fs = require('fs');
-var moment = require('moment');
 
 var nconf = require('nconf');
 nconf.argv();
