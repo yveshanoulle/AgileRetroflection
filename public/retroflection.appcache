@@ -22,3 +22,7 @@ fonts/ratchicons.woff
 #   
 NETWORK:
 questions.json
+
+#
+SETTINGS:
+prefer-online
