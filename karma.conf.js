@@ -17,6 +17,7 @@ module.exports = function (config) {
       "src/questionstore.js",
       "src/templates.js",
       "src/app.js",
+      "test/**/test-questions.js",
       "test/**/*.js"
     ],
 
