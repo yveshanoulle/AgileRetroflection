@@ -17,14 +17,17 @@
     "useragent": "~2.0"
   },
   "devDependencies": {
+    "chai": "~1.9",
     "grunt": "~0.4",
     "grunt-contrib-jshint": "~0.9",
-    "grunt-mocha-hack": "~0.1.0",
-    "grunt-mocha-phantomjs": "~0.4.0",
-    "chai": "~1.5.0",
+    "grunt-mocha-istanbul": "~1.1",
     "request": "~2.16.6",
-    "mocha": "*",
-    "grunt-contrib-concat": "~0.3.0"
+    "grunt-contrib-concat": "~0.3.0",
+    "karma": "*",
+    "grunt-karma": "*",
+    "karma-chrome-launcher": "*",
+    "karma-phantomjs-launcher": "~0.1.4",
+    "karma-jasmine": "~0.1.5"
   },
   "engines": {
     "node": "~0.10"

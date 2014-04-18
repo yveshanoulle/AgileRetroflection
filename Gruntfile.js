@@ -18,19 +18,19 @@ module.exports = function (grunt) {
         jshintrc: '.jshintrc'
       }
     },
-    'mocha-hack': {
-      options: {
-        globals: ['should'],
-        timeout: 3000,
-        ignoreLeaks: false,
-        ui: 'bdd',
-        reporter: 'spec'
-      },
-
-      all: { src: 'test/**/*.js' }
-    },
-    'mocha_phantomjs': {
-      all: ['browser-test/**/*.html']
+    mocha_istanbul: {
+      test: {
+        src: 'test-server', // the folder, not the files,
+        options: {
+          root: '.',
+          mask: '**/*.js',
+          reporter: 'spec',
+          check: {
+            lines: 10,
+            statements: 10
+          }
+        }
+      }
     },
     concat: {
       options: {
@@ -51,17 +51,33 @@ module.exports = function (grunt) {
         ],
         dest: "public/js/global.js"
       }
+    },
+    karma: {
+      options : {
+        configFile: 'karma.conf.js'
+      },
+      once: {
+        browsers: ['PhantomJS'],
+        runnerPort: 6666,
+        singleRun: true
+      },
+      continuous: {
+        browsers: ['Chrome'],
+        autoWatch: true
+      }
     }
   });
 
+
+  grunt.loadNpmTasks('grunt-karma');
+
   // These plugins provide necessary tasks.
   grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-mocha-hack');
-  grunt.loadNpmTasks('grunt-mocha-phantomjs');
+  grunt.loadNpmTasks('grunt-mocha-istanbul');
   grunt.loadNpmTasks('grunt-contrib-concat');
 
-  // Default task.
-  grunt.registerTask('default', ['concat', 'jshint', 'mocha-hack', 'mocha_phantomjs']);
+  grunt.registerTask('default', ['concat', 'jshint', 'karma:once', 'mocha_istanbul:test']);
+  grunt.registerTask('devmode', ['karma:continuous']);
 
   // Travis-CI task
   grunt.registerTask('travis', ['default']);
