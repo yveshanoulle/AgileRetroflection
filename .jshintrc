@@ -19,6 +19,7 @@
   "trailing": true,
   "expr": true,
   "globals": {
+    "angular": true,
     "jasmine": true,
     "describe": true,
     "expect": true,
@@ -26,8 +27,6 @@
     "beforeEach": true,
     "afterEach": true,
     "createCorrectionMailURL": true,
-    "Author": true,
-    "authors": true,
     "chai": true,
     "createMailURL": true,
     "escape": true,
@@ -35,6 +34,7 @@
     "nextQuestion": true,
     "previousQuestion": true,
     "linkToTwitter": true,
-    "ui": true
+    "ui": true,
+    "_": true
   }
 }

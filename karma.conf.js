@@ -14,7 +14,6 @@ module.exports = function (config) {
       "src/3rd-party/angular-touch.min.js",
       "src/3rd-party/angular-ui-router.min.js",
       "src/3rd-party/angular-mocks.js",
-      "src/helpers.js",
       "src/questionstore.js",
       "src/templates.js",
       "src/app.js",

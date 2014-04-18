@@ -1,10 +1,10 @@
-/* global _, angular, questions, templates */
+/* global _ */
 "use strict";
 
-angular.module('retroflection', ['ui.router', 'questionstore', 'ngTouch', 'ngAnimate'])
+angular.module('retroflection', ['ui.router', 'questionstore', 'ngTouch', 'ngAnimate', 'templates'])
 
-  .config(['$stateProvider', '$urlRouterProvider',
-    function ($stateProvider, $urlRouterProvider) {
+  .config(['$stateProvider', '$urlRouterProvider', 'templates',
+    function ($stateProvider, $urlRouterProvider, templates) {
       $stateProvider
         .state('retro', {
           abstract: true,
@@ -14,9 +14,9 @@ angular.module('retroflection', ['ui.router', 'questionstore', 'ngTouch', 'ngAni
             }
           },
           template: templates.retrotpl,
-          controller: function ($scope, $state, questions, questionService) {
+          controller: function ($scope, $state, questions, questionService, authorService) {
             $scope.questions = questions;
-            $scope.authors = authors($scope.questions);
+            $scope.authors = authorService($scope.questions);
             var service = questionService($scope.questions.length);
             $scope.nextQuestion = function () {
               $scope.animationclass = 'fade-left';
@@ -35,8 +35,6 @@ angular.module('retroflection', ['ui.router', 'questionstore', 'ngTouch', 'ngAni
               template: templates.questionheadertpl,
               controller: function ($scope, $stateParams) {
                 $scope.current = _.find($scope.questions, {"id": $stateParams.id});
-                $scope.createMailURL = $scope.current ? createMailURL($scope.current) : '#';
-                $scope.createCorrectionMailURL = $scope.current ? createCorrectionMailURL($scope.current) : '#';
               }
             },
             'content': {
@@ -84,7 +82,7 @@ angular.module('retroflection', ['ui.router', 'questionstore', 'ngTouch', 'ngAni
           views: {
             'nav-bar': {
               template: '<a class="btn pull-left" ui-sref="retro.authors">back</a><h1 class="title">{{author.name}}</h1>',
-              controller: function ($scope, $stateParams, $state) {
+              controller: function ($scope, $stateParams) {
                 $scope.author = _.find($scope.authors, {"name": $stateParams.name});
               }
             },
@@ -92,7 +90,6 @@ angular.module('retroflection', ['ui.router', 'questionstore', 'ngTouch', 'ngAni
               template: templates.authortpl,
               controller: function ($scope, $stateParams) {
                 $scope.questions = _.find($scope.authors, {"name": $stateParams.name}).questions;
-                $scope.createCorrectionMailURL = createCorrectionMailURL;
                 $scope.animationclass = 'fade-left-right';
               }
             },
@@ -138,7 +135,48 @@ angular.module('retroflection', ['ui.router', 'questionstore', 'ngTouch', 'ngAni
       template: '<a href="{{link}}">{{name}}</a>',
       replace: true,
       link: function (scope) {
-        scope.link = (scope.name.charAt(0) === '@') ? 'http://twitter.com/' + scope.name.substr(1) : '#';
+        var name = scope.name || ' ';
+        scope.link = (name.charAt(0) === '@') ? 'http://twitter.com/' + name.substr(1) : '#';
+      }
+    };
+  })
+
+  .directive('mailQuestion', function () {
+    return {
+      restrict: 'E',
+      scope: {
+        question: '='
+      },
+      template: '<a href="{{link}}" ng-transclude=></a>',
+      transclude: true,
+      replace: true,
+      link: function (scope) {
+        var question = scope.question;
+        scope.link = question ? 'mailto:?subject=Retroflection Question ' + question.id + '&body=' +
+          encodeURI('"' + question.question + '"' + ' by ' + question.author) +
+          encodeURIComponent('\n\n---\nThis retroflection was originally twittered by @retroflection' +
+            '\nand is sent via the retroflection app available at http://retroflection.org') : '#';
+      }
+    };
+  })
+
+  .directive('correctQuestion', function () {
+    return {
+      restrict: 'E',
+      scope: {
+        question: '='
+      },
+      template: '<a href="{{link}}" ng-transclude=></a>',
+      transclude: true,
+      replace: true,
+      link: function (scope) {
+        var question = scope.question;
+        scope.link = question ? 'mailto:retroflections@hanoulle.be?subject=Retroflection corrected question&body=' +
+          encodeURI('I have a proposal on improving the spelling of retroflection question ' +
+            question.id + ': \n' + '"' + question.question + '" by ' + question.author) +
+          encodeURIComponent('\n\nI would write it as follows:\n\n\n---\n' +
+            'This retroflection was originally twittered by @retroflection' +
+            '\nand is sent via the retroflection app available at http://retroflection.org') : '#';
       }
     };
   })
@@ -167,5 +205,34 @@ angular.module('retroflection', ['ui.router', 'questionstore', 'ngTouch', 'ngAni
         next: nextQuestion,
         previous: previousQuestion
       };
+    };
+  })
+
+  .factory('authorService', function () {
+    return function (questions) {
+      var internal = [];
+
+      function addAuthor(author) {
+        internal.push({name: author, questions: []});
+      }
+
+      function getAuthorNamed(name) {
+        return _.find(internal, {name: name});
+      }
+
+      function sort() {
+        internal.sort(function (a, b) {
+          return a.name.localeCompare(b.name);
+        });
+      }
+
+      for (var i in questions) {
+        var question = questions[i];
+        var name = question.author;
+        if (!getAuthorNamed(name)) { addAuthor(name); }
+        getAuthorNamed(name).questions.push(question);
+      }
+      sort();
+      return internal;
     };
   });

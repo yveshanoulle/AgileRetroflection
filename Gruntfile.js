@@ -34,7 +34,6 @@ module.exports = function (grunt) {
           "src/3rd-party/angular-animate.min.js",
           "src/3rd-party/angular-touch.min.js",
           "src/3rd-party/angular-ui-router.min.js",
-          "src/helpers.js",
           "src/questionstore.js",
           "src/templates.js",
           "src/app.js"
