@@ -6,14 +6,8 @@ module.exports = function (grunt) {
   grunt.initConfig({
     // Metadata.
     pkg: grunt.file.readJSON('package.json'),
-    banner: '/*! <%= pkg.title || pkg.name %> - v<%= pkg.version %> - ' +
-      '<%= grunt.template.today("yyyy-mm-dd") %>\n' +
-      '<%= pkg.homepage ? "* " + pkg.homepage + "\\n" : "" %>' +
-      '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;' +
-      ' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */\n',
-    // Task configuration.
     jshint: {
-      files: ['*.js', 'scripts/*', '.jshintrc', '!node_modules/**/*.js*', '!scripts/*.min.js*', '!scripts/swipe*.js*'],
+      files: ['src/*.js', 'test/*.js', 'test-server/*.js', '*.js'],
       options: {
         jshintrc: '.jshintrc'
       }
@@ -24,11 +18,7 @@ module.exports = function (grunt) {
         options: {
           root: '.',
           mask: '**/*.js',
-          reporter: 'spec',
-          check: {
-            lines: 10,
-            statements: 10
-          }
+          reporter: 'spec'
         }
       }
     },
@@ -43,7 +33,7 @@ module.exports = function (grunt) {
           "src/3rd-party/angular.min.js",
           "src/3rd-party/angular-animate.min.js",
           "src/3rd-party/angular-touch.min.js",
-          "src/3rd-party/angular-ui-router.js",
+          "src/3rd-party/angular-ui-router.min.js",
           "src/helpers.js",
           "src/questionstore.js",
           "src/templates.js",
@@ -53,11 +43,19 @@ module.exports = function (grunt) {
       }
     },
     karma: {
-      options : {
+      options: {
         configFile: 'karma.conf.js'
       },
       once: {
         browsers: ['PhantomJS'],
+        options: {
+          files: [
+            "public/js/*.js",
+            "src/3rd-party/angular-mocks.js",
+            "test/**/test-questions.js",
+            "test/**/*.js"
+          ]
+        },
         runnerPort: 6666,
         singleRun: true
       },
@@ -66,8 +64,8 @@ module.exports = function (grunt) {
         autoWatch: true
       }
     }
-  });
-
+  })
+  ;
 
   grunt.loadNpmTasks('grunt-karma');
 
@@ -81,4 +79,5 @@ module.exports = function (grunt) {
 
   // Travis-CI task
   grunt.registerTask('travis', ['default']);
-};
+}
+;

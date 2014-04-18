@@ -14,17 +14,17 @@ angular.module('retroflection', ['ui.router', 'questionstore', 'ngTouch', 'ngAni
             }
           },
           template: templates.retrotpl,
-          controller: function ($scope, $state, questions, QuestionService) {
+          controller: function ($scope, $state, questions, questionService) {
             $scope.questions = questions.data;
             $scope.authors = authors($scope.questions);
-            QuestionService.numberOfQuestions($scope.questions.length);
+            var service = questionService($scope.questions.length);
             $scope.nextQuestion = function () {
               $scope.animationclass = 'fade-left';
-              QuestionService.next();
+              $state.go('retro.question', { id: service.next() });
             };
             $scope.previousQuestion = function () {
               $scope.animationclass = 'fade-right';
-              QuestionService.previous();
+              $state.go('retro.question', { id: service.previous() });
             };
           }
         })
@@ -130,35 +130,29 @@ angular.module('retroflection', ['ui.router', 'questionstore', 'ngTouch', 'ngAni
     }]
 )
 
-  .service('QuestionService', ['$state', function ($state) {
-    var questionNumbers = [];
-    var questionsize;
+  .factory('questionService', function () {
+    return function (questionsize) {
+      var questionNumbers = [];
 
-    function numberOfQuestions(number) {
-      questionsize = number;
-    }
-
-    function nextQuestion() {
-      questionNumbers.push(Math.floor(Math.random() * questionsize));
-      currentQuestionNumber();
-    }
-
-    function previousQuestion() {
-      questionNumbers.pop();
-      if (questionNumbers.length === 0) {
-        return nextQuestion();
+      function nextQuestion() {
+        questionNumbers.push(Math.floor(Math.random() * questionsize));
+        return currentQuestionNumber();
       }
-      currentQuestionNumber();
-    }
 
-    function currentQuestionNumber() {
-      $state.go('retro.question', { id: questionNumbers[questionNumbers.length - 1] });
-    }
+      function previousQuestion() {
+        if (questionNumbers.length > 1) {
+          questionNumbers.pop();
+        }
+        return currentQuestionNumber();
+      }
 
-    return {
-      next: nextQuestion,
-      previous: previousQuestion,
-      numberOfQuestions: numberOfQuestions
+      function currentQuestionNumber() {
+        return questionNumbers[questionNumbers.length - 1];
+      }
+
+      return {
+        next: nextQuestion,
+        previous: previousQuestion
+      };
     };
-
-  }]);
+  });

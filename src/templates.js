@@ -46,4 +46,4 @@ var templates = {
 
   questiontpl: '<h3 class="question">{{current.question}}</h3>' +
     '<p class="author"><a href="{{twitterlink(current.author)}}">{{current.author}}</a> (#{{current.id}})</p>'
-}
+};
