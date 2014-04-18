@@ -17,10 +17,6 @@ function createMailURL(question) {
   return result;
 }
 
-function linkToTwitter(name) {
-  return (name.charAt(0) === '@') ? "http://twitter.com/" + name.substr(1) : name;
-}
-
 function Author(name) {
   this.name = name;
   this.questions = [];

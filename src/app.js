@@ -44,7 +44,6 @@ angular.module('retroflection', ['ui.router', 'questionstore', 'ngTouch', 'ngAni
               controller: function ($scope, $stateParams) {
                 if (!$stateParams.id) { return $scope.nextQuestion(); }
                 $scope.current = _.find($scope.questions, {"id": $stateParams.id});
-                $scope.twitterlink = linkToTwitter;
                 $scope.swipeleft = $scope.nextQuestion;
                 $scope.swiperight = $scope.previousQuestion;
               }
@@ -129,6 +128,20 @@ angular.module('retroflection', ['ui.router', 'questionstore', 'ngTouch', 'ngAni
       $urlRouterProvider.otherwise('/question/');
     }]
 )
+
+  .directive('twitterLink', function () {
+    return {
+      restrict: 'E',
+      scope: {
+        name: '='
+      },
+      template: '<a href="{{link}}">{{name}}</a>',
+      replace: true,
+      link: function (scope) {
+        scope.link = (scope.name.charAt(0) === '@') ? 'http://twitter.com/' + scope.name.substr(1) : '#';
+      }
+    };
+  })
 
   .factory('questionService', function () {
     return function (questionsize) {

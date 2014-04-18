@@ -49,16 +49,3 @@ describe('helpers function for correction emails', function () {
     expect(result).toMatch(question.id);
   });
 });
-
-describe('helpers function for twitter links', function () {
-  it('creates link for twitter name', function () {
-    var result = linkToTwitter('@yveshanoulle');
-    expect(result).toMatch('http://twitter.com/yves');
-  });
-
-  it('creates no link for non twitter name', function () {
-    var result = linkToTwitter('yveshanoulle');
-    expect(result).not.toMatch('http://twitter.com/yves');
-    expect(result).toMatch('yveshanoulle');
-  });
-});

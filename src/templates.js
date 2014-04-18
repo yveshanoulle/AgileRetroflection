@@ -45,5 +45,5 @@ var templates = {
     '<h1 class="title">Retroflection</h1>',
 
   questiontpl: '<h3 class="question">{{current.question}}</h3>' +
-    '<p class="author"><a href="{{twitterlink(current.author)}}">{{current.author}}</a> (#{{current.id}})</p>'
+    '<p class="author"><twitter-link name="current.author"></twitter-link> (#{{current.id}})</p>'
 };
