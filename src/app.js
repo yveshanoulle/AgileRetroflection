@@ -15,7 +15,7 @@ angular.module('retroflection', ['ui.router', 'questionstore', 'ngTouch', 'ngAni
           },
           template: templates.retrotpl,
           controller: function ($scope, $state, questions, questionService) {
-            $scope.questions = questions.data;
+            $scope.questions = questions;
             $scope.authors = authors($scope.questions);
             var service = questionService($scope.questions.length);
             $scope.nextQuestion = function () {
