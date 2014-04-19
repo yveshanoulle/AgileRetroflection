@@ -1,5 +1,6 @@
 "use strict";
 
+var fs = require('fs');
 var express = require('express');
 var path = require('path');
 var app = express();
@@ -34,4 +35,9 @@ server.listen(process.env.PORT || 5000, function () {
 });
 retrieve_questions();
 setInterval(retrieve_questions, 1000 * 60 * 60 * 24);
+setInterval(function () {
+  if (!fs.existsSync('public/questions.json')) {
+    retrieve_questions();
+  }
+}, 1000 * 60); // check every minute if questions.json exists
 
