@@ -37,7 +37,7 @@
     "node": "~0.10"
   },
   "scripts": {
-    "postinstall": "grunt concat",
+    "postinstall": "grunt concat && node retrieve-questions-runner",
     "start": "node server",
     "test": "grunt travis --verbose"
   }
