@@ -41,6 +41,6 @@
   "scripts": {
     "postinstall": "grunt concat && node retrieve-questions-runner",
     "start": "node server",
-    "test": "grunt travis --verbose"
+    "test": "grunt travis"
   }
 }

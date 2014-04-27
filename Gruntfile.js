@@ -13,7 +13,7 @@ module.exports = function (grunt) {
         options: {
           root: '.',
           mask: '**/*.js',
-          reporter: 'spec',
+          reporter: 'dot',
           check: {
             lines: 100,
             statements: 100,
