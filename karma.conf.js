@@ -1,4 +1,5 @@
 module.exports = function (config) {
+  "use strict";
   config.set({
     // base path, that will be used to resolve files and exclude
     basePath: '',
@@ -26,7 +27,7 @@ module.exports = function (config) {
     ],
 
     // possible values: 'dots', 'progress'
-    reporters: ['dots'],
+    reporters: ['dots', 'coverage'],
 
     // web server port
     // CLI --port 9876
@@ -68,10 +69,18 @@ module.exports = function (config) {
     // CLI --report-slower-than 500
     reportSlowerThan: 500,
 
+    preprocessors: {
+      // source files, that you wanna generate coverage for
+      // do not include tests or libraries
+      // (these files will be instrumented by Istanbul)
+      'src/*.js': ['coverage']
+    },
+
     plugins: [
       'karma-jasmine',
       'karma-phantomjs-launcher',
-      'karma-chrome-launcher'
+      'karma-chrome-launcher',
+      'karma-coverage'
     ]
   });
 };

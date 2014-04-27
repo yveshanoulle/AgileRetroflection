@@ -53,8 +53,11 @@ module.exports = function () {
     ],
     function (err, questions) {
       if (err) { return err; }
-      fs.writeFileSync('public/questions.json', JSON.stringify(_.flatten(questions)));
-      console.log("questions updated");
-    });
+      fs.writeFile('public/questions.json', JSON.stringify(_.flatten(questions)), function (err) {
+        if (err) { return console.log(err); }
+        console.log("questions updated");
+      });
+    }
+  );
 };
 

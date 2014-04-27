@@ -1,14 +1,13 @@
 "use strict";
 
-var fs = require('fs');
 var express = require('express');
 var path = require('path');
 var app = express();
-var retrieve_questions = require('./retrieve-questions');
 var useragent = require('useragent');
 var favicon = require('static-favicon');
 var compress = require('compression');
 var serveStatic = require('serve-static');
+var server;
 
 function detectBrowser(req, res, next) {
   res.locals.ios = !!useragent.parse(req.headers['user-agent']).os.family.match(/iOS|iPhone|iPad|iPod/);
@@ -27,16 +26,23 @@ app.get('/', function (req, res) {
   res.render('index');
 });
 
-var server = require('http').createServer(app);
-
-server.listen(process.env.PORT || 5000, function () {
-  console.log('Server running');
+app.get('/online', function (req, res) {
+  res.render('index-online');
 });
-retrieve_questions();
-setInterval(retrieve_questions, 1000 * 60 * 60 * 24);
-setInterval(function () {
-  if (!fs.existsSync('public/questions.json')) {
-    retrieve_questions();
-  }
-}, 1000 * 60); // check every minute if questions.json exists
 
+app.start = function (port, done) {
+  server = require('http').createServer(this);
+  server.listen(port || process.env.PORT || 5000, function () {
+    console.log('Server started');
+    if (done) { done(); }
+  });
+};
+
+app.stop = function (done) {
+  server.close(function () {
+    console.log('Server stopped');
+    if (done) { done(); }
+  });
+};
+
+module.exports = app;

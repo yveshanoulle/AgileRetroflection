@@ -1,8 +1,8 @@
 "use strict";
 
 /*
-* Use this file to retrieve metadata for new pages in the spreadsheet and then transfer the infor to retrieve-questions.js
-*/
+ * Use this file to retrieve metadata for new pages in the spreadsheet and then transfer the info to retrieve-questions.js
+ */
 
 var Spreadsheet = require('edit-google-spreadsheet');
 

@@ -5,20 +5,20 @@ module.exports = function (grunt) {
   // Project configuration.
   grunt.initConfig({
     // Metadata.
+
     pkg: grunt.file.readJSON('package.json'),
-    jshint: {
-      files: ['src/*.js', 'test/*.js', 'test-server/*.js', '*.js'],
-      options: {
-        jshintrc: '.jshintrc'
-      }
-    },
     mocha_istanbul: {
       test: {
         src: 'test-server', // the folder, not the files,
         options: {
           root: '.',
           mask: '**/*.js',
-          reporter: 'spec'
+          reporter: 'spec',
+          check: {
+            lines: 100,
+            statements: 100,
+            functions: 100
+          }
         }
       }
     },
@@ -47,14 +47,6 @@ module.exports = function (grunt) {
       },
       once: {
         browsers: ['PhantomJS'],
-        options: {
-          files: [
-            "public/js/*.js",
-            "src/3rd-party/angular-mocks.js",
-            "test/**/test-questions.js",
-            "test/**/*.js"
-          ]
-        },
         runnerPort: 6666,
         singleRun: true
       },
@@ -62,21 +54,53 @@ module.exports = function (grunt) {
         browsers: ['Chrome'],
         autoWatch: true
       }
+    },
+    jslint: { // configure the task
+      // lint your project's server code
+      server: {
+        src: [ // some example files
+          '*.js'
+        ],
+        exclude: [
+          'server/config.js'
+        ],
+        directives: { // example directives
+          node: true,
+          nomen: true,
+          vars: true,
+          indent: 2,
+          unparam: true
+        },
+        options: {
+          edition: 'latest', // specify an edition of jslint or use 'dir/mycustom-jslint.js' for own path
+          errorsOnly: true // only display errors
+        }
+      },
+      // lint your project's client code
+      client: {
+        src: [
+          'src/*.js'
+        ],
+        directives: {
+          browser: true,
+          indent: 2,
+          nomen: true,
+          predef: [ 'jQuery', 'angular', '_' ]
+        }
+      }
     }
-  })
-  ;
+  });
 
   grunt.loadNpmTasks('grunt-karma');
 
   // These plugins provide necessary tasks.
-  grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-mocha-istanbul');
   grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-jslint');
 
-  grunt.registerTask('default', ['concat', 'jshint', 'karma:once', 'mocha_istanbul:test']);
+  grunt.registerTask('default', ['concat', 'jslint', 'karma:once', 'mocha_istanbul:test']);
   grunt.registerTask('devmode', ['karma:continuous']);
 
   // Travis-CI task
   grunt.registerTask('travis', ['default']);
-}
-;
+};
