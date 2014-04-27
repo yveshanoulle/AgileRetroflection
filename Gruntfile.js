@@ -7,6 +7,7 @@ module.exports = function (grunt) {
     // Metadata.
 
     pkg: grunt.file.readJSON('package.json'),
+    clean: ["coverage", "coverage-karma"],
     mocha_istanbul: {
       test: {
         src: 'test-server', // the folder, not the files,
@@ -55,6 +56,17 @@ module.exports = function (grunt) {
         autoWatch: true
       }
     },
+    coverage: {
+      options: {
+        thresholds: {
+          'statements': 75,
+          'branches': 50,
+          'lines': 75,
+          'functions': 70
+        },
+        dir: 'coverage-karma'
+      }
+    },
     jslint: { // configure the task
       // lint your project's server code
       server: {
@@ -91,14 +103,16 @@ module.exports = function (grunt) {
     }
   });
 
-  grunt.loadNpmTasks('grunt-karma');
 
   // These plugins provide necessary tasks.
-  grunt.loadNpmTasks('grunt-mocha-istanbul');
+  grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-jslint');
+  grunt.loadNpmTasks('grunt-istanbul-coverage');
+  grunt.loadNpmTasks('grunt-karma');
+  grunt.loadNpmTasks('grunt-mocha-istanbul');
 
-  grunt.registerTask('default', ['concat', 'jslint', 'karma:once', 'mocha_istanbul:test']);
+  grunt.registerTask('default', ['clean', 'concat', 'jslint', 'mocha_istanbul:test', 'karma:once', 'coverage']);
   grunt.registerTask('devmode', ['karma:continuous']);
 
   // Travis-CI task

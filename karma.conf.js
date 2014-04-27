@@ -76,6 +76,13 @@ module.exports = function (config) {
       'src/*.js': ['coverage']
     },
 
+    coverageReporter: {
+      reporters: [
+        {type: 'html', dir: 'coverage-karma/'},
+        {type: 'json', dir: 'coverage-karma/'}
+      ]
+    },
+
     plugins: [
       'karma-jasmine',
       'karma-phantomjs-launcher',
