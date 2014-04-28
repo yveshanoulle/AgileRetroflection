@@ -11,7 +11,7 @@
     "compression": "~1.0",
     "edit-google-spreadsheet": "~0.2",
     "express": "~4.0",
-    "grunt": "~0.4", // here because of heroku not fetching dev dependencies
+    "grunt": "~0.4",
     "grunt-cli": "~0.1",
     "grunt-contrib-concat": "~0.4.0",
     "jade": "~1.3",
