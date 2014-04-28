@@ -42,7 +42,7 @@
   },
   "scripts": {
     "postinstall": "grunt concat && node retrieve-questions-runner",
-    "start": "node server",
+    "start": "node start",
     "test": "grunt travis"
   }
 }
