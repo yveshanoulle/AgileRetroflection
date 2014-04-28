@@ -10,9 +10,11 @@ describe('The Controllers', function () {
   }));
 
   describe('The Root Controller', function () {
-    it('initializes the scope correctly', inject(
-      function ($controller, $state, questionService, authorService) {
-        var lastQuestion, questionId, state = {go: function (to, param) {
+    var lastQuestion, questionId;
+
+    beforeEach(inject(
+      function ($controller, questionService, authorService) {
+        var state = {go: function (to, param) {
           questionId = param.id;
         }};
         $controller('rootController', {
@@ -22,22 +24,40 @@ describe('The Controllers', function () {
           questionsService: questionService,
           authorService: authorService
         });
-
-        expect($scope.questions.length).toEqual(15);
-        expect($scope.authors.length).toEqual(7);
-
-        $scope.nextQuestion();
-        expect($scope.animationclass).toEqual('fade-left');
-        expect(questionId).toBeGreaterThan(-1);
-        expect(questionId).toBeLessThan(15);
-        lastQuestion = questionId;
-
-        $scope.previousQuestion();
-        expect($scope.animationclass).toEqual('fade-right');
-        expect(questionId).toEqual(lastQuestion);
       }
     ));
+
+    it('initializes the scope correctly', function () {
+      expect($scope.questions.length).toEqual(15);
+      expect($scope.authors.length).toEqual(7);
+
+      $scope.nextQuestion();
+      expect($scope.animationclass).toEqual('fade-left');
+      expect(questionId).toBeGreaterThan(-1);
+      expect(questionId).toBeLessThan(15);
+
+      $scope.previousQuestion();
+      expect($scope.animationclass).toEqual('fade-right');
+    });
+
+    it('navigates to the previous question', function () {
+      $scope.nextQuestion();
+      lastQuestion = questionId;
+      $scope.nextQuestion();
+
+      $scope.previousQuestion();
+      expect(questionId).toEqual(lastQuestion);
+    });
+
+    it('never navigates before the start', function () {
+      $scope.nextQuestion();
+      lastQuestion = questionId;
+
+      $scope.previousQuestion();
+      expect(questionId).toEqual(lastQuestion);
+    });
   });
+
   describe('The Question Controller', function () {
     it('initializes the scope correctly', inject(
       function ($controller) {
