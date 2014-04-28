@@ -1,10 +1,7 @@
-/*global inject*/
-
-"use strict";
-
 describe('directive', function () {
-  var $compile;
-  var $rootScope;
+  "use strict";
+
+  var $rootScope, $compile;
 
   beforeEach(module('retroflection'));
 
@@ -31,8 +28,7 @@ describe('directive', function () {
   });
 
   describe('for question mails', function () {
-    var element;
-    var question = {"question": "Q1", "author": "@deborahh", "id": "976"};
+    var element, question = {"question": "Q1", "author": "@deborahh", "id": "976"};
 
     beforeEach(function () {
       $rootScope.question = question;
@@ -60,11 +56,10 @@ describe('directive', function () {
     it('retains the inner html stuff', function () {
       expect(element[0].innerHTML).toMatch('blabla');
     });
-  });  
-  
+  });
+
   describe('for correction mails', function () {
-    var element;
-    var question = {"question": "Q1", "author": "@deborahh", "id": "976"};
+    var element, question = {"question": "Q1", "author": "@deborahh", "id": "976"};
 
     beforeEach(function () {
       $rootScope.question = question;

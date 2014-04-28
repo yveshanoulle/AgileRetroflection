@@ -59,10 +59,10 @@ module.exports = function (grunt) {
     coverage: {
       options: {
         thresholds: {
-          'statements': 75,
+          'statements': 90,
           'branches': 50,
-          'lines': 75,
-          'functions': 70
+          'lines': 90,
+          'functions': 89
         },
         dir: 'coverage-karma'
       }
@@ -97,7 +97,7 @@ module.exports = function (grunt) {
           browser: true,
           indent: 2,
           nomen: true,
-          predef: [ 'jQuery', 'angular', '_' ]
+          predef: [ 'jQuery', 'angular', '_', 'inject' ]
         }
       }
     }

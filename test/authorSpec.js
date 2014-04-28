@@ -1,8 +1,7 @@
-/*global test_questions, inject*/
-
-"use strict";
+/*global test_questions*/
 
 describe('authors function', function () {
+  "use strict";
   var questions;
   beforeEach(module('retroflection'));
 
@@ -15,19 +14,19 @@ describe('authors function', function () {
   });
 
   it('contains Yves with 5 test_questions', function () {
-    for (var i in questions) {
-      if (questions[i].name === '@yveshanoulle') {
-        expect(questions[i].questions.length).toEqual(5);
+    questions.forEach(function (question) {
+      if (question.name === '@yveshanoulle') {
+        expect(question.questions.length).toEqual(5);
       }
-    }
+    });
   });
 
   it('sorts the authors by name', function () {
     var lastName = "";
-    for (var i in questions) {
-      var currentName = questions[i].name;
+    questions.forEach(function (question) {
+      var currentName = question.name;
       expect(lastName.localeCompare(currentName)).toBeLessThan(0);
       lastName = currentName;
-    }
+    });
   });
 });

@@ -1,8 +1,5 @@
-/*global inject*/
-
-"use strict";
-
 describe('the QuestionService', function () {
+  "use strict";
   var service;
 
   beforeEach(module('retroflection'));
@@ -13,7 +10,7 @@ describe('the QuestionService', function () {
 
   it('chooses the same question for previous after initial question', function () {
     var current = service.next();
-    expect(current).toBeTruthy();
+    expect(current + 1).toBeTruthy();
     expect(service.previous()).toEqual(current);
   });
 
