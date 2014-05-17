@@ -1,7 +1,7 @@
-/*global test_questions*/
+/*global test_questions, jasmine*/
 describe('The Controllers', function () {
   "use strict";
-  var $scope;
+  var $scope, lastQuestion, questionId;
 
   beforeEach(module('retroflection'));
 
@@ -9,27 +9,27 @@ describe('The Controllers', function () {
     $scope = $rootScope.$new();
   }));
 
-  describe('The Root Controller', function () {
-    var lastQuestion, questionId;
+  beforeEach(inject(
+    function ($controller, questionService, authorService) {
+      var state = {go: function (to, param) {
+        questionId = param.id;
+      }};
+      $controller('rootController', {
+        $scope: $scope,
+        $state: state,
+        questions: test_questions,
+        questionService: questionService,
+        authorService: authorService
+      });
+    }
+  ));
 
-    beforeEach(inject(
-      function ($controller, questionService, authorService) {
-        var state = {go: function (to, param) {
-          questionId = param.id;
-        }};
-        $controller('rootController', {
-          $scope: $scope,
-          $state: state,
-          questions: test_questions,
-          questionsService: questionService,
-          authorService: authorService
-        });
-      }
-    ));
+  describe('The Root Controller', function () {
 
     it('initializes the scope correctly', function () {
       expect($scope.questions.length).toEqual(15);
       expect($scope.authors.length).toEqual(7);
+      expect($scope.questionService).not.toBeUndefined();
 
       $scope.nextQuestion();
       expect($scope.animationclass).toEqual('fade-left');
@@ -61,17 +61,27 @@ describe('The Controllers', function () {
   describe('The Question Controller', function () {
     it('initializes the scope correctly', inject(
       function ($controller) {
-        $scope.questions = test_questions;
         $scope.nextQuestion = "placeholder for function nextQuestion";
         $scope.previousQuestion = "placeholder for function previousQuestion";
         $controller('questionController', {
           $scope: $scope,
-          $stateParams: {id: 3}
+          $stateParams: {id: '2'}
         });
 
         expect($scope.swipeleft).toEqual($scope.nextQuestion);
         expect($scope.swiperight).toEqual($scope.previousQuestion);
         expect($scope.showQuestion).toBe(true);
+        expect($scope.current).toEqual(jasmine.objectContaining({id: '2', question: 'Q2'}));
+      }
+    ));
+  });
+
+  describe('The Random Controller', function () {
+    it('initializes the scope correctly', inject(
+      function ($controller) {
+        expect($scope.current).toBeUndefined();
+        $controller('randomController', { $scope: $scope });
+        expect($scope.current).not.toBeUndefined();
       }
     ));
   });

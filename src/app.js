@@ -33,6 +33,23 @@
               }
             }
           })
+          .state('retro.random', {
+            url: '/random',
+            views: {
+              'nav-bar': {
+                template: templates.questionheadertpl,
+                controller: 'randomController'
+              },
+              'content': {
+                template: templates.questiontpl,
+                controller: 'randomController'
+              },
+              'buttons': {
+                template: templates.buttontpl,
+                controller: 'randomController'
+              }
+            }
+          })
           .state('retro.authors', {
             url: '/authors',
             views: {
@@ -90,6 +107,7 @@
       $scope.questions = questions;
       $scope.authors = authorService($scope.questions);
       var service = questionService($scope.questions.length);
+      $scope.questionService = service;
       $scope.nextQuestion = function () {
         $scope.animationclass = 'fade-left';
         $state.go('retro.question', { id: service.next() });
@@ -105,6 +123,11 @@
       $scope.current = _.find($scope.questions, {"id": $stateParams.id});
       $scope.swipeleft = $scope.nextQuestion;
       $scope.swiperight = $scope.previousQuestion;
+      $scope.showQuestion = true;
+    })
+
+    .controller('randomController', function ($scope) {
+      $scope.current = _.find($scope.questions, {"id": $scope.questionService.next().toString()});
       $scope.showQuestion = true;
     })
 
