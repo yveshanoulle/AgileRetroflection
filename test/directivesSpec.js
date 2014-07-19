@@ -15,7 +15,7 @@ describe('directive', function () {
       $rootScope.name = '@yveshanoulle';
       var element = $compile('<twitter-link name="name"></twitter-link>')($rootScope);
       $rootScope.$digest();
-      expect(element[0].href).toMatch('http://twitter.com/yves');
+      expect(element[0].href).toMatch('http://twitter.com/yveshanoulle');
     });
 
     it('creates no link for non twitter name', function () {
@@ -23,7 +23,7 @@ describe('directive', function () {
       var element = $compile('<twitter-link name="name"></twitter-link>')($rootScope);
       $rootScope.$digest();
       expect(element[0].href).toMatch('#');
-      expect(element[0].href).not.toMatch('http://twitter.com/yves');
+      expect(element[0].href).not.toMatch('http://twitter.com/yveshanoulle');
     });
   });
 

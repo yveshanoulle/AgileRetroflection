@@ -1,5 +1,5 @@
 (function () {
-  "use strict";
+  'use strict';
 
   angular.module('templates', [])
     .constant('templates', {buttontpl: '<a class="tab-item" ng-class="{active: showAuthors}" ui-sref="retro.authors">\n' +
