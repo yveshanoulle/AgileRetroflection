@@ -9,9 +9,9 @@
           .state('retro', {
             abstract: true,
             resolve: {
-              questions: function (questionstore) {
+              questions: ['questionstore', function (questionstore) {
                 return questionstore.questions();
-              }
+              }]
             },
             template: templates.retrotpl,
             controller: 'rootController'
@@ -103,51 +103,69 @@
         $urlRouterProvider.otherwise('/question/');
       }])
 
-    .controller('rootController', function ($scope, $state, questions, questionService, authorService) {
-      $scope.questions = questions;
-      $scope.authors = authorService($scope.questions);
-      var service = questionService($scope.questions.length);
-      $scope.questionService = service;
-      $scope.nextQuestion = function () {
-        $scope.animationclass = 'fade-left';
-        $state.go('retro.question', { id: service.next() });
-      };
-      $scope.previousQuestion = function () {
-        $scope.animationclass = 'fade-right';
-        $state.go('retro.question', { id: service.previous() });
-      };
-    })
+    .controller('rootController', [
+      '$scope',
+      '$state',
+      'questions',
+      'questionService',
+      'authorService',
+      function ($scope, $state, questions, questionService, authorService) {
+        $scope.questions = questions;
+        $scope.authors = authorService($scope.questions);
+        var service = questionService($scope.questions.length);
+        $scope.questionService = service;
+        $scope.nextQuestion = function () {
+          $scope.animationclass = 'fade-left';
+          $state.go('retro.question', { id: service.next() });
+        };
+        $scope.previousQuestion = function () {
+          $scope.animationclass = 'fade-right';
+          $state.go('retro.question', { id: service.previous() });
+        };
+      }])
 
-    .controller('questionController', function ($scope, $stateParams) {
-      if (!$stateParams.id) { return $scope.nextQuestion(); }
-      $scope.current = _.find($scope.questions, {"id": $stateParams.id});
-      $scope.swipeleft = $scope.nextQuestion;
-      $scope.swiperight = $scope.previousQuestion;
-      $scope.showQuestion = true;
-    })
+    .controller('questionController', [
+      '$scope',
+      '$stateParams',
+      function ($scope, $stateParams) {
+        if (!$stateParams.id) { return $scope.nextQuestion(); }
+        $scope.current = _.find($scope.questions, {"id": $stateParams.id});
+        $scope.swipeleft = $scope.nextQuestion;
+        $scope.swiperight = $scope.previousQuestion;
+        $scope.showQuestion = true;
+      }])
 
-    .controller('randomController', function ($scope) {
-      $scope.current = _.find($scope.questions, {"id": $scope.questionService.next().toString()});
-      $scope.showQuestion = true;
-    })
+    .controller('randomController', [
+      '$scope',
+      function ($scope) {
+        $scope.current = _.find($scope.questions, {"id": $scope.questionService.next().toString()});
+        $scope.showQuestion = true;
+      }])
 
-    .controller('authorsController', function ($scope) {
-      $scope.normname = function (name) { return name.substr(1); };
-      $scope.animationclass = '';
-      $scope.showAuthors = true;
-    })
+    .controller('authorsController', [
+      '$scope',
+      function ($scope) {
+        $scope.normname = function (name) { return name.substr(1); };
+        $scope.animationclass = '';
+        $scope.showAuthors = true;
+      }])
 
-    .controller('authorDetailController', function ($scope, $stateParams) {
-      $scope.author = _.find($scope.authors, {"name": $stateParams.name});
-      $scope.questions = $scope.author.questions;
-      $scope.animationclass = 'fade-left-right';
-      $scope.showAuthors = true;
-    })
+    .controller('authorDetailController', [
+      '$scope',
+      '$stateParams',
+      function ($scope, $stateParams) {
+        $scope.author = _.find($scope.authors, {"name": $stateParams.name});
+        $scope.questions = $scope.author.questions;
+        $scope.animationclass = 'fade-left-right';
+        $scope.showAuthors = true;
+      }])
 
-    .controller('aboutController', function ($scope) {
-      $scope.animationclass = 'fade-left-right';
-      $scope.showAbout = true;
-    })
+    .controller('aboutController', [
+      '$scope',
+      function ($scope) {
+        $scope.animationclass = 'fade-left-right';
+        $scope.showAbout = true;
+      }])
 
     .directive('twitterLink', function () {
       return {
