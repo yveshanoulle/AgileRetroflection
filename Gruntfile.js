@@ -123,7 +123,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-karma');
   grunt.loadNpmTasks('grunt-mocha-istanbul');
 
-  grunt.registerTask('prpare', ['bower-install-simple', 'clean', 'copy']);
+  grunt.registerTask('prepare', ['bower-install-simple', 'clean', 'copy']);
 
   grunt.registerTask('deployProduction', ['prepare', 'uglify:production']);
   grunt.registerTask('deployDevelopment', ['prepare', 'uglify:development']);
