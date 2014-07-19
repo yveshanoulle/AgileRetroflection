@@ -7,3 +7,6 @@ googledocs
 coverage
 global.js
 coverage-karma
+bower_components
+*.min.css
+public/fonts/ratchicons*

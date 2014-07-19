@@ -1,16 +1,40 @@
 module.exports = function (grunt) {
-  // See http://www.jshint.com/docs/#strict
-  "use strict";
+  'use strict';
 
-  // Project configuration.
+  var filesToJoin = {
+    'public/js/global.js': [
+      'node_modules/lodash/lodash.js',
+      'bower_components/angular/angular.js',
+      'bower_components/angular-animate/angular-animate.js',
+      'bower_components/angular-touch/angular-touch.js',
+      'bower_components/angular-ui-router/release/angular-ui-router.js',
+      'bower_components/ratchet/dist/js/ratchet.js',
+      'src/questionstore.js',
+      'src/templates.js',
+      'src/app.js'
+    ]
+  };
+
   grunt.initConfig({
-    // Metadata.
-
     pkg: grunt.file.readJSON('package.json'),
-    clean: ["coverage", "coverage-karma"],
+    clean: ['coverage', 'coverage-karma'],
+    copy: {
+      css: {
+        expand: true,
+        src: 'bower_components/ratchet/dist/css/*.min.css',
+        dest: 'public/css',
+        flatten: true
+      },
+      fonts: {
+        expand: true,
+        src: 'bower_components/ratchet/dist/fonts/*',
+        dest: 'public/fonts',
+        flatten: true
+      }
+    },
     mocha_istanbul: {
       test: {
-        src: 'test-server', // the folder, not the files,
+        src: 'test-server',
         options: {
           root: '.',
           mask: '**/*.js',
@@ -23,23 +47,16 @@ module.exports = function (grunt) {
         }
       }
     },
-    concat: {
-      options: {
-        separator: ';'
+    uglify: {
+      development: {
+        options: {
+          mangle: false,
+          beautify: true
+        },
+        files: filesToJoin
       },
-      all: {
-        src: [
-          "src/3rd-party/lodash.min.js",
-          "src/3rd-party/ratchet.min.js",
-          "src/3rd-party/angular.min.js",
-          "src/3rd-party/angular-animate.min.js",
-          "src/3rd-party/angular-touch.min.js",
-          "src/3rd-party/angular-ui-router.min.js",
-          "src/questionstore.js",
-          "src/templates.js",
-          "src/app.js"
-        ],
-        dest: "public/js/global.js"
+      production: {
+        files: filesToJoin
       }
     },
     karma: {
@@ -50,10 +67,6 @@ module.exports = function (grunt) {
         browsers: ['PhantomJS'],
         runnerPort: 6666,
         singleRun: true
-      },
-      continuous: {
-        browsers: ['Chrome'],
-        autoWatch: true
       }
     },
     coverage: {
@@ -62,21 +75,20 @@ module.exports = function (grunt) {
           'statements': 90,
           'branches': 50,
           'lines': 90,
-          'functions': 89
+          'functions': 79
         },
         dir: 'coverage-karma'
       }
     },
-    jslint: { // configure the task
-      // lint your project's server code
+    jslint: {
       server: {
-        src: [ // some example files
+        src: [
           '*.js'
         ],
         exclude: [
           'server/config.js'
         ],
-        directives: { // example directives
+        directives: {
           node: true,
           nomen: true,
           vars: true,
@@ -84,11 +96,10 @@ module.exports = function (grunt) {
           unparam: true
         },
         options: {
-          edition: 'latest', // specify an edition of jslint or use 'dir/mycustom-jslint.js' for own path
-          errorsOnly: true // only display errors
+          edition: 'latest',
+          errorsOnly: true
         }
       },
-      // lint your project's client code
       client: {
         src: [
           'src/*.js'
@@ -103,18 +114,20 @@ module.exports = function (grunt) {
     }
   });
 
-
-  // These plugins provide necessary tasks.
+  grunt.loadNpmTasks('grunt-bower-install-simple');
   grunt.loadNpmTasks('grunt-contrib-clean');
-  grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-jslint');
   grunt.loadNpmTasks('grunt-istanbul-coverage');
   grunt.loadNpmTasks('grunt-karma');
   grunt.loadNpmTasks('grunt-mocha-istanbul');
 
-  grunt.registerTask('default', ['clean', 'concat', 'jslint', 'mocha_istanbul:test', 'karma:once', 'coverage']);
-  grunt.registerTask('devmode', ['karma:continuous']);
+  grunt.registerTask('prpare', ['bower-install-simple', 'clean', 'copy']);
 
-  // Travis-CI task
+  grunt.registerTask('deployProduction', ['prepare', 'uglify:production']);
+  grunt.registerTask('deployDevelopment', ['prepare', 'uglify:development']);
+
+  grunt.registerTask('default', ['deployProduction', 'jslint', 'mocha_istanbul:test', 'karma:once', 'coverage']);
   grunt.registerTask('travis', ['default']);
 };

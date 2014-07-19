@@ -8,13 +8,8 @@ module.exports = function (config) {
 
     // list of files / patterns to load in the browser
     files: [
-      "src/3rd-party/lodash.min.js",
-      "src/3rd-party/ratchet.min.js",
-      "src/3rd-party/angular.min.js",
-      "src/3rd-party/angular-animate.min.js",
-      "src/3rd-party/angular-touch.min.js",
-      "src/3rd-party/angular-ui-router.min.js",
-      "src/3rd-party/angular-mocks.js",
+      "public/js/global.js",
+      "bower_components/angular-mocks/angular-mocks.js",
       "src/questionstore.js",
       "src/templates.js",
       "src/app.js",
@@ -86,7 +81,6 @@ module.exports = function (config) {
     plugins: [
       'karma-jasmine',
       'karma-phantomjs-launcher',
-      'karma-chrome-launcher',
       'karma-coverage'
     ]
   });
