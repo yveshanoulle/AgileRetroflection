@@ -30,7 +30,7 @@ function loadSheet(worksheetId, idCol, questionCol, authorCol, dateCol, callback
     spreadsheet.receive({getValues: true}, function (err, rows) {
       if (err) { return callback(err); }
       callback(null, _(rows).filter(function (row) {
-        return !!row[dateCol] && moment(row[dateCol], 'M/D/YYYY').add('days', 1).isBefore(moment());
+        return !!row[dateCol] && moment(row[dateCol], 'M/D/YYYY').add(1, 'days').isBefore(moment());
       }).map(function (row) {
         var questionrow = {};
         questionrow.id = row[idCol] ? row[idCol].toString() : '';
