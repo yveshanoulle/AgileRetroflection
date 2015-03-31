@@ -4,7 +4,7 @@ var express = require('express');
 var path = require('path');
 var app = express();
 var useragent = require('useragent');
-var favicon = require('static-favicon');
+var favicon = require('serve-favicon');
 var compress = require('compression');
 var serveStatic = require('serve-static');
 var server;

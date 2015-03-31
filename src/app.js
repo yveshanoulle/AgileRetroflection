@@ -129,7 +129,9 @@
       '$stateParams',
       function ($scope, $stateParams) {
         if (!$stateParams.id) { return $scope.nextQuestion(); }
-        $scope.current = _.find($scope.questions, {"id": $stateParams.id});
+        var candidate = _.find($scope.questions, {"id": $stateParams.id});
+        if (!candidate) { return $scope.nextQuestion(); }
+        $scope.current = candidate;
         $scope.swipeleft = $scope.nextQuestion;
         $scope.swiperight = $scope.previousQuestion;
         $scope.showQuestion = true;

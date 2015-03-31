@@ -11,7 +11,7 @@ The app is designed to run on mobile phones and depends on javascript and HTML5.
 connection once it has been loaded to the phone. It will be completely cached by your phone, so updating can be a little bit tidious. 
 Be sure to completely delete your caches and saved data on the phone. To install it as an app, do the following:
 
-### iPhone (iOS 7)
+### iPhone (iOS 7 and above)
 
 1. Open [retroflection.org](http://retroflection.org) in Safari.
 1. Click on the title to open the bottom menu of Safari. See Image 1 below.

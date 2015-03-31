@@ -11,9 +11,11 @@ describe('The Controllers', function () {
 
   beforeEach(inject(
     function ($controller, questionService, authorService) {
-      var state = {go: function (to, param) {
-        questionId = param.id;
-      }};
+      var state = {
+        go: function (to, param) {
+          questionId = param.id;
+        }
+      };
       $controller('rootController', {
         $scope: $scope,
         $state: state,
@@ -74,13 +76,29 @@ describe('The Controllers', function () {
         expect($scope.current).toEqual(jasmine.objectContaining({id: '2', question: 'Q2'}));
       }
     ));
+    
+    it('return a valid question even if the id is not found', inject(
+      function ($controller) {
+        var nextQuestionCalled = false;
+        $scope.nextQuestion = function () {
+          nextQuestionCalled = true;
+        };
+        $scope.previousQuestion = "placeholder for function previousQuestion";
+        $controller('questionController', {
+          $scope: $scope,
+          $stateParams: {id: '33'}
+        });
+
+        expect(nextQuestionCalled).toBe(true);
+      }
+    ));
   });
 
   describe('The Random Controller', function () {
     it('initializes the scope correctly', inject(
       function ($controller) {
         expect($scope.current).toBeUndefined();
-        $controller('randomController', { $scope: $scope });
+        $controller('randomController', {$scope: $scope});
         expect($scope.current).not.toBeUndefined();
       }
     ));
