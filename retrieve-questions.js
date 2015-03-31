@@ -49,7 +49,8 @@ module.exports = function () {
       function (callback) { loadSheet('od8', '2', '4', '5', '9', callback); },
       function (callback) { loadSheet('odb', '2', '4', '5', '9', callback); },
       function (callback) { loadSheet('ocx', '1', '3', '4', '8', callback); },
-      function (callback) { loadSheet('od6', '1', '3', '4', '7', callback); }
+      function (callback) { loadSheet('od6', '1', '3', '4', '7', callback); },
+      function (callback) { loadSheet('od0', '1', '3', '4', '7', callback); }
     ],
     function (err, questions) {
       if (err) { return err; }

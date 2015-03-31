@@ -108,7 +108,14 @@ module.exports = function (grunt) {
           browser: true,
           indent: 2,
           nomen: true,
-          predef: [ 'jQuery', 'angular', '_', 'inject' ]
+          predef: ['jQuery', 'angular', '_', 'inject']
+        }
+      }
+    },
+    'bower-install-simple': {
+      default: {
+        options: {
+          directory: 'bower_components'
         }
       }
     }

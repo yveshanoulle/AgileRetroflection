@@ -20,7 +20,7 @@ describe('SWK Plattform server', function () {
       expect(resp).to.exist();
       expect(resp.statusCode).to.equal(200);
       expect(resp.body).to.contain('<body ng-app="retroflection"><div ui-view></div></body>');
-      expect(resp.body).to.contain('<head manifest="retroflection.appcache">');
+      expect(resp.body).to.contain('<html manifest="retroflection.appcache">');
       done(); // without error check
     });
   });
@@ -30,7 +30,7 @@ describe('SWK Plattform server', function () {
       expect(resp).to.exist();
       expect(resp.statusCode).to.equal(200);
       expect(resp.body).to.contain('<body ng-app="retroflection"><div ui-view></div></body>');
-      expect(resp.body).to.contain('<head>');
+      expect(resp.body).to.contain('<html>');
       done(); // without error check
     });
   });
