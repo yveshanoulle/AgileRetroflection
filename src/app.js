@@ -1,5 +1,5 @@
 (function () {
-  "use strict";
+  'use strict';
 
   angular.module('retroflection', ['ui.router', 'questionstore', 'ngTouch', 'ngAnimate', 'templates'])
 

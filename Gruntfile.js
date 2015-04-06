@@ -3,7 +3,7 @@ module.exports = function (grunt) {
 
   var filesToJoin = {
     'public/js/global.js': [
-      'node_modules/lodash/lodash.js',
+      'bower_components/lodash/lodash.js',
       'bower_components/angular/angular.js',
       'bower_components/angular-animate/angular-animate.js',
       'bower_components/angular-touch/angular-touch.js',
