@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<testsuites>
-  <testsuite>
-<testcase classname="src.questionstore" name="questionstore:0:0"></testcase>
-<testcase classname="src.app" name="app:0:0"></testcase>
-<testcase classname="src.templates" name="templates:0:0"></testcase>
-  </testsuite>
-</testsuites>
