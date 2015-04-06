@@ -41,8 +41,8 @@
     "node": "~0.12"
   },
   "scripts": {
-    "postinstall": "grunt deployProduction && node retrieve-questions-runner",
-    "start": "node start",
+    "postinstall": "grunt deployProduction && node server/retrieve-questions-runner",
+    "start": "node server/start",
     "test": "grunt travis"
   }
 }

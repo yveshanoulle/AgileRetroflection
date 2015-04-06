@@ -4,7 +4,7 @@ var httpRequest = require('request');
 var port = 5001;
 var base_uri = "http://localhost:" + port;
 
-var app = require('../server');
+var app = require('../server/server');
 
 describe('SWK Plattform server', function () {
   beforeEach(function (done) {

@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 var app = require('./server');
 var retrieve_questions = require('./retrieve-questions');
