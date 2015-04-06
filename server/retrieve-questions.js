@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 var Spreadsheet = require('edit-google-spreadsheet');
 var _ = require('lodash');
