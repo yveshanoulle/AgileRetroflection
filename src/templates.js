@@ -29,7 +29,7 @@
         '</div>',
 
       authortpl: '<ul class="table-view">\n' +
-        '  <li ng-repeat="question in questions" class="table-view-cell">{{question.question}} <correct-question question="question" class="btn icon icon-edit"></correct-question></li>\n' +
+        '  <li ng-repeat="question in questions" class="table-view-cell">{{question.question}} <a ui-sref="retro.question({id:question.id})"><small>(#{{question.id}})</small></a> <correct-question question="question" class="btn icon icon-edit" style="padding:0px;"></correct-question></li>\n' +
         '</ul>\n',
 
       authorstpl: '<ul class="table-view">\n' +
