@@ -189,11 +189,13 @@
         scope: {
           name: '='
         },
-        template: '<a href="{{link}}">{{name}}</a>',
+        template: '<span ng-repeat="author in authors" >' +
+          '<a href="http://twitter.com/{{author.substr(1)}}">{{author}}</a>' +
+          '<span ng-if="!$last"> & </span>' +
+          '</span>',
         replace: true,
         link: function (scope) {
-          var name = scope.name || ' ';
-          scope.link = 'http://twitter.com/' + name.substr(1);
+          scope.authors = scope.name.match(/@(\w+)/g);
         }
       };
     })
