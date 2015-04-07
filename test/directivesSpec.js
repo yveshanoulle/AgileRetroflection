@@ -1,5 +1,5 @@
 describe('directive', function () {
-  "use strict";
+  'use strict';
 
   var $rootScope, $compile;
 

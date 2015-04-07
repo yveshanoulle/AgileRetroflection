@@ -1,6 +1,6 @@
 /*global test_questions, jasmine*/
 describe('The Controllers', function () {
-  "use strict";
+  'use strict';
   var $scope, lastQuestion, questionId;
 
   beforeEach(module('retroflection'));

@@ -129,7 +129,7 @@
       '$stateParams',
       function ($scope, $stateParams) {
         if (!$stateParams.id) { return $scope.nextQuestion(); }
-        var candidate = _.find($scope.questions, {"id": $stateParams.id});
+        var candidate = _.find($scope.questions, {'id': $stateParams.id});
         if (!candidate) { return $scope.nextQuestion(); }
         $scope.current = candidate;
         $scope.swipeleft = $scope.nextQuestion;
@@ -140,7 +140,7 @@
     .controller('randomController', [
       '$scope',
       function ($scope) {
-        $scope.current = _.find($scope.questions, {"id": $scope.questionService.next().toString()});
+        $scope.current = _.find($scope.questions, {'id': $scope.questionService.next().toString()});
         $scope.showQuestion = true;
       }])
 
@@ -156,7 +156,7 @@
       '$scope',
       '$stateParams',
       function ($scope, $stateParams) {
-        $scope.author = _.find($scope.authors, {"name": $stateParams.name});
+        $scope.author = _.find($scope.authors, {'name': $stateParams.name});
         $scope.questions = $scope.author.questions;
         $scope.animationclass = 'fade-left-right';
         $scope.showAuthors = true;

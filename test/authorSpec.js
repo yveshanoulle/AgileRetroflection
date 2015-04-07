@@ -1,7 +1,7 @@
 /*global test_questions*/
 
 describe('authors function', function () {
-  "use strict";
+  'use strict';
   var questions;
   beforeEach(module('retroflection'));
 
@@ -22,7 +22,7 @@ describe('authors function', function () {
   });
 
   it('sorts the authors by name', function () {
-    var lastName = "";
+    var lastName = '';
     questions.forEach(function (question) {
       var currentName = question.name;
       expect(lastName.localeCompare(currentName)).toBeLessThan(0);

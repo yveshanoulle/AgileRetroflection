@@ -1,5 +1,5 @@
 describe('the QuestionService', function () {
-  "use strict";
+  'use strict';
   var service;
 
   beforeEach(module('retroflection'));
