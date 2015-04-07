@@ -25,7 +25,7 @@
         '  <p>Originally tweeted by <a href="http://twitter.com/retroflection">@Retroflection</a></p>\n' +
         '  <p>Site by <a href="http://www.twitter.com/leiderleider">@leiderleider</a></p>\n' +
         '  <p>Version: {{version}}</p>\n' +
-        '  <p>We currently feature {{questions.length}} different questions by {{authors.length}} persons.</p>\n' +
+        '  <p>We currently feature {{questions.length}} different questions by {{distinct_authors.length}} distinct authors.</p>\n' +
         '</div>',
 
       authortpl: '<ul class="table-view">\n' +

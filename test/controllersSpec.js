@@ -30,13 +30,13 @@ describe('The Controllers', function () {
 
     it('initializes the scope correctly', function () {
       expect($scope.questions.length).toEqual(15);
-      expect($scope.authors.length).toEqual(7);
+      expect($scope.authors.length).toEqual(8);
       expect($scope.questionService).not.toBeUndefined();
 
       $scope.nextQuestion();
       expect($scope.animationclass).toEqual('fade-left');
       expect(questionId).toBeGreaterThan(-1);
-      expect(questionId).toBeLessThan(15);
+      expect(questionId).toBeLessThan(17);
 
       $scope.previousQuestion();
       expect($scope.animationclass).toEqual('fade-right');
@@ -120,7 +120,7 @@ describe('The Controllers', function () {
   describe('The Authors Detail Controller', function () {
     it('initializes the scope correctly', inject(
       function ($controller, authorService) {
-        $scope.authors = authorService(test_questions);
+        $scope.authors = authorService(test_questions).all;
         $controller('authorDetailController', {
           $scope: $scope,
           $stateParams: {name: '@yveshanoulle'}

@@ -113,16 +113,17 @@
       'authorService',
       function ($scope, $state, questions, questionService, authorService) {
         $scope.questions = questions;
-        $scope.authors = authorService($scope.questions);
+        $scope.authors = authorService($scope.questions).all;
+        $scope.distinct_authors = authorService($scope.questions).distinct();
         var service = questionService($scope.questions.length);
         $scope.questionService = service;
         $scope.nextQuestion = function () {
           $scope.animationclass = 'fade-left';
-          $state.go('retro.question', { id: service.next() });
+          $state.go('retro.question', {id: service.next()});
         };
         $scope.previousQuestion = function () {
           $scope.animationclass = 'fade-right';
-          $state.go('retro.question', { id: service.previous() });
+          $state.go('retro.question', {id: service.previous()});
         };
       }])
 
@@ -130,9 +131,13 @@
       '$scope',
       '$stateParams',
       function ($scope, $stateParams) {
-        if (!$stateParams.id) { return $scope.nextQuestion(); }
+        if (!$stateParams.id) {
+          return $scope.nextQuestion();
+        }
         var candidate = _.find($scope.questions, {'id': $stateParams.id});
-        if (!candidate) { return $scope.nextQuestion(); }
+        if (!candidate) {
+          return $scope.nextQuestion();
+        }
         $scope.current = candidate;
         $scope.swipeleft = $scope.nextQuestion;
         $scope.swiperight = $scope.previousQuestion;
@@ -142,14 +147,20 @@
     .controller('randomController', [
       '$scope',
       function ($scope) {
-        $scope.current = _.find($scope.questions, {'id': $scope.questionService.next().toString()});
+        function current() {
+          return _.find($scope.questions, {'id': $scope.questionService.next().toString()}) || current();
+        }
+
+        $scope.current = current();
         $scope.showQuestion = true;
       }])
 
     .controller('authorsController', [
       '$scope',
       function ($scope) {
-        $scope.normname = function (name) { return name.substr(1); };
+        $scope.normname = function (name) {
+          return name.substr(1);
+        };
         $scope.animationclass = '';
         $scope.showAuthors = true;
       }])
@@ -182,7 +193,7 @@
         replace: true,
         link: function (scope) {
           var name = scope.name || ' ';
-          scope.link = (name.charAt(0) === '@') ? 'http://twitter.com/' + name.substr(1) : '#';
+          scope.link = 'http://twitter.com/' + name.substr(1);
         }
       };
     })
@@ -274,11 +285,20 @@
 
         _.each(questions, function (question) {
           var name = question.author;
-          if (!getAuthorNamed(name)) { addAuthor(name); }
+          if (!getAuthorNamed(name)) {
+            addAuthor(name);
+          }
           getAuthorNamed(name).questions.push(question);
         });
         sort();
-        return internal;
+        return {
+          all: internal,
+          distinct: function () {
+            return _(internal).pluck('name').map(function (each) {
+              return each.match(/@(\w+)/g);
+            }).flatten().unique().value();
+          }
+        };
       };
     });
 }());
