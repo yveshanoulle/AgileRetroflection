@@ -16,13 +16,16 @@
       '</a>\n',
 
       abouttpl: '<div class="content-padded">\n' +
-        '  <p>Please support us by:</p>\n' +
-        '  <p>Adding questions on the <a href="https://docs.google.com/spreadsheet/viewform?formkey=dFg2aXdNbE5qdzlzNjBmM1pKaFJFYkE6MQ" target="_blank">google doc</a>.</p>\n' +
-        '  <p>Contributing to the code on <a href="https://github.com/yveshanoulle/AgileRetroflection" target="_blank">github</a></p>\n' +
-        '  <p>Correcting the spelling of the questions. Just leave us a note by clicking on this icon <a class="icon icon-edit"></a> inside the app.</p>\n' +
+        '  <h4>Please support us by:</h4>\n' +
+        '  <ul style="font-size: 14px;">\n' +
+        '    <li>Adding questions on the <a href="https://docs.google.com/spreadsheet/viewform?formkey=dFg2aXdNbE5qdzlzNjBmM1pKaFJFYkE6MQ" target="_blank">google doc</a>.</li>\n' +
+        '    <li>Contributing to the code on <a href="https://github.com/yveshanoulle/AgileRetroflection" target="_blank">github</a></li>\n' +
+        '    <li>Correcting the spelling of the questions. Just leave us a note by clicking on this icon <a class="icon icon-edit" style="font-size: inherit;"></a> inside the app.</li>\n' +
+        '  </ul>\n' +
         '  <p>Originally tweeted by <a href="http://twitter.com/retroflection">@Retroflection</a></p>\n' +
         '  <p>Site by <a href="http://www.twitter.com/leiderleider">@leiderleider</a></p>\n' +
-        '  <p>Version: 2.2.2</p>\n' +
+        '  <p>Version: {{version}}</p>\n' +
+        '  <p>We currently feature {{questions.length}} different questions by {{authors.length}} persons.</p>\n' +
         '</div>',
 
       authortpl: '<ul class="table-view">\n' +

@@ -51,11 +51,15 @@ module.exports = function (grunt) {
       development: {
         options: {
           mangle: false,
-          beautify: true
+          beautify: true,
+          banner: 'retroflection_version = \'<%= pkg.version %>\';\n'
         },
         files: filesToJoin
       },
       production: {
+        options: {
+          banner: 'retroflection_version = \'<%= pkg.version %>\';\n'
+        },
         files: filesToJoin
       }
     },

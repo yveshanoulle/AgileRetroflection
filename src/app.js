@@ -1,3 +1,5 @@
+/*global retroflection_version */
+
 (function () {
   'use strict';
 
@@ -167,6 +169,7 @@
       function ($scope) {
         $scope.animationclass = 'fade-left-right';
         $scope.showAbout = true;
+        $scope.version = retroflection_version;
       }])
 
     .directive('twitterLink', function () {
