@@ -1,6 +1,6 @@
 var test_questions = [
-  {"question": "Q1", "author": "@Deborahh", "id": "1"},
-  {"question": "Q2", "author": "@mfloryan", "id": "2"},
+  {"question": "Q1", "author": "@Deborahh", "id": "1", "date": "1/23/2012"},
+  {"question": "Q2", "author": "@mfloryan", "id": "2", "date": "1/23/2012"},
   {"question": "Q3", "author": "@yveshanoulle", "id": "3"},
   {"question": "Q4", "author": "@philagile", "id": "4"},
   {"question": "Q5", "author": "@didierkoc", "id": "5"},

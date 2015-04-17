@@ -49,5 +49,5 @@
         '<h1 class="title">Retroflection</h1>',
 
       questiontpl: '<h3 class="question">{{current.question}}</h3>' +
-        '<p class="author"><twitter-link name="current.author"></twitter-link> (#{{current.id}})</p>'});
+        '<p class="author"><twitter-link name="current.author"></twitter-link> (#{{current.id}} - {{current.date}})</p>'});
 }());

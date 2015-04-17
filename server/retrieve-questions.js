@@ -42,6 +42,7 @@ function loadSheet(worksheetId, idCol, questionCol, authorCol, dateCol, callback
         questionrow.id = row[idCol] ? row[idCol].toString() : '';
         questionrow.question = row[questionCol];
         questionrow.author = row[authorCol];
+        questionrow.date = row[dateCol];
         return questionrow;
       }).filter(function (row) {
         return !!row.author && row.author.match(/^@/);
