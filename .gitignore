@@ -10,3 +10,4 @@ coverage-karma
 bower_components
 *.min.css
 public/fonts/ratchicons*
+build

@@ -20,6 +20,7 @@
     "grunt-jslint": "1.1.14",
     "grunt-karma": "0.10.1",
     "grunt-mocha-istanbul": "2.3.1",
+    "grunt-react": "0.12.2",
     "jade": "1.9.2",
     "lodash": "3.6.0",
     "moment": "2.9.0",
