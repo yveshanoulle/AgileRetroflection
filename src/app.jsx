@@ -3,12 +3,11 @@
 (function () {
   'use strict';
 
-  var Router = ReactRouter;
-
-  var DefaultRoute = Router.DefaultRoute;
-  var Link = Router.Link;
-  var Route = Router.Route;
-  var RouteHandler = Router.RouteHandler;
+  var Router = ReactRouter,
+    DefaultRoute = Router.DefaultRoute,
+    Link = Router.Link,
+    Route = Router.Route,
+    RouteHandler = Router.RouteHandler;
 
   function authors(questions) {
     var internal = [];
@@ -32,7 +31,7 @@
     internal.sort(function (a, b) {
       return a.name.localeCompare(b.name);
     });
-    
+
     return {
       all: internal,
       distinct: function () {
@@ -42,10 +41,12 @@
       }
     };
   }
-  
-  function Questions(questionjson) {
 
-    var questionNumbers = [];
+  function Questions(questionstring) {
+
+    var
+      questionjson = JSON.parse(questionstring),
+      questionNumbers = [];
 
     function currentQuestionNumber() {
       return questionNumbers[questionNumbers.length - 1] || 0;
@@ -99,7 +100,7 @@
     render: function () {
       var lastauthor = this.props.authors[this.props.authors.length - 1];
       return <span>
-        {this.props.authors.map(function(author) {
+        {this.props.authors.map(function (author) {
           return <span key={author}>
             <a href={"http://twitter.com/" + author.substr(1)}>{author}</a> {lastauthor !== author ? " & " : ""} 
           </span>;
@@ -107,7 +108,7 @@
       </span>
     }
   });
-  
+
   var MailQuestion = React.createClass({
     render: function () {
       var question = this.props.question;
@@ -115,11 +116,11 @@
       encodeURI('"' + question.question + '"' + ' by ' + question.author) +
       encodeURIComponent('\n\n---\nThis retroflection was originally twittered by @retroflection' +
         '\nand is sent via the retroflection app available at http://retroflection.org') : '#';
-      
+
       return <a href={link}> Mail <span className="icon icon-compose"></span> </a>
     }
   });
-  
+
   function mailtoForCorrection(question) {
     return question ? 'mailto:retroflections@hanoulle.be?subject=Retroflection corrected question&body=' +
     encodeURI('I have a proposal on improving the spelling of retroflection question ' +
@@ -128,25 +129,26 @@
       'This retroflection was originally twittered by @retroflection' +
       '\nand is sent via the retroflection app available at http://retroflection.org') : '#';
   }
-  
+
   var Question = React.createClass({
     render: function () {
       var questions = this.props.questions,
         id = this.props.params.id || questions.next().toString(),
         current = _.find(questions.all, {'id': id}) || {author: "", id: "", date: ""};
-      
+
       return <div>
         <header className="bar bar-nav">
           <button className="btn btn-link btn-nav pull-left">
             <a href={mailtoForCorrection(current)}> <span className="icon icon-edit"></span> Correct It </a>
           </button>
           <button className="btn btn-link btn-nav pull-right">
-            <MailQuestion question={current} />
+            <MailQuestion question={current}/>
           </button>
           <h1 className="title">Retroflection</h1>
         </header>
         <div className="content">
           <h3 className="question">{current.question}</h3>
+
           <p className="author">
             <Twitterlink authors={current.author.match(/@(\w+)/g) || []}/>
             (#{current.id} - {current.date})
@@ -160,48 +162,52 @@
   var Authors = React.createClass({
     render: function () {
       var questions = this.props.questions;
-  
+
       return <div>
         <header className="bar bar-nav">
           <h1 className="title">Authors</h1>
         </header>
         <div className="content">
           <ul className="table-view">
-            {questions.authors.all.map(function(author) {
+            {questions.authors.all.map(function (author) {
               return <li key={author.name} className="table-view-cell">
                 <Link className="navigate-right" to="author" params={{name: encodeURIComponent(author.name)}}>
                   <span className="badge">{author.questions.length}</span> {author.name}
-                </Link> 
+                </Link>
               </li>;
             })}
           </ul>
         </div>
-        <Buttons for="question" questions={questions}/>
+        <Buttons for="authors" questions={questions}/>
       </div>
     }
   });
 
   var Author = React.createClass({
     render: function () {
-      var 
+      var
         questions = this.props.questions,
         name = decodeURIComponent(this.props.params.name),
-        author = _.find(questions.authors.all, {name: name});
+        author = _.find(questions.authors.all, {name: name}) || {questions: []};
       return <div>
         <header className="bar bar-nav">
-          <Link className="btn pull-left" to="authors">back</Link><h1 className="title">{name}</h1>
+          <Link className="btn pull-left" to="authors">back</Link>
+
+          <h1 className="title">{name}</h1>
         </header>
         <div className="content">
           <ul className="table-view">
-            {author.questions.map(function(question) {
+            {author.questions.map(function (question) {
               return <li key={question.id} className="table-view-cell">
-                {question.question} <Link style={{display: "inline"}} to="question" params={{id: question.id}}><small>(#{question.id})</small></Link>
+                {question.question} <Link style={{display: "inline"}} to="question" params={{id: question.id}}>
+                <small>(#{question.id})</small>
+              </Link>
                 <a href={mailtoForCorrection(question)} className="btn icon icon-edit" style={{padding: "0px"}}/>
               </li>;
             })}
           </ul>
         </div>
-        <Buttons for="question" questions={questions}/>
+        <Buttons for="authors" questions={questions}/>
       </div>
     }
   });
@@ -218,24 +224,14 @@
           <div className="content-padded">
             <h4>Please support us by:</h4>
             <ul style={{fontSize: "14px"}}>
-              <li>Adding questions on the <a
-                href="https://docs.google.com/spreadsheet/viewform?formkey=dFg2aXdNbE5qdzlzNjBmM1pKaFJFYkE6MQ"
-                target="_blank">google doc</a>.
-              </li>
-              <li>Contributing to the code on <a href="https://github.com/yveshanoulle/AgileRetroflection"
-                                                 target="_blank">github</a></li>
-              <li>Correcting the spelling of the questions. Just leave us a note by clicking on this icon <a
-                className="icon icon-edit" style={{fontSize: "inherit"}}></a> inside the app.
-              </li>
+              <li>Adding questions on the <a href="https://docs.google.com/spreadsheet/viewform?formkey=dFg2aXdNbE5qdzlzNjBmM1pKaFJFYkE6MQ" target="_blank">google doc</a>. </li>
+              <li>Contributing to the code on <a href="https://github.com/yveshanoulle/AgileRetroflection" target="_blank">github</a></li>
+              <li>Correcting the spelling of the questions. Just leave us a note by clicking on this icon <a className="icon icon-edit" style={{fontSize: "inherit"}}></a> inside the app. </li>
             </ul>
             <p>Originally tweeted by <a href="http://twitter.com/retroflection">@Retroflection</a></p>
-
             <p>Site by <a href="http://www.twitter.com/leiderleider">@leiderleider</a></p>
-
             <p>Version: {retroflection_version}</p>
-
-            <p>We currently feature {questions.all.length} different questions by {questions.authors.distinct().length} distinct
-              authors.</p>
+            <p>We currently feature {questions.all.length} different questions by {questions.authors.distinct().length} distinct authors.</p>
           </div>
         </div>
         <Buttons for="about" questions={questions}/>
@@ -245,21 +241,38 @@
 
   var App = React.createClass({
     getInitialState: function () {
-      return {data: Questions([])};
+      return {data: Questions("[]")};
     },
     componentDidMount: function () {
-      $.ajax({
-        url: '/questions.json',
-        dataType: 'json',
-        cache: false,
-        success: function (data) {
-          localStorage.setItem('questions', JSON.stringify(data));
-          this.setState({data: Questions(data)});
-        }.bind(this),
-        error: function () {
-          this.setState({data: Questions(JSON.parse(localStorage.getItem('questions')))});
-        }.bind(this)
-      });
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.onreadystatechange = function() {
+        if (xmlhttp.readyState == XMLHttpRequest.DONE ) {
+          if(xmlhttp.status == 200){
+            var data = xmlhttp.response;
+            localStorage.setItem('questions', data);
+            this.setState({data: Questions(data)});
+          } else {
+            this.setState({data: Questions(localStorage.getItem('questions'))});
+          }
+        }
+      }.bind(this);
+
+      xmlhttp.open("GET", "/questions.json", true);
+      xmlhttp.send();
+      
+      
+      //$.ajax({
+      //  url: '/questions.json',
+      //  dataType: 'json',
+      //  cache: false,
+      //  success: function (data) {
+      //    localStorage.setItem('questions', JSON.stringify(data));
+      //    this.setState({data: Questions(data)});
+      //  }.bind(this),
+      //  error: function () {
+      //    this.setState({data: Questions(JSON.parse(localStorage.getItem('questions')))});
+      //  }.bind(this)
+      //});
     },
     render: function () {
       return <RouteHandler questions={this.state.data}/>;

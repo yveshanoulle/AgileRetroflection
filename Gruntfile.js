@@ -3,7 +3,6 @@ module.exports = function (grunt) {
 
   var filesToJoin = {
     'public/js/global.js': [
-      'bower_components/jquery/dist/jquery.js',
       'bower_components/lodash/lodash.js',
       'bower_components/react/react.js',
       'bower_components/react-router/build/umd/ReactRouter.js',
