@@ -1,26 +1,29 @@
-/*global test_questions*/
+/* eslint-env mocha */
+'use strict';
+
+var expect = require('must');
+
+var testQuestions = require('./test-questions.json');
+var authorService = require('../src/authorsService');
 
 describe('authors function', function () {
-  'use strict';
   var service;
-  beforeEach(module('retroflection'));
-
-  beforeEach(inject(function (authorService) {
-    service = authorService(test_questions);
-  }));
+  beforeEach(function () {
+    service = authorService(testQuestions);
+  });
 
   it('parses the test_questions to 8 distinct authors strings', function () {
-    expect(service.all.length).toEqual(8);
+    expect(service.all.length).to.be(8);
   });
 
   it('parses the test_questions to 7 distinct authors', function () {
-    expect(service.distinct().length).toEqual(7);
+    expect(service.distinct().length).to.be(7);
   });
 
   it('contains Yves with 5 test_questions', function () {
     service.all.forEach(function (question) {
       if (question.name === '@yveshanoulle') {
-        expect(question.questions.length).toEqual(4);
+        expect(question.questions.length).to.be(4);
       }
     });
   });
@@ -29,7 +32,7 @@ describe('authors function', function () {
     var lastName = '';
     service.all.forEach(function (question) {
       var currentName = question.name;
-      expect(lastName.localeCompare(currentName)).toBeLessThan(0);
+      expect(lastName.localeCompare(currentName)).to.be.below(0);
       lastName = currentName;
     });
   });

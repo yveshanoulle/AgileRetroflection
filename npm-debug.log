@@ -1,0 +1,431 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'install' ]
+2 info using npm@1.4.28
+3 info using node@v0.10.38
+4 verbose readDependencies using package.json deps
+5 verbose install where, deps [ '/JavascriptDev/AgileRetroflection-leider',
+5 verbose install   [ 'async',
+5 verbose install     'compression',
+5 verbose install     'edit-google-spreadsheet',
+5 verbose install     'express',
+5 verbose install     'grunt',
+5 verbose install     'grunt-browserify',
+5 verbose install     'grunt-cli',
+5 verbose install     'grunt-contrib-clean',
+5 verbose install     'grunt-contrib-copy',
+5 verbose install     'grunt-contrib-uglify',
+5 verbose install     'grunt-eslint',
+5 verbose install     'grunt-mocha-istanbul',
+5 verbose install     'grunt-react',
+5 verbose install     'jade',
+5 verbose install     'lodash',
+5 verbose install     'moment',
+5 verbose install     'must',
+5 verbose install     'nconf',
+5 verbose install     'twbs/ratchet',
+5 verbose install     'react',
+5 verbose install     'react-router',
+5 verbose install     'request',
+5 verbose install     'serve-static',
+5 verbose install     'serve-favicon',
+5 verbose install     'useragent' ] ]
+6 info preinstall retroflection@3.0.0
+7 verbose readDependencies using package.json deps
+8 verbose already installed skipping grunt-cli@0.1.13 /JavascriptDev/AgileRetroflection-leider
+9 verbose already installed skipping grunt-contrib-clean@0.6.0 /JavascriptDev/AgileRetroflection-leider
+10 verbose already installed skipping grunt-contrib-copy@0.8.0 /JavascriptDev/AgileRetroflection-leider
+11 verbose cache add [ 'grunt-contrib-uglify@0.9.1', null ]
+12 verbose cache add name=undefined spec="grunt-contrib-uglify@0.9.1" args=["grunt-contrib-uglify@0.9.1",null]
+13 verbose parsed url { protocol: null,
+13 verbose parsed url   slashes: null,
+13 verbose parsed url   auth: null,
+13 verbose parsed url   host: null,
+13 verbose parsed url   port: null,
+13 verbose parsed url   hostname: null,
+13 verbose parsed url   hash: null,
+13 verbose parsed url   search: null,
+13 verbose parsed url   query: null,
+13 verbose parsed url   pathname: 'grunt-contrib-uglify@0.9.1',
+13 verbose parsed url   path: 'grunt-contrib-uglify@0.9.1',
+13 verbose parsed url   href: 'grunt-contrib-uglify@0.9.1' }
+14 verbose already installed skipping grunt-eslint@12.0.0 /JavascriptDev/AgileRetroflection-leider
+15 verbose cache add name="grunt-contrib-uglify" spec="0.9.1" args=["grunt-contrib-uglify","0.9.1"]
+16 verbose parsed url { protocol: null,
+16 verbose parsed url   slashes: null,
+16 verbose parsed url   auth: null,
+16 verbose parsed url   host: null,
+16 verbose parsed url   port: null,
+16 verbose parsed url   hostname: null,
+16 verbose parsed url   hash: null,
+16 verbose parsed url   search: null,
+16 verbose parsed url   query: null,
+16 verbose parsed url   pathname: '0.9.1',
+16 verbose parsed url   path: '0.9.1',
+16 verbose parsed url   href: '0.9.1' }
+17 verbose addNamed [ 'grunt-contrib-uglify', '0.9.1' ]
+18 verbose addNamed [ '0.9.1', '0.9.1' ]
+19 verbose cache add [ 'grunt-mocha-istanbul@2.4.0', null ]
+20 verbose cache add name=undefined spec="grunt-mocha-istanbul@2.4.0" args=["grunt-mocha-istanbul@2.4.0",null]
+21 verbose parsed url { protocol: null,
+21 verbose parsed url   slashes: null,
+21 verbose parsed url   auth: null,
+21 verbose parsed url   host: null,
+21 verbose parsed url   port: null,
+21 verbose parsed url   hostname: null,
+21 verbose parsed url   hash: null,
+21 verbose parsed url   search: null,
+21 verbose parsed url   query: null,
+21 verbose parsed url   pathname: 'grunt-mocha-istanbul@2.4.0',
+21 verbose parsed url   path: 'grunt-mocha-istanbul@2.4.0',
+21 verbose parsed url   href: 'grunt-mocha-istanbul@2.4.0' }
+22 silly lockFile 59c70bbc-grunt-contrib-uglify-0-9-1 grunt-contrib-uglify@0.9.1
+23 verbose lock grunt-contrib-uglify@0.9.1 /Users/leider/.npm/59c70bbc-grunt-contrib-uglify-0-9-1.lock
+24 verbose already installed skipping grunt-react@0.12.2 /JavascriptDev/AgileRetroflection-leider
+25 verbose cache add name="grunt-mocha-istanbul" spec="2.4.0" args=["grunt-mocha-istanbul","2.4.0"]
+26 verbose parsed url { protocol: null,
+26 verbose parsed url   slashes: null,
+26 verbose parsed url   auth: null,
+26 verbose parsed url   host: null,
+26 verbose parsed url   port: null,
+26 verbose parsed url   hostname: null,
+26 verbose parsed url   hash: null,
+26 verbose parsed url   search: null,
+26 verbose parsed url   query: null,
+26 verbose parsed url   pathname: '2.4.0',
+26 verbose parsed url   path: '2.4.0',
+26 verbose parsed url   href: '2.4.0' }
+27 verbose addNamed [ 'grunt-mocha-istanbul', '2.4.0' ]
+28 verbose addNamed [ '2.4.0', '2.4.0' ]
+29 silly lockFile d5111bf2-grunt-mocha-istanbul-2-4-0 grunt-mocha-istanbul@2.4.0
+30 verbose lock grunt-mocha-istanbul@2.4.0 /Users/leider/.npm/d5111bf2-grunt-mocha-istanbul-2-4-0.lock
+31 verbose already installed skipping jade@1.9.2 /JavascriptDev/AgileRetroflection-leider
+32 verbose cache add [ 'lodash@3.8.0', null ]
+33 verbose cache add name=undefined spec="lodash@3.8.0" args=["lodash@3.8.0",null]
+34 verbose parsed url { protocol: null,
+34 verbose parsed url   slashes: null,
+34 verbose parsed url   auth: null,
+34 verbose parsed url   host: null,
+34 verbose parsed url   port: null,
+34 verbose parsed url   hostname: null,
+34 verbose parsed url   hash: null,
+34 verbose parsed url   search: null,
+34 verbose parsed url   query: null,
+34 verbose parsed url   pathname: 'lodash@3.8.0',
+34 verbose parsed url   path: 'lodash@3.8.0',
+34 verbose parsed url   href: 'lodash@3.8.0' }
+35 verbose cache add [ 'moment@2.10.2', null ]
+36 verbose cache add name=undefined spec="moment@2.10.2" args=["moment@2.10.2",null]
+37 verbose parsed url { protocol: null,
+37 verbose parsed url   slashes: null,
+37 verbose parsed url   auth: null,
+37 verbose parsed url   host: null,
+37 verbose parsed url   port: null,
+37 verbose parsed url   hostname: null,
+37 verbose parsed url   hash: null,
+37 verbose parsed url   search: null,
+37 verbose parsed url   query: null,
+37 verbose parsed url   pathname: 'moment@2.10.2',
+37 verbose parsed url   path: 'moment@2.10.2',
+37 verbose parsed url   href: 'moment@2.10.2' }
+38 verbose cache add name="lodash" spec="3.8.0" args=["lodash","3.8.0"]
+39 verbose parsed url { protocol: null,
+39 verbose parsed url   slashes: null,
+39 verbose parsed url   auth: null,
+39 verbose parsed url   host: null,
+39 verbose parsed url   port: null,
+39 verbose parsed url   hostname: null,
+39 verbose parsed url   hash: null,
+39 verbose parsed url   search: null,
+39 verbose parsed url   query: null,
+39 verbose parsed url   pathname: '3.8.0',
+39 verbose parsed url   path: '3.8.0',
+39 verbose parsed url   href: '3.8.0' }
+40 verbose addNamed [ 'lodash', '3.8.0' ]
+41 verbose addNamed [ '3.8.0', '3.8.0' ]
+42 silly lockFile bc32ba6a-lodash-3-8-0 lodash@3.8.0
+43 verbose lock lodash@3.8.0 /Users/leider/.npm/bc32ba6a-lodash-3-8-0.lock
+44 verbose already installed skipping must@0.12.0 /JavascriptDev/AgileRetroflection-leider
+45 verbose cache add name="moment" spec="2.10.2" args=["moment","2.10.2"]
+46 verbose parsed url { protocol: null,
+46 verbose parsed url   slashes: null,
+46 verbose parsed url   auth: null,
+46 verbose parsed url   host: null,
+46 verbose parsed url   port: null,
+46 verbose parsed url   hostname: null,
+46 verbose parsed url   hash: null,
+46 verbose parsed url   search: null,
+46 verbose parsed url   query: null,
+46 verbose parsed url   pathname: '2.10.2',
+46 verbose parsed url   path: '2.10.2',
+46 verbose parsed url   href: '2.10.2' }
+47 verbose addNamed [ 'moment', '2.10.2' ]
+48 verbose addNamed [ '2.10.2', '2.10.2' ]
+49 silly lockFile ae6fe67f-moment-2-10-2 moment@2.10.2
+50 verbose lock moment@2.10.2 /Users/leider/.npm/ae6fe67f-moment-2-10-2.lock
+51 verbose already installed skipping nconf@0.7.1 /JavascriptDev/AgileRetroflection-leider
+52 verbose cache add [ 'twbs/ratchet@2.0.2', null ]
+53 verbose cache add name=undefined spec="twbs/ratchet@2.0.2" args=["twbs/ratchet@2.0.2",null]
+54 verbose parsed url { protocol: null,
+54 verbose parsed url   slashes: null,
+54 verbose parsed url   auth: null,
+54 verbose parsed url   host: null,
+54 verbose parsed url   port: null,
+54 verbose parsed url   hostname: null,
+54 verbose parsed url   hash: null,
+54 verbose parsed url   search: null,
+54 verbose parsed url   query: null,
+54 verbose parsed url   pathname: 'twbs/ratchet@2.0.2',
+54 verbose parsed url   path: 'twbs/ratchet@2.0.2',
+54 verbose parsed url   href: 'twbs/ratchet@2.0.2' }
+55 verbose cache add name="twbs/ratchet" spec="2.0.2" args=["twbs/ratchet","2.0.2"]
+56 verbose parsed url { protocol: null,
+56 verbose parsed url   slashes: null,
+56 verbose parsed url   auth: null,
+56 verbose parsed url   host: null,
+56 verbose parsed url   port: null,
+56 verbose parsed url   hostname: null,
+56 verbose parsed url   hash: null,
+56 verbose parsed url   search: null,
+56 verbose parsed url   query: null,
+56 verbose parsed url   pathname: '2.0.2',
+56 verbose parsed url   path: '2.0.2',
+56 verbose parsed url   href: '2.0.2' }
+57 verbose addNamed [ 'twbs/ratchet', '2.0.2' ]
+58 verbose addNamed [ '2.0.2', '2.0.2' ]
+59 silly lockFile 846ad68c-twbs-ratchet-2-0-2 twbs/ratchet@2.0.2
+60 verbose lock twbs/ratchet@2.0.2 /Users/leider/.npm/846ad68c-twbs-ratchet-2-0-2.lock
+61 verbose already installed skipping react@0.13.2 /JavascriptDev/AgileRetroflection-leider
+62 verbose request where is /grunt-contrib-uglify
+63 verbose request registry https://registry.npmjs.org/
+64 verbose request id 1e0aca471b800ff7
+65 verbose url raw /grunt-contrib-uglify
+66 verbose url resolving [ 'https://registry.npmjs.org/', './grunt-contrib-uglify' ]
+67 verbose url resolved https://registry.npmjs.org/grunt-contrib-uglify
+68 verbose request where is https://registry.npmjs.org/grunt-contrib-uglify
+69 info trying registry request attempt 1 at 20:13:38
+70 verbose etag "D6I7VSGW1NJ3EJ7ZC9UNR4TY4"
+71 http GET https://registry.npmjs.org/grunt-contrib-uglify
+72 verbose request where is /grunt-mocha-istanbul
+73 verbose request registry https://registry.npmjs.org/
+74 verbose url raw /grunt-mocha-istanbul
+75 verbose url resolving [ 'https://registry.npmjs.org/', './grunt-mocha-istanbul' ]
+76 verbose url resolved https://registry.npmjs.org/grunt-mocha-istanbul
+77 verbose request where is https://registry.npmjs.org/grunt-mocha-istanbul
+78 info trying registry request attempt 1 at 20:13:38
+79 verbose etag "920CY2B5LZ24A7RM6ORAD7SG9"
+80 http GET https://registry.npmjs.org/grunt-mocha-istanbul
+81 verbose already installed skipping react-router@0.13.3 /JavascriptDev/AgileRetroflection-leider
+82 verbose already installed skipping request@2.55.0 /JavascriptDev/AgileRetroflection-leider
+83 verbose already installed skipping serve-static@1.9.2 /JavascriptDev/AgileRetroflection-leider
+84 verbose already installed skipping serve-favicon@2.2.0 /JavascriptDev/AgileRetroflection-leider
+85 verbose cache add [ 'useragent@2.1.6', null ]
+86 verbose cache add name=undefined spec="useragent@2.1.6" args=["useragent@2.1.6",null]
+87 verbose parsed url { protocol: null,
+87 verbose parsed url   slashes: null,
+87 verbose parsed url   auth: null,
+87 verbose parsed url   host: null,
+87 verbose parsed url   port: null,
+87 verbose parsed url   hostname: null,
+87 verbose parsed url   hash: null,
+87 verbose parsed url   search: null,
+87 verbose parsed url   query: null,
+87 verbose parsed url   pathname: 'useragent@2.1.6',
+87 verbose parsed url   path: 'useragent@2.1.6',
+87 verbose parsed url   href: 'useragent@2.1.6' }
+88 verbose already installed skipping async@0.9.0 /JavascriptDev/AgileRetroflection-leider
+89 verbose already installed skipping compression@1.4.3 /JavascriptDev/AgileRetroflection-leider
+90 verbose already installed skipping edit-google-spreadsheet@0.2.16 /JavascriptDev/AgileRetroflection-leider
+91 verbose already installed skipping express@4.12.3 /JavascriptDev/AgileRetroflection-leider
+92 verbose already installed skipping grunt@0.4.5 /JavascriptDev/AgileRetroflection-leider
+93 verbose already installed skipping grunt-browserify@3.8.0 /JavascriptDev/AgileRetroflection-leider
+94 verbose cache add name="useragent" spec="2.1.6" args=["useragent","2.1.6"]
+95 verbose parsed url { protocol: null,
+95 verbose parsed url   slashes: null,
+95 verbose parsed url   auth: null,
+95 verbose parsed url   host: null,
+95 verbose parsed url   port: null,
+95 verbose parsed url   hostname: null,
+95 verbose parsed url   hash: null,
+95 verbose parsed url   search: null,
+95 verbose parsed url   query: null,
+95 verbose parsed url   pathname: '2.1.6',
+95 verbose parsed url   path: '2.1.6',
+95 verbose parsed url   href: '2.1.6' }
+96 verbose addNamed [ 'useragent', '2.1.6' ]
+97 verbose addNamed [ '2.1.6', '2.1.6' ]
+98 silly lockFile 5ea6ba1e-useragent-2-1-6 useragent@2.1.6
+99 verbose lock useragent@2.1.6 /Users/leider/.npm/5ea6ba1e-useragent-2-1-6.lock
+100 verbose request where is /twbs/ratchet
+101 verbose request registry https://registry.npmjs.org/
+102 verbose url raw /twbs/ratchet
+103 verbose url resolving [ 'https://registry.npmjs.org/', './twbs/ratchet' ]
+104 verbose url resolved https://registry.npmjs.org/twbs/ratchet
+105 verbose request where is https://registry.npmjs.org/twbs/ratchet
+106 info trying registry request attempt 1 at 20:13:38
+107 http GET https://registry.npmjs.org/twbs/ratchet
+108 verbose request where is /lodash
+109 verbose request registry https://registry.npmjs.org/
+110 verbose url raw /lodash
+111 verbose url resolving [ 'https://registry.npmjs.org/', './lodash' ]
+112 verbose url resolved https://registry.npmjs.org/lodash
+113 verbose request where is https://registry.npmjs.org/lodash
+114 info trying registry request attempt 1 at 20:13:38
+115 verbose etag "ASYRR044UXWJYRT0XXMUCNJVM"
+116 http GET https://registry.npmjs.org/lodash
+117 verbose request where is /moment
+118 verbose request registry https://registry.npmjs.org/
+119 verbose url raw /moment
+120 verbose url resolving [ 'https://registry.npmjs.org/', './moment' ]
+121 verbose url resolved https://registry.npmjs.org/moment
+122 verbose request where is https://registry.npmjs.org/moment
+123 info trying registry request attempt 1 at 20:13:38
+124 verbose etag "8F2K9H09GBNVFRKIITEQ3PSWG"
+125 http GET https://registry.npmjs.org/moment
+126 verbose request where is /useragent
+127 verbose request registry https://registry.npmjs.org/
+128 verbose url raw /useragent
+129 verbose url resolving [ 'https://registry.npmjs.org/', './useragent' ]
+130 verbose url resolved https://registry.npmjs.org/useragent
+131 verbose request where is https://registry.npmjs.org/useragent
+132 info trying registry request attempt 1 at 20:13:38
+133 verbose etag "1EHP2ZHFMWAUEF7WKMGG6RVTI"
+134 http GET https://registry.npmjs.org/useragent
+135 http 304 https://registry.npmjs.org/lodash
+136 silly registry.get cb [ 304,
+136 silly registry.get   { date: 'Sun, 03 May 2015 18:13:38 GMT',
+136 silly registry.get     via: '1.1 varnish',
+136 silly registry.get     'last-modified': 'Sun, 03 May 2015 18:13:01 GMT',
+136 silly registry.get     'cache-control': 'max-age=60',
+136 silly registry.get     etag: '"ASYRR044UXWJYRT0XXMUCNJVM"',
+136 silly registry.get     age: '39',
+136 silly registry.get     connection: 'keep-alive',
+136 silly registry.get     'x-served-by': 'cache-fra1230-FRA',
+136 silly registry.get     'x-cache': 'HIT',
+136 silly registry.get     'x-cache-hits': '5',
+136 silly registry.get     'x-timer': 'S1430676818.298627,VS0,VE0',
+136 silly registry.get     vary: 'Accept' } ]
+137 verbose etag https://registry.npmjs.org/lodash from cache
+138 silly lockFile bc32ba6a-lodash-3-8-0 lodash@3.8.0
+139 silly lockFile bc32ba6a-lodash-3-8-0 lodash@3.8.0
+140 http 304 https://registry.npmjs.org/useragent
+141 silly registry.get cb [ 304,
+141 silly registry.get   { date: 'Sun, 03 May 2015 18:13:38 GMT',
+141 silly registry.get     via: '1.1 varnish',
+141 silly registry.get     'last-modified': 'Sun, 03 May 2015 18:13:38 GMT',
+141 silly registry.get     'cache-control': 'max-age=60',
+141 silly registry.get     etag: '"1EHP2ZHFMWAUEF7WKMGG6RVTI"',
+141 silly registry.get     age: '52',
+141 silly registry.get     connection: 'keep-alive',
+141 silly registry.get     'x-served-by': 'cache-fra1230-FRA',
+141 silly registry.get     'x-cache': 'HIT',
+141 silly registry.get     'x-cache-hits': '1',
+141 silly registry.get     'x-timer': 'S1430676818.316285,VS0,VE0',
+141 silly registry.get     vary: 'Accept' } ]
+142 verbose etag https://registry.npmjs.org/useragent from cache
+143 silly lockFile 5ea6ba1e-useragent-2-1-6 useragent@2.1.6
+144 silly lockFile 5ea6ba1e-useragent-2-1-6 useragent@2.1.6
+145 http 304 https://registry.npmjs.org/grunt-contrib-uglify
+146 silly registry.get cb [ 304,
+146 silly registry.get   { date: 'Sun, 03 May 2015 18:13:38 GMT',
+146 silly registry.get     via: '1.1 varnish',
+146 silly registry.get     'last-modified': 'Sun, 03 May 2015 18:13:38 GMT',
+146 silly registry.get     'cache-control': 'max-age=60',
+146 silly registry.get     etag: '"D6I7VSGW1NJ3EJ7ZC9UNR4TY4"',
+146 silly registry.get     age: '0',
+146 silly registry.get     connection: 'keep-alive',
+146 silly registry.get     'x-served-by': 'cache-fra1233-FRA',
+146 silly registry.get     'x-cache': 'HIT',
+146 silly registry.get     'x-cache-hits': '1',
+146 silly registry.get     'x-timer': 'S1430676818.297325,VS0,VE105',
+146 silly registry.get     vary: 'Accept' } ]
+147 verbose etag https://registry.npmjs.org/grunt-contrib-uglify from cache
+148 silly lockFile 59c70bbc-grunt-contrib-uglify-0-9-1 grunt-contrib-uglify@0.9.1
+149 silly lockFile 59c70bbc-grunt-contrib-uglify-0-9-1 grunt-contrib-uglify@0.9.1
+150 http 404 https://registry.npmjs.org/twbs/ratchet
+151 verbose headers { server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+151 verbose headers   etag: '"1UST70E4Z48KWKO2887YU303M"',
+151 verbose headers   'content-type': 'application/json',
+151 verbose headers   'cache-control': 'max-age=0',
+151 verbose headers   'content-length': '38',
+151 verbose headers   'accept-ranges': 'bytes',
+151 verbose headers   date: 'Sun, 03 May 2015 18:13:38 GMT',
+151 verbose headers   via: '1.1 varnish',
+151 verbose headers   age: '0',
+151 verbose headers   connection: 'keep-alive',
+151 verbose headers   'x-served-by': 'cache-fra1242-FRA',
+151 verbose headers   'x-cache': 'MISS',
+151 verbose headers   'x-cache-hits': '0',
+151 verbose headers   'x-timer': 'S1430676818.298267,VS0,VE185',
+151 verbose headers   vary: 'Accept' }
+152 silly registry.get cb [ 404,
+152 silly registry.get   { server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+152 silly registry.get     etag: '"1UST70E4Z48KWKO2887YU303M"',
+152 silly registry.get     'content-type': 'application/json',
+152 silly registry.get     'cache-control': 'max-age=0',
+152 silly registry.get     'content-length': '38',
+152 silly registry.get     'accept-ranges': 'bytes',
+152 silly registry.get     date: 'Sun, 03 May 2015 18:13:38 GMT',
+152 silly registry.get     via: '1.1 varnish',
+152 silly registry.get     age: '0',
+152 silly registry.get     connection: 'keep-alive',
+152 silly registry.get     'x-served-by': 'cache-fra1242-FRA',
+152 silly registry.get     'x-cache': 'MISS',
+152 silly registry.get     'x-cache-hits': '0',
+152 silly registry.get     'x-timer': 'S1430676818.298267,VS0,VE185',
+152 silly registry.get     vary: 'Accept' } ]
+153 silly lockFile 846ad68c-twbs-ratchet-2-0-2 twbs/ratchet@2.0.2
+154 silly lockFile 846ad68c-twbs-ratchet-2-0-2 twbs/ratchet@2.0.2
+155 http 304 https://registry.npmjs.org/grunt-mocha-istanbul
+156 silly registry.get cb [ 304,
+156 silly registry.get   { date: 'Sun, 03 May 2015 18:13:38 GMT',
+156 silly registry.get     via: '1.1 varnish',
+156 silly registry.get     'last-modified': 'Sun, 03 May 2015 18:13:39 GMT',
+156 silly registry.get     'cache-control': 'max-age=60',
+156 silly registry.get     etag: '"920CY2B5LZ24A7RM6ORAD7SG9"',
+156 silly registry.get     age: '0',
+156 silly registry.get     connection: 'keep-alive',
+156 silly registry.get     'x-served-by': 'cache-fra1229-FRA',
+156 silly registry.get     'x-cache': 'HIT',
+156 silly registry.get     'x-cache-hits': '1',
+156 silly registry.get     'x-timer': 'S1430676818.297201,VS0,VE723',
+156 silly registry.get     vary: 'Accept' } ]
+157 verbose etag https://registry.npmjs.org/grunt-mocha-istanbul from cache
+158 silly lockFile d5111bf2-grunt-mocha-istanbul-2-4-0 grunt-mocha-istanbul@2.4.0
+159 silly lockFile d5111bf2-grunt-mocha-istanbul-2-4-0 grunt-mocha-istanbul@2.4.0
+160 http 304 https://registry.npmjs.org/moment
+161 silly registry.get cb [ 304,
+161 silly registry.get   { date: 'Sun, 03 May 2015 18:13:38 GMT',
+161 silly registry.get     via: '1.1 varnish',
+161 silly registry.get     'last-modified': 'Sun, 03 May 2015 18:13:39 GMT',
+161 silly registry.get     'cache-control': 'max-age=60',
+161 silly registry.get     etag: '"8F2K9H09GBNVFRKIITEQ3PSWG"',
+161 silly registry.get     age: '0',
+161 silly registry.get     connection: 'keep-alive',
+161 silly registry.get     'x-served-by': 'cache-fra1242-FRA',
+161 silly registry.get     'x-cache': 'HIT',
+161 silly registry.get     'x-cache-hits': '1',
+161 silly registry.get     'x-timer': 'S1430676818.315357,VS0,VE730',
+161 silly registry.get     vary: 'Accept' } ]
+162 verbose etag https://registry.npmjs.org/moment from cache
+163 silly lockFile ae6fe67f-moment-2-10-2 moment@2.10.2
+164 silly lockFile ae6fe67f-moment-2-10-2 moment@2.10.2
+165 error Error: version not found: ratchet : twbs/ratchet
+165 error     at RegClient.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:308:14)
+165 error     at Request._callback (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:246:65)
+165 error     at Request.self.callback (/usr/local/lib/node_modules/npm/node_modules/request/request.js:236:22)
+165 error     at Request.emit (events.js:98:17)
+165 error     at Request.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:1142:14)
+165 error     at Request.emit (events.js:117:20)
+165 error     at IncomingMessage.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:1096:12)
+165 error     at IncomingMessage.emit (events.js:117:20)
+165 error     at _stream_readable.js:944:16
+165 error     at process._tickCallback (node.js:448:13)
+166 error If you need help, you may report this *entire* log,
+166 error including the npm and node versions, at:
+166 error     <http://github.com/npm/npm/issues>
+167 error System Darwin 14.3.0
+168 error command "node" "/usr/local/bin/npm" "install"
+169 error cwd /JavascriptDev/AgileRetroflection-leider
+170 error node -v v0.10.38
+171 error npm -v 1.4.28
+172 verbose exit [ 1, true ]

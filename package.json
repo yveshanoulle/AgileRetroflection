@@ -1,6 +1,6 @@
 {
   "name": "retroflection",
-  "version": "2.9.2",
+  "version": "3.0.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/yveshanoulle/AgileRetroflection"
@@ -12,31 +12,24 @@
     "edit-google-spreadsheet": "0.2.16",
     "express": "4.12.3",
     "grunt": "0.4.5",
-    "grunt-bower-install-simple": "1.1.2",
+    "grunt-browserify": "3.8.0",
     "grunt-cli": "0.1.13",
     "grunt-contrib-clean": "0.6.0",
-    "grunt-contrib-copy": "0.8.0",
-    "grunt-contrib-uglify": "0.8.1",
-    "grunt-jslint": "1.1.14",
-    "grunt-karma": "0.10.1",
-    "grunt-mocha-istanbul": "2.3.1",
+    "grunt-contrib-uglify": "0.9.1",
+    "grunt-eslint": "12.0.0",
+    "grunt-mocha-istanbul": "2.4.0",
     "grunt-react": "0.12.2",
     "jade": "1.9.2",
-    "lodash": "3.6.0",
-    "moment": "2.9.0",
+    "lodash": "3.8.0",
+    "moment": "2.10.2",
+    "must": "0.12.0",
     "nconf": "0.7.1",
+    "react": "0.13.2",
+    "react-router": "0.13.3",
+    "request": "2.55.0",
     "serve-static": "1.9.2",
     "serve-favicon": "2.2.0",
-    "useragent": "2.1.5"
-  },
-  "devDependencies": {
-    "karma": "0.12.32",
-    "karma-coverage": "0.2.7",
-    "grunt-istanbul-coverage": "0.1.1",
-    "karma-jasmine": "0.3.5",
-    "karma-phantomjs-launcher": "0.1.4",
-    "must": "0.12.0",
-    "request": "2.55.0"
+    "useragent": "2.1.6"
   },
   "engines": {
     "node": "~0.12"
