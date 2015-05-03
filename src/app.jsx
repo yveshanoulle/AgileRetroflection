@@ -246,33 +246,19 @@
     componentDidMount: function () {
       var xmlhttp = new XMLHttpRequest();
       xmlhttp.onreadystatechange = function() {
-        if (xmlhttp.readyState == XMLHttpRequest.DONE ) {
+        if (xmlhttp.readyState === XMLHttpRequest.DONE ) {
           if(xmlhttp.status == 200){
             var data = xmlhttp.response;
-            localStorage.setItem('questions', data);
+            localStorage.setItem("questions", data);
             this.setState({data: Questions(data)});
           } else {
-            this.setState({data: Questions(localStorage.getItem('questions'))});
+            this.setState({data: Questions(localStorage.getItem("questions"))});
           }
         }
       }.bind(this);
 
       xmlhttp.open("GET", "/questions.json", true);
       xmlhttp.send();
-      
-      
-      //$.ajax({
-      //  url: '/questions.json',
-      //  dataType: 'json',
-      //  cache: false,
-      //  success: function (data) {
-      //    localStorage.setItem('questions', JSON.stringify(data));
-      //    this.setState({data: Questions(data)});
-      //  }.bind(this),
-      //  error: function () {
-      //    this.setState({data: Questions(JSON.parse(localStorage.getItem('questions')))});
-      //  }.bind(this)
-      //});
     },
     render: function () {
       return <RouteHandler questions={this.state.data}/>;
