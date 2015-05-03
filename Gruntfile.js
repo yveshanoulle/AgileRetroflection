@@ -11,7 +11,7 @@ module.exports = function (grunt) {
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
-    clean: ['coverage', 'coverage-karma'],
+    clean: ['coverage'],
     mocha_istanbul: {
       test: {
         src: 'test',
@@ -54,11 +54,11 @@ module.exports = function (grunt) {
     }
   });
 
+  grunt.loadNpmTasks('grunt-browserify');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-eslint');
   grunt.loadNpmTasks('grunt-mocha-istanbul');
-  grunt.loadNpmTasks('grunt-browserify');
 
   grunt.registerTask('prepare', ['clean', 'eslint', 'browserify']);
 
