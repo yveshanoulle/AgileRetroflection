@@ -1,15 +1,12 @@
 /*global retroflectionVersion */
-/*eslint-env browser */
-/*eslint no-unused-vars: 0 */
 'use strict';
 
-var _ = require('lodash');
 var React = require('react');
 var Router = require('react-router');
-var fragments = require('./fragments.jsx');
 var QuestionPage = require('./questions.jsx').QuestionPage;
 var app = require('./questions.jsx').app;
 var authors = require('./authors.jsx');
+var fragments = require('./fragments.jsx');
 
 var About = React.createClass({
   render: function () {
@@ -60,5 +57,6 @@ var routes = (
 );
 
 Router.run(routes, function (Handler) {
+  /*eslint no-unused-vars: 0 */
   React.render(<Handler />, document.body);
 });

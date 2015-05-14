@@ -1,5 +1,3 @@
-/*global retroflectionVersion */
-/*eslint-env browser */
 /*eslint no-unused-vars: 0 */
 'use strict';
 

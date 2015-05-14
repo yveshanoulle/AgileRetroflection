@@ -7,6 +7,9 @@ var Link = require('react-router').Link;
 var fragments = require('./fragments.jsx');
 
 module.exports.AuthorsPage = React.createClass({
+  propTypes: {
+    questions: React.PropTypes.array.isRequired
+  },
   render: function () {
     var questions = this.props.questions;
 
@@ -35,7 +38,7 @@ module.exports.AuthorPage = React.createClass({
     var
       questions = this.props.questions,
       name = decodeURIComponent(this.props.params.name),
-      author = _.find(questions.authors.all, {name: name}) || {questions: []};
+      author = questions.authorNamed(name) || {questions: []};
     return <div>
       <header className="bar bar-nav">
         <h1 className="title">{name}</h1>

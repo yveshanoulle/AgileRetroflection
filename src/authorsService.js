@@ -1,5 +1,3 @@
-/*eslint no-unused-vars: 0 */
-
 'use strict';
 var _ = require('lodash');
 
@@ -32,7 +30,8 @@ module.exports = function (questions) {
       return _(internal).pluck('name').map(function (each) {
         return each.match(/@(\w+)/g);
       }).flatten().unique().value();
-    }
+    },
+    authorNamed: getAuthorNamed
   };
 };
 

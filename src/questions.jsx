@@ -1,4 +1,3 @@
-/*eslint-env browser */
 /*eslint no-unused-vars: 0 */
 'use strict';
 
@@ -6,31 +5,26 @@ var _ = require('lodash');
 var React = require('react');
 var RouteHandler = require('react-router').RouteHandler;
 var fragments = require('./fragments.jsx');
-var questionsstore = require('./questionsStore');
+var questionsStore = require('./questionsStore');
+var appCallbackID;
+
+questionsStore.loadQuestions();
 
 module.exports.app = React.createClass({
   getInitialState: function () {
-    return {data: questionsstore('[]')};
+    return questionsStore.service();
   },
   componentDidMount: function () {
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange = function () {
-      if (xmlhttp.readyState === XMLHttpRequest.DONE) {
-        if (xmlhttp.status === 200) {
-          var data = xmlhttp.response;
-          localStorage.setItem('questions', data);
-          this.setState({data: questionsstore(data)});
-        } else {
-          this.setState({data: questionsstore(localStorage.getItem('questions'))});
-        }
-      }
-    }.bind(this);
-
-    xmlhttp.open('GET', '/questions.json', true);
-    xmlhttp.send();
+    var self = this;
+    appCallbackID = questionsStore.appDispatcher.register(function () {
+      self.setState(questionsStore.service());
+    });
+  },
+  componentWillUnmount: function() {
+    questionsStore.appDispatcher.removeChangeListener(appCallbackID);
   },
   render: function () {
-    return <RouteHandler questions={this.state.data}/>;
+    return <RouteHandler questions={this.state}/>;
   }
 });
 

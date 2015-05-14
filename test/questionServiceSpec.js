@@ -1,16 +1,12 @@
-/* eslint-env mocha */
 'use strict';
 
 var expect = require('must');
 
-var questionService = require('../src/questionsStore');
+var questionStore = require('../src/questionsStore').store;
 var testQuestions = require('./test-questions.json');
-describe('the QuestionService', function () {
-  var service;
 
-  beforeEach(function () {
-    service = questionService(JSON.stringify(testQuestions));
-  });
+describe('the QuestionService', function () {
+  var service = questionStore(JSON.stringify(testQuestions));
 
   it('chooses the same question for previous after initial question', function () {
     var current = service.next();

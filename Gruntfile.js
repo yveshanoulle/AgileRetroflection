@@ -20,9 +20,9 @@ module.exports = function (grunt) {
           mask: '**/*.js',
           reporter: 'dot',
           check: {
-            lines: 100,
-            statements: 100,
-            functions: 100
+            lines: 80,
+            statements: 80,
+            functions: 80
           }
         }
       }
@@ -40,14 +40,14 @@ module.exports = function (grunt) {
       }
     },
     eslint: {
-      target: ['*.js', 'server/*.js', 'src/*.jsx', 'test-server/*.js']
+      target: ['*.js', 'server/*.js', 'src/*.jsx', 'test/*.js']
     },
     browserify: {
       options: {
         banner: 'var retroflectionVersion = \'<%= pkg.version %>\';\n',
         transform: [ require('grunt-react').browserify ]
       },
-      client: {
+      app: {
         src: ['src/main.jsx'],
         dest: 'build/app.js'
       }
