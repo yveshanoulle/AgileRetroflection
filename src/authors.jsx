@@ -8,7 +8,7 @@ var fragments = require('./fragments.jsx');
 
 module.exports.AuthorsPage = React.createClass({
   propTypes: {
-    questions: React.PropTypes.array.isRequired
+    questions: React.PropTypes.object.isRequired
   },
   render: function () {
     var questions = this.props.questions;
@@ -34,6 +34,9 @@ module.exports.AuthorsPage = React.createClass({
 });
 
 module.exports.AuthorPage = React.createClass({
+  propTypes: {
+    questions: React.PropTypes.object.isRequired
+  },
   render: function () {
     var
       questions = this.props.questions,

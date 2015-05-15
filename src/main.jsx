@@ -3,12 +3,17 @@
 
 var React = require('react');
 var Router = require('react-router');
+var PureRenderMixin = require('react/addons').addons.PureRenderMixin;
 var QuestionPage = require('./questions.jsx').QuestionPage;
 var app = require('./questions.jsx').app;
 var authors = require('./authors.jsx');
 var fragments = require('./fragments.jsx');
 
 var About = React.createClass({
+  mixins: [PureRenderMixin],
+  propTypes: {
+    questions: React.PropTypes.object.isRequired
+  },
   render: function () {
     var questions = this.props.questions;
 
