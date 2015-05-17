@@ -1,9 +1,14 @@
 'use strict';
 
 var authorsService = require('./authorsService');
-var Dispatcher = require('flux').Dispatcher;
-var appDispatcher = new Dispatcher();
+var appMechanics = require('./appMechanics');
+var appDispatcher = appMechanics.dispatcher;
 var questionsService = questionsStore('[]');
+
+var CHANGE_EVENT = 'change';
+var EventEmitter = require('events').EventEmitter;
+
+var questionsEE = new EventEmitter();
 
 function questionsStore(questionstring) {
 
@@ -40,29 +45,18 @@ function questionsStore(questionstring) {
 
 function questionsLoaded(questionstring) {
   questionsService = questionsStore(questionstring);
-  appDispatcher.dispatch(questionsService);
+  questionsEE.emit(CHANGE_EVENT);
 }
 
-function loadQuestions() {
-// trying to update the questions from server, fallback is local storage
-  var xmlhttp = new XMLHttpRequest();
-  xmlhttp.onreadystatechange = function () {
-    if (xmlhttp.readyState === XMLHttpRequest.DONE) {
-      if (xmlhttp.status === 200) {
-        var data = xmlhttp.response;
-        localStorage.setItem('questions', data);
-        questionsLoaded(data);
-      } else {
-        questionsLoaded(localStorage.getItem('questions'));
-      }
-    }
-  };
-  xmlhttp.open('GET', '/questions.json', true);
-  xmlhttp.send();
-}
+appDispatcher.register(function (action) {
+  if (action.type === appMechanics.actionsTypes.QUESTIONS_LOADED) {
+    return questionsLoaded(action.rawQuestions);
+  }
+});
 
-
-module.exports.store = questionsStore; // to make it testable
-module.exports.appDispatcher = appDispatcher;
-module.exports.loadQuestions = loadQuestions;
-module.exports.service = function () { return questionsService; };
+module.exports = {
+  store: questionsStore,
+  addChangeListener: function (callback) { questionsEE.on(CHANGE_EVENT, callback); },
+  removeChangeListener: function (callback) { questionsEE.removeListener(CHANGE_EVENT, callback); },
+  service: function () { return questionsService; }
+};

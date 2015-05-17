@@ -6,33 +6,26 @@ var React = require('react');
 var RouteHandler = require('react-router').RouteHandler;
 var fragments = require('./fragments.jsx');
 var questionsStore = require('./questionsStore');
-var appCallbackID;
+var appMechanics = require('./appMechanics');
 
-questionsStore.loadQuestions();
-
-module.exports.app = React.createClass({
+module.exports.QuestionPage = React.createClass({
   getInitialState: function () {
     return questionsStore.service();
   },
   componentDidMount: function () {
-    var self = this;
-    appCallbackID = questionsStore.appDispatcher.register(function () {
-      self.setState(questionsStore.service());
-    });
+    questionsStore.addChangeListener(this.onChange);
   },
   componentWillUnmount: function() {
-    questionsStore.appDispatcher.removeChangeListener(appCallbackID);
+    questionsStore.removeChangeListener(this.onChange);
+  },
+  onChange: function () {
+    this.setState(questionsStore.service());
+    this.forceUpdate();
   },
   render: function () {
-    return <RouteHandler questions={this.state}/>;
-  }
-});
-
-module.exports.QuestionPage = React.createClass({
-  render: function () {
-    var questiones = this.props.questions,
-      id = this.props.params.id || questiones.next().toString(),
-      current = _.find(questiones.all, {'id': id}) || {author: '', id: '', date: ''};
+    var questions = this.state,
+      id = this.props.params.id || questions.next().toString(),
+      current = _.find(questions.all, {'id': id}) || {author: '', id: '', date: ''};
 
     return <div>
       <header className="bar bar-nav">
@@ -52,7 +45,7 @@ module.exports.QuestionPage = React.createClass({
           (#{current.id} - {current.date})
         </p>
       </div>
-      <fragments.Buttons for="question" questions={questiones}/>
+      <fragments.Buttons for="question" questions={questions}/>
     </div>;
   }
 });

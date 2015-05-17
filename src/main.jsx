@@ -5,17 +5,29 @@ var React = require('react');
 var Router = require('react-router');
 var PureRenderMixin = require('react/addons').addons.PureRenderMixin;
 var QuestionPage = require('./questions.jsx').QuestionPage;
-var app = require('./questions.jsx').app;
 var authors = require('./authors.jsx');
 var fragments = require('./fragments.jsx');
+var appMechanics = require('./appMechanics');
+var questionsStore = require('./questionsStore');
+
+appMechanics.loadQuestions();
 
 var About = React.createClass({
   mixins: [PureRenderMixin],
-  propTypes: {
-    questions: React.PropTypes.object.isRequired
+  getInitialState: function () {
+    return questionsStore.service();
+  },
+  componentDidMount: function () {
+    questionsStore.addChangeListener(this.onChange);
+  },
+  componentWillUnmount: function () {
+    questionsStore.removeChangeListener(this.onChange);
+  },
+  onChange: function () {
+    this.setState(questionsStore.service());
   },
   render: function () {
-    var questions = this.props.questions;
+    var questions = this.state;
 
     return <div>
       <header className="bar bar-nav">
@@ -50,7 +62,13 @@ var About = React.createClass({
   }
 });
 
-var routes = (
+var app = React.createClass({
+  render: function () {
+    return <Router.RouteHandler/>;
+  }
+});
+
+var routes =
   <Router.Route handler={app}>
     <Router.Route name="question" path="/question/:id" handler={QuestionPage}/>
     <Router.Route name="random" handler={QuestionPage}/>
@@ -58,8 +76,7 @@ var routes = (
     <Router.Route name="author" path="authors/:name" handler={authors.AuthorPage}/>
     <Router.Route name="about" handler={About}/>
     <Router.DefaultRoute handler={QuestionPage}/>
-  </Router.Route>
-);
+  </Router.Route>;
 
 Router.run(routes, function (Handler) {
   /*eslint no-unused-vars: 0 */

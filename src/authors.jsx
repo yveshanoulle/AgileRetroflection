@@ -5,13 +5,23 @@ var _ = require('lodash');
 var React = require('react');
 var Link = require('react-router').Link;
 var fragments = require('./fragments.jsx');
+var questionsStore = require('./questionsStore');
 
 module.exports.AuthorsPage = React.createClass({
-  propTypes: {
-    questions: React.PropTypes.object.isRequired
+  getInitialState: function () {
+    return questionsStore.service();
+  },
+  componentDidMount: function () {
+    questionsStore.addChangeListener(this.onChange);
+  },
+  componentWillUnmount: function() {
+    questionsStore.removeChangeListener(this.onChange);
+  },
+  onChange: function () {
+    this.setState(questionsStore.service());
   },
   render: function () {
-    var questions = this.props.questions;
+    var questions = this.state;
 
     return <div>
       <header className="bar bar-nav">
@@ -34,8 +44,17 @@ module.exports.AuthorsPage = React.createClass({
 });
 
 module.exports.AuthorPage = React.createClass({
-  propTypes: {
-    questions: React.PropTypes.object.isRequired
+  getInitialState: function () {
+    return questionsStore.service();
+  },
+  componentDidMount: function () {
+    questionsStore.addChangeListener(this.onChange);
+  },
+  componentWillUnmount: function() {
+    questionsStore.removeChangeListener(this.onChange);
+  },
+  onChange: function () {
+    this.setState(questionsStore.service());
   },
   render: function () {
     var
