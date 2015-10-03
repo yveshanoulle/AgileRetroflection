@@ -1,35 +1,53 @@
 /*eslint no-unused-vars: 0 */
 'use strict';
 
+var _ = require('lodash');
 var React = require('react');
 var Link = require('react-router').Link;
+var questionsStore = require('./questionsStore');
+
+var nextNumber = 0;
+
+function questionListenerTemplate(configuration) {
+  return React.createClass(_.assign(configuration, questionsStore.template()));
+}
+
+module.exports.questionListenerTemplate = questionListenerTemplate;
 
 module.exports.Buttons = React.createClass({
+  componentDidMount: function () { questionsStore.addChangeListener(this.onChange); },
+  componentWillUnmount: function () { questionsStore.removeChangeListener(this.onChange); },
+  onChange: function () {
+    nextNumber = questionsStore.service().next();
+  },
+  propTypes: {for: React.PropTypes.string.isRequired},
   render: function () {
-    var activeButton = this.props.for;
+    var self = this;
 
     function buttonClassName(buttonname) {
-      return 'tab-item' + (activeButton === buttonname ? ' active' : '');
+      return 'tab-item' + (self.props.for === buttonname ? ' active' : '');
     }
 
-    return <nav className="bar bar-tab">
-      <Link className={buttonClassName('authors')} to="authors">
-        <span className="icon icon-person"></span>
-        <span className="tab-label">Authors</span>
+    return <nav className='bar bar-tab'>
+      <Link className={buttonClassName('authors')} to='authors'>
+        <span className='icon icon-person'></span>
+        <span className='tab-label'>Authors</span>
       </Link>
-      <Link className={buttonClassName('question')} to="question" params={{id: this.props.questions.next()}}>
-        <span className="icon icon-refresh"></span>
-        <span className="tab-label">Random</span>
+      <Link className={buttonClassName('question')} to='question' params={{id: nextNumber}}
+            onClick={function() { self.onChange(); }}>
+        <span className='icon icon-refresh'></span>
+        <span className='tab-label'>Random</span>
       </Link>
-      <Link className={buttonClassName('about')} to="about">
-        <span className="icon icon-info"></span>
-        <span className="tab-label">About</span>
+      <Link className={buttonClassName('about')} to='about'>
+        <span className='icon icon-info'></span>
+        <span className='tab-label'>About</span>
       </Link>
     </nav>;
   }
 });
 
 module.exports.Twitterlink = React.createClass({
+  propTypes: {authors: React.PropTypes.array.isRequired},
   render: function () {
     var lastauthor = this.props.authors[this.props.authors.length - 1];
     return <span>

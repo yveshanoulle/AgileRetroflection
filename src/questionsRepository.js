@@ -2,17 +2,9 @@
 
 var _ = require('lodash');
 
-var appMechanics = require('./appMechanics');
-var appDispatcher = appMechanics.dispatcher;
-var questionsService = questionsStore('[]');
+function authornameToArray(name) { return name.match(/@(\w+)/g) || []; }
 
-var CHANGE_EVENT = 'change';
-var EventEmitter = require('events').EventEmitter;
-
-var questionsEE = new EventEmitter();
-
-
-function authorsService (questions) {
+function authorsService(questions) {
   var internal = [];
 
   function addAuthor(author) {
@@ -37,64 +29,37 @@ function authorsService (questions) {
 
   return {
     all: internal,
-    distinct: function () {
-      return _(internal).pluck('name').map(function (each) {
-        return each.match(/@(\w+)/g);
-      }).flatten().unique().value();
+    distinctCount: function () {
+      return _(internal).pluck('name').map(authornameToArray).flatten().unique().value().length;
     },
     authorNamed: getAuthorNamed
   };
 }
 
 
-
 function questionsStore(questionstring) {
-
   var
     questionjson = JSON.parse(questionstring),
-    questionNumbers = [];
+    authors = authorsService(questionjson);
 
-  function currentQuestionNumber() {
-    return questionNumbers[questionNumbers.length - 1] || 0;
+  _.each(questionjson, function (each) { each.authornameToArray = authornameToArray; });
+
+  function next() { return Math.floor(Math.random() * questionjson.length); }
+
+  function questionFor(idString) {
+    var id = idString || next().toString();
+    return _.find(questionjson, {'id': id}) || {author: '', id: '', date: ''};
   }
-
-  function nextQuestion() {
-    questionNumbers.push(Math.floor(Math.random() * questionjson.length));
-    return currentQuestionNumber();
-  }
-
-  function previousQuestion() {
-    if (questionNumbers.length > 1) {
-      questionNumbers.pop();
-    }
-    return currentQuestionNumber();
-  }
-
-  var authors = authorsService(questionjson);
 
   return {
-    next: nextQuestion,
-    previous: previousQuestion,
+    next: next,
     all: questionjson,
     authors: authors,
-    authorNamed: authors.authorNamed
+    authorNamed: authors.authorNamed,
+    questionFor: questionFor,
+    authornameToArray: authornameToArray
   };
 }
 
-function questionsLoaded(questionstring) {
-  questionsService = questionsStore(questionstring);
-  questionsEE.emit(CHANGE_EVENT);
-}
 
-appDispatcher.register(function (action) {
-  if (action.type === appMechanics.actionsTypes.QUESTIONS_LOADED) {
-    return questionsLoaded(action.rawQuestions);
-  }
-});
-
-module.exports = {
-  store: questionsStore,
-  addChangeListener: function (callback) { questionsEE.on(CHANGE_EVENT, callback); },
-  removeChangeListener: function (callback) { questionsEE.removeListener(CHANGE_EVENT, callback); },
-  service: function () { return questionsService; }
-};
+module.exports = questionsStore;

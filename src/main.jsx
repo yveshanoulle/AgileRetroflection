@@ -9,8 +9,9 @@ var authors = require('./authors.jsx');
 var fragments = require('./fragments.jsx');
 var appMechanics = require('./appMechanics');
 var questionsStore = require('./questionsStore');
+var currentAuthorStore = require('./currentAuthorStore');
 
-appMechanics.loadQuestions();
+appMechanics.initQuestions();
 
 var About = React.createClass({
   mixins: [PureRenderMixin],
@@ -54,10 +55,10 @@ var About = React.createClass({
           <p>Version: {retroflectionVersion}</p>
 
           <p>We currently feature {questions.all.length} different questions
-            by {questions.authors.distinct().length} distinct authors.</p>
+            by {questions.authors.distinctCount()} distinct authors.</p>
         </div>
       </div>
-      <fragments.Buttons for="about" questions={questions}/>
+      <fragments.Buttons for="about"/>
     </div>;
   }
 });

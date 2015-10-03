@@ -2,18 +2,18 @@
 var Dispatcher = require('flux').Dispatcher;
 var appDispatcher = new Dispatcher();
 
-var actionsTypes = {
+var actionTypes = {
   QUESTIONS_LOADED: 'questionsLoaded'
 };
 
 function questionsLoaded(rawQuestions) {
   appDispatcher.dispatch({
-    type: actionsTypes.QUESTIONS_LOADED,
+    type: actionTypes.QUESTIONS_LOADED,
     rawQuestions: rawQuestions
   });
 }
 
-function loadQuestions() {
+function initQuestions() {
 // trying to update the questions from server, fallback is local storage
   var xmlhttp = new XMLHttpRequest();
   xmlhttp.onreadystatechange = function () {
@@ -28,8 +28,8 @@ function loadQuestions() {
 
 module.exports = {
   questionsLoaded: questionsLoaded,
-  actionsTypes: actionsTypes,
+  actionTypes: actionTypes,
   dispatcher: appDispatcher,
-  loadQuestions: loadQuestions
+  initQuestions: initQuestions
 };
 

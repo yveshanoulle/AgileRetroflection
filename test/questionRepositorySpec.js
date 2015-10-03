@@ -5,23 +5,6 @@ var expect = require('must');
 var questionsRepository = require('../src/questionsRepository');
 var testQuestions = require('./test-questions.json');
 
-describe('the QuestionService', function () {
-  var service = questionsRepository(JSON.stringify(testQuestions));
-
-  it('chooses the same question for previous after initial question', function () {
-    var current = service.next();
-    expect(current + 1).to.be.truthy();
-    expect(service.previous()).to.be(current);
-  });
-
-  it('chooses the previous question for previous after second question', function () {
-    var first = service.next();
-    service.next();
-    expect(service.previous()).to.be(first);
-  });
-
-});
-
 describe('authors function', function () {
   var service = questionsRepository(JSON.stringify(testQuestions)).authors;
 
@@ -30,7 +13,7 @@ describe('authors function', function () {
   });
 
   it('parses the test_questions to 7 distinct authors', function () {
-    expect(service.distinct().length).to.be(7);
+    expect(service.distinctCount()).to.be(7);
   });
 
   it('contains Yves with 5 test_questions', function () {
