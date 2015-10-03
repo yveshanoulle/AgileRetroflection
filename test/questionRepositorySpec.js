@@ -2,14 +2,28 @@
 
 var expect = require('must');
 
+var questionsRepository = require('../src/questionsRepository');
 var testQuestions = require('./test-questions.json');
-var authorService = require('../src/authorsService');
+
+describe('the QuestionService', function () {
+  var service = questionsRepository(JSON.stringify(testQuestions));
+
+  it('chooses the same question for previous after initial question', function () {
+    var current = service.next();
+    expect(current + 1).to.be.truthy();
+    expect(service.previous()).to.be(current);
+  });
+
+  it('chooses the previous question for previous after second question', function () {
+    var first = service.next();
+    service.next();
+    expect(service.previous()).to.be(first);
+  });
+
+});
 
 describe('authors function', function () {
-  var service;
-  beforeEach(function () {
-    service = authorService(testQuestions);
-  });
+  var service = questionsRepository(JSON.stringify(testQuestions)).authors;
 
   it('parses the test_questions to 8 distinct authors strings', function () {
     expect(service.all.length).to.be(8);
