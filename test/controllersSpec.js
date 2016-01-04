@@ -28,17 +28,17 @@ describe('The Controllers', function () {
   describe('The Root Controller', function () {
 
     it('initializes the scope correctly', function () {
-      expect($scope.questions.length).toEqual(15);
-      expect($scope.authors.length).toEqual(8);
-      expect($scope.questionService).not.toBeUndefined();
+      expect($scope.questions.length).to.be(15);
+      expect($scope.authors.length).to.be(8);
+      expect($scope.questionService).to.exist();
 
       $scope.nextQuestion();
-      expect($scope.animationclass).toEqual('fade-left');
-      expect(questionId).toBeGreaterThan(-1);
-      expect(questionId).toBeLessThan(17);
+      expect($scope.animationclass).to.be('fade-left');
+      expect(questionId).to.be.above(-1);
+      expect(questionId).to.be.below(17);
 
       $scope.previousQuestion();
-      expect($scope.animationclass).toEqual('fade-right');
+      expect($scope.animationclass).to.be('fade-right');
     });
 
     it('navigates to the previous question', function () {
@@ -47,7 +47,7 @@ describe('The Controllers', function () {
       $scope.nextQuestion();
 
       $scope.previousQuestion();
-      expect(questionId).toEqual(lastQuestion);
+      expect(questionId).to.be(lastQuestion);
     });
 
     it('never navigates before the start', function () {
@@ -55,7 +55,7 @@ describe('The Controllers', function () {
       lastQuestion = questionId;
 
       $scope.previousQuestion();
-      expect(questionId).toEqual(lastQuestion);
+      expect(questionId).to.be(lastQuestion);
     });
   });
 
@@ -69,10 +69,11 @@ describe('The Controllers', function () {
           $stateParams: {id: '2'}
         });
 
-        expect($scope.swipeleft).toEqual($scope.nextQuestion);
-        expect($scope.swiperight).toEqual($scope.previousQuestion);
-        expect($scope.showQuestion).toBe(true);
-        expect($scope.current).toEqual(jasmine.objectContaining({id: '2', question: 'Q2'}));
+        expect($scope.swipeleft).to.be($scope.nextQuestion);
+        expect($scope.swiperight).to.be($scope.previousQuestion);
+        expect($scope.showQuestion).to.be(true);
+        expect($scope.current).to.have.ownProperty('id', '2');
+        expect($scope.current).to.have.ownProperty('question', 'Q2');
       }
     ));
 
@@ -88,7 +89,7 @@ describe('The Controllers', function () {
           $stateParams: {id: '33'}
         });
 
-        expect(nextQuestionCalled).toBe(true);
+        expect(nextQuestionCalled).to.be(true);
       }
     ));
   });
@@ -96,9 +97,9 @@ describe('The Controllers', function () {
   describe('The Random Controller', function () {
     it('initializes the scope correctly', inject(
       function ($controller) {
-        expect($scope.current).toBeUndefined();
+        expect($scope.current).to.be.undefined();
         $controller('randomController', {$scope: $scope});
-        expect($scope.current).not.toBeUndefined();
+        expect($scope.current).to.exist();
       }
     ));
   });
@@ -110,8 +111,8 @@ describe('The Controllers', function () {
           $scope: $scope
         });
 
-        expect($scope.normname('@some name')).toEqual('some name');
-        expect($scope.showAuthors).toBe(true);
+        expect($scope.normname('@some name')).to.be('some name');
+        expect($scope.showAuthors).to.be(true);
       }
     ));
   });
@@ -125,10 +126,10 @@ describe('The Controllers', function () {
           $stateParams: {name: '@yveshanoulle'}
         });
 
-        expect($scope.author.name).toEqual('@yveshanoulle');
-        expect($scope.questions).toEqual($scope.author.questions);
-        expect($scope.animationclass).toEqual('fade-left-right');
-        expect($scope.showAuthors).toBe(true);
+        expect($scope.author.name).to.be('@yveshanoulle');
+        expect($scope.questions).to.be($scope.author.questions);
+        expect($scope.animationclass).to.be('fade-left-right');
+        expect($scope.showAuthors).to.be(true);
       }
     ));
   });
@@ -140,8 +141,8 @@ describe('The Controllers', function () {
           $scope: $scope
         });
 
-        expect($scope.animationclass).toEqual('fade-left-right');
-        expect($scope.showAbout).toBe(true);
+        expect($scope.animationclass).to.be('fade-left-right');
+        expect($scope.showAbout).to.be(true);
       }
     ));
   });

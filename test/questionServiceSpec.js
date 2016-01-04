@@ -10,14 +10,14 @@ describe('the QuestionService', function () {
 
   it('chooses the same question for previous after initial question', function () {
     var current = service.next();
-    expect(current + 1).toBeTruthy();
-    expect(service.previous()).toEqual(current);
+    expect(current + 1).to.be.truthy();
+    expect(service.previous()).to.be(current);
   });
 
   it('chooses the previous question for previous after second question', function () {
     var first = service.next();
     service.next();
-    expect(service.previous()).toEqual(first);
+    expect(service.previous()).to.be(first);
   });
 
 });

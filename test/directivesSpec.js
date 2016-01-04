@@ -20,23 +20,23 @@ describe('directive', function () {
     });
 
     it('creates mailto: without address', function () {
-      expect(element[0].href).toMatch('mailto:?');
+      expect(element[0].href).to.match('mailto:?');
     });
 
     it('contains the question text', function () {
-      expect(element[0].href).toMatch(question.question);
+      expect(element[0].href).to.match(question.question);
     });
 
     it('contains the question author', function () {
-      expect(element[0].href).toMatch(question.author);
+      expect(element[0].href).to.match(question.author);
     });
 
     it('contains the question id', function () {
-      expect(element[0].href).toMatch(question.id);
+      expect(element[0].href).to.match(question.id);
     });
 
     it('retains the inner html stuff', function () {
-      expect(element[0].innerHTML).toMatch('blabla');
+      expect(element[0].innerHTML).to.match('blabla');
     });
   });
 
@@ -49,23 +49,23 @@ describe('directive', function () {
     });
 
     it('creates mailto: with address "retroflections@hanoulle.be"', function () {
-      expect(element[0].href).toMatch('mailto:retroflections@hanoulle.be?');
+      expect(element[0].href).to.match('mailto:retroflections@hanoulle.be?');
     });
 
     it('contains the question text', function () {
-      expect(element[0].href).toMatch(question.question);
+      expect(element[0].href).to.match(question.question);
     });
 
     it('contains the question author', function () {
-      expect(element[0].href).toMatch(question.author);
+      expect(element[0].href).to.match(question.author);
     });
 
     it('contains the question id', function () {
-      expect(element[0].href).toMatch(question.id);
+      expect(element[0].href).to.match(question.id);
     });
 
     it('retains the inner html stuff', function () {
-      expect(element[0].innerHTML).toMatch('blabla');
+      expect(element[0].innerHTML).to.match('blabla');
     });
   });
 });

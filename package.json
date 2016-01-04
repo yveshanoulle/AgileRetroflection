@@ -1,6 +1,7 @@
 {
   "name": "retroflection",
   "version": "2.9.3",
+  "license": "(MIT OR Apache-2.0)",
   "repository": {
     "type": "git",
     "url": "https://github.com/yveshanoulle/AgileRetroflection"
@@ -36,11 +37,11 @@
     "useragent": "2.1.8"
   },
   "devDependencies": {
+    "grunt-istanbul-coverage": "0.1.1",
     "karma": "0.13.16",
     "karma-coverage": "0.5.3",
-    "grunt-istanbul-coverage": "0.1.1",
-    "karma-jasmine": "0.3.6",
-    "jasmine-core": "2.4.1",
+    "karma-mocha": "0.2.1",
+    "karma-must": "0.1.1",
     "karma-phantomjs-launcher": "0.2.2",
     "must": "0.13.1",
     "phantomjs": "1.9.19",

@@ -10,9 +10,7 @@
   },
   "globals": {
     "expect": false,
-    "sinon": false,
     "inject": false,
-    "test_questions": true,
-    "jasmine": false
+    "test_questions": true
   }
 }
