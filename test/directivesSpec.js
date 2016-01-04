@@ -1,7 +1,7 @@
 describe('directive', function () {
   'use strict';
 
-  var $rootScope, $compile;
+  var $rootScope, $compile, element, question = {'question': 'Q1', 'author': '@deborahh', 'id': '976'};
 
   beforeEach(module('retroflection'));
 
@@ -11,7 +11,6 @@ describe('directive', function () {
   }));
 
   describe('for question mails', function () {
-    var element, question = {"question": "Q1", "author": "@deborahh", "id": "976"};
 
     beforeEach(function () {
       $rootScope.question = question;
@@ -42,8 +41,6 @@ describe('directive', function () {
   });
 
   describe('for correction mails', function () {
-    var element, question = {"question": "Q1", "author": "@deborahh", "id": "976"};
-
     beforeEach(function () {
       $rootScope.question = question;
       element = $compile('<correct-question question="question">blabla</correct-question>')($rootScope);

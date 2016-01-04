@@ -1,4 +1,3 @@
-/*global test_questions, jasmine*/
 describe('The Controllers', function () {
   'use strict';
   var $scope, lastQuestion, questionId;
@@ -63,8 +62,8 @@ describe('The Controllers', function () {
   describe('The Question Controller', function () {
     it('initializes the scope correctly', inject(
       function ($controller) {
-        $scope.nextQuestion = "placeholder for function nextQuestion";
-        $scope.previousQuestion = "placeholder for function previousQuestion";
+        $scope.nextQuestion = 'placeholder for function nextQuestion';
+        $scope.previousQuestion = 'placeholder for function previousQuestion';
         $controller('questionController', {
           $scope: $scope,
           $stateParams: {id: '2'}
@@ -76,14 +75,14 @@ describe('The Controllers', function () {
         expect($scope.current).toEqual(jasmine.objectContaining({id: '2', question: 'Q2'}));
       }
     ));
-    
+
     it('return a valid question even if the id is not found', inject(
       function ($controller) {
         var nextQuestionCalled = false;
         $scope.nextQuestion = function () {
           nextQuestionCalled = true;
         };
-        $scope.previousQuestion = "placeholder for function previousQuestion";
+        $scope.previousQuestion = 'placeholder for function previousQuestion';
         $controller('questionController', {
           $scope: $scope,
           $stateParams: {id: '33'}

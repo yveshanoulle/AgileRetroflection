@@ -31,9 +31,9 @@ function loadSheet(worksheetId, idCol, questionCol, authorCol, dateCol, callback
       return callback(err);
     }
 
-    spreadsheet.receive({getValues: true}, function (err, rows) {
-      if (err) {
-        return callback(err);
+    spreadsheet.receive({getValues: true}, function (err1, rows) {
+      if (err1) {
+        return callback(err1);
       }
       callback(null, _(rows).filter(function (row) {
         return !!row[dateCol] && moment(row[dateCol], 'M/D/YYYY').add(1, 'days').isBefore(moment());
@@ -80,9 +80,10 @@ module.exports = function () {
       var sortedQuestions = _.flatten(questions).sort(function (question1, question2) {
         return parseInt(question1.id, 10) - parseInt(question2.id, 10);
       });
-      fs.writeFile('public/questions.json', JSON.stringify(sortedQuestions), function (err) {
-        if (err) {
-          return console.log(err);
+      fs.writeFile('public/questions.json', JSON.stringify(sortedQuestions), function (err1) {
+        /* eslint no-console: 0 */
+        if (err1) {
+          return console.log(err1);
         }
         console.log('questions updated');
       });

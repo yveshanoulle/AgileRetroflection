@@ -1,13 +1,14 @@
+'use strict';
 module.exports = function (grunt) {
-  'use strict';
+  /*eslint camelcase: 0*/
 
   var filesToJoin = {
     'public/js/global.js': [
-      'bower_components/lodash/lodash.js',
-      'bower_components/angular/angular.js',
-      'bower_components/angular-animate/angular-animate.js',
-      'bower_components/angular-touch/angular-touch.js',
-      'bower_components/angular-ui-router/release/angular-ui-router.js',
+      'node_modules/lodash/index.js',
+      'node_modules/angular/angular.js',
+      'node_modules/angular-animate/angular-animate.js',
+      'node_modules/angular-touch/angular-touch.js',
+      'node_modules/angular-ui-router/release/angular-ui-router.js',
       'bower_components/ratchet/dist/js/ratchet.js',
       'src/questionstore.js',
       'src/templates.js',
@@ -84,37 +85,9 @@ module.exports = function (grunt) {
         dir: 'coverage-karma'
       }
     },
-    jslint: {
-      server: {
-        src: [
-          '*.js'
-        ],
-        exclude: [
-          'server/config.js'
-        ],
-        directives: {
-          node: true,
-          nomen: true,
-          vars: true,
-          indent: 2,
-          unparam: true
-        },
-        options: {
-          edition: 'latest',
-          errorsOnly: true
-        }
-      },
-      client: {
-        src: [
-          'src/*.js'
-        ],
-        directives: {
-          browser: true,
-          indent: 2,
-          nomen: true,
-          predef: ['jQuery', 'angular', '_', 'inject']
-        }
-      }
+    eslint: {
+      options: {quiet: true},
+      target: ['src/**/*.js', 'server/**/*.js', 'test/**/*.js', 'test-server/**/*.js', '*.js']
     },
     'bower-install-simple': {
       default: {
@@ -129,7 +102,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-jslint');
+  grunt.loadNpmTasks('grunt-eslint');
   grunt.loadNpmTasks('grunt-istanbul-coverage');
   grunt.loadNpmTasks('grunt-karma');
   grunt.loadNpmTasks('grunt-mocha-istanbul');
@@ -139,6 +112,6 @@ module.exports = function (grunt) {
   grunt.registerTask('deployProduction', ['prepare', 'uglify:production']);
   grunt.registerTask('deployDevelopment', ['prepare', 'uglify:development']);
 
-  grunt.registerTask('default', ['deployProduction', 'jslint', 'mocha_istanbul:test', 'karma:once', 'coverage']);
+  grunt.registerTask('default', ['deployProduction', 'eslint', 'mocha_istanbul:test', 'karma:once', 'coverage']);
   grunt.registerTask('travis', ['default']);
 };

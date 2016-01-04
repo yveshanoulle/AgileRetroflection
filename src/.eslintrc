@@ -1,0 +1,15 @@
+{
+  "env": {
+    "node": false,
+    "browser": true,
+    "jquery": true
+  },
+  "rules": {
+    "camelcase": 0,
+    "strict": [2, "function"]
+  },
+  "globals": {
+    "angular": false,
+    "_": false
+  }
+}

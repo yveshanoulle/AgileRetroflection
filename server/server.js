@@ -1,4 +1,5 @@
 'use strict';
+/* eslint no-console: 0 */
 
 var express = require('express');
 var path = require('path');

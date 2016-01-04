@@ -26,8 +26,9 @@ function loadSheet(worksheetId) {
   }, function sheetReady(err, spreadsheet) {
     if (err) { throw err; }
 
-    spreadsheet.receive(function (err, rows, info) {
-      if (err) { throw err; }
+    spreadsheet.receive(function (err1, rows, info) {
+      /* eslint no-console: 0 */
+      if (err1) { throw err1; }
       console.log(info);
     });
   });

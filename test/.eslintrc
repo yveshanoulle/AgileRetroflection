@@ -1,0 +1,18 @@
+{
+  "env": {
+    "browser": true,
+    "jquery": true,
+    "mocha": true
+  },
+  "rules": {
+    "camelcase": 0,
+    "strict": [2, "function"]
+  },
+  "globals": {
+    "expect": false,
+    "sinon": false,
+    "inject": false,
+    "test_questions": true,
+    "jasmine": false
+  }
+}

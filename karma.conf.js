@@ -1,5 +1,5 @@
+'use strict';
 module.exports = function (config) {
-  "use strict";
   config.set({
     // base path, that will be used to resolve files and exclude
     basePath: '',
@@ -8,18 +8,17 @@ module.exports = function (config) {
 
     // list of files / patterns to load in the browser
     files: [
-      "public/js/global.js",
-      "bower_components/angular-mocks/angular-mocks.js",
-      "src/questionstore.js",
-      "src/templates.js",
-      "src/app.js",
-      "test/**/test-questions.js",
-      "test/**/*.js"
+      'public/js/global.js',
+      'node_modules/angular-mocks/angular-mocks.js',
+      'src/questionstore.js',
+      'src/templates.js',
+      'src/app.js',
+      'test/**/test-questions.js',
+      'test/**/*.js'
     ],
 
     // list of files to exclude
-    exclude: [
-    ],
+    exclude: [],
 
     // possible values: 'dots', 'progress'
     reporters: ['dots', 'coverage'],
