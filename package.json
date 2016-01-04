@@ -43,7 +43,7 @@
     "karma-mocha": "0.2.1",
     "karma-must": "0.1.1",
     "karma-phantomjs-launcher": "0.2.2",
-    "must": "0.13.1",
+    "must-dist": "0.12.0",
     "phantomjs": "1.9.19",
     "request": "2.67.0"
   },

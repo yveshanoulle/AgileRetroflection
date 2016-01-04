@@ -1,5 +1,5 @@
 'use strict';
-var expect = require('must');
+var expect = require('must-dist');
 var httpRequest = require('request');
 var port = 5001;
 var baseUri = 'http://localhost:' + port;
