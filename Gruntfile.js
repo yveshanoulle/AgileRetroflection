@@ -45,7 +45,6 @@ module.exports = function (grunt) {
     browserify: {
       options: {
         banner: 'var retroflectionVersion = \'<%= pkg.version %>\';\n',
-//        transform: [require('grunt-react').browserify]
         transform: [[ {presets: ['babel-preset-react']}, require('babelify')]]
       },
       app: {
