@@ -45,7 +45,7 @@
     "request": "2.67.0"
   },
   "engines": {
-    "node": "~0.12"
+    "node": "4.x"
   },
   "scripts": {
     "postinstall": "grunt deployProduction && node server/retrieve-questions-runner",
