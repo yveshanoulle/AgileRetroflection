@@ -7,6 +7,7 @@ var fs = require('fs');
 var server = require('http').createServer(app);
 
 server.listen(process.env.PORT || 5000, function () {
+  /* eslint no-console: 0 */
   console.log('Server running');
 });
 retrieveQuestions();

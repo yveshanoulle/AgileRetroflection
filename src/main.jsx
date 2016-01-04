@@ -8,7 +8,7 @@ var QuestionPage = require('./questions.jsx').QuestionPage;
 var authors = require('./authors.jsx');
 var fragments = require('./fragments.jsx');
 var appMechanics = require('./appMechanics');
-var questionsStore = require('./questionsStore');
+var questionsStore = require('./questionsStore').store;
 var currentAuthorStore = require('./currentAuthorStore');
 
 appMechanics.initQuestions();

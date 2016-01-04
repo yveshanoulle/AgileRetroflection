@@ -5,7 +5,7 @@ var _ = require('lodash');
 var React = require('react');
 var Link = require('react-router').Link;
 var fragments = require('./fragments.jsx');
-var questionsStore = require('./questionsStore');
+var questionsStore = require('./questionsStore').store;
 var currentAuthorStore = require('./currentAuthorStore');
 var appMechanics = require('./appMechanics');
 

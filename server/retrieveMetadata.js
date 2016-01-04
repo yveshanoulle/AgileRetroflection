@@ -26,6 +26,7 @@ function loadSheet(worksheetId) {
     if (err) { throw err; }
 
     spreadsheet.receive(function (err1, rows, info) {
+      /* eslint no-console: 0 */
       if (err1) { throw err1; }
       console.log(info);
     });

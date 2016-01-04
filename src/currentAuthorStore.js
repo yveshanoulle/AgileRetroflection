@@ -2,7 +2,7 @@
 
 var appMechanics = require('./appMechanics');
 var appDispatcher = appMechanics.dispatcher;
-var questionsStore = require('./questionsStore');
+var questionsStore = require('./questionsStore').store;
 
 var CHANGE_EVENT = 'change';
 var EventEmitter = require('events').EventEmitter;

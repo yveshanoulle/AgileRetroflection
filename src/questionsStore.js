@@ -19,7 +19,6 @@ var dispatchToken = appDispatcher.register(function (action) {
 });
 
 var store = {
-  template: template,
   addChangeListener: function (callback) { questionsEE.on(CHANGE_EVENT, callback); },
   removeChangeListener: function (callback) { questionsEE.removeListener(CHANGE_EVENT, callback); },
   dispatchToken: dispatchToken,
@@ -36,4 +35,5 @@ function template() {
   };
 }
 
-module.exports = store;
+module.exports.store = store;
+module.exports.template = template;

@@ -4,12 +4,13 @@
 var _ = require('lodash');
 var React = require('react');
 var Link = require('react-router').Link;
-var questionsStore = require('./questionsStore');
+var questionsStore = require('./questionsStore').store;
+var questionsTemplate = require('./questionsStore').template;
 
 var nextNumber = 0;
 
 function questionListenerTemplate(configuration) {
-  return React.createClass(_.assign(configuration, questionsStore.template()));
+  return React.createClass(_.assign(configuration, questionsTemplate()));
 }
 
 module.exports.questionListenerTemplate = questionListenerTemplate;

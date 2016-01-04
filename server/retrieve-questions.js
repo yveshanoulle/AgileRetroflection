@@ -75,6 +75,7 @@ module.exports = function () {
         return parseInt(question1.id, 10) - parseInt(question2.id, 10);
       });
       fs.writeFile('public/questions.json', JSON.stringify(sortedQuestions), function (err1) {
+        /* eslint no-console: 0 */
         if (err1) {
           return console.log(err1);
         }
