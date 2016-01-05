@@ -19,7 +19,7 @@ describe('SWK Plattform server', function () {
     httpRequest({uri: baseUri}, function (req, resp) {
       expect(resp).to.exist();
       expect(resp.statusCode).to.equal(200);
-      expect(resp.body).to.contain('<body><script src="/js/global.js"></script></body>');
+      expect(resp.body).to.contain('<body><div id="retroflection"></div><script src="/js/global.js"></script></body>');
       expect(resp.body).to.contain('<html manifest="retroflection.appcache">');
       done(); // without error check
     });
@@ -29,7 +29,7 @@ describe('SWK Plattform server', function () {
     httpRequest({uri: baseUri + '/online'}, function (req, resp) {
       expect(resp).to.exist();
       expect(resp.statusCode).to.equal(200);
-      expect(resp.body).to.contain('<body><script src="/js/global.js"></script></body>');
+      expect(resp.body).to.contain('<body><div id="retroflection"></div><script src="/js/global.js"></script></body>');
       expect(resp.body).to.contain('<html>');
       done(); // without error check
     });
