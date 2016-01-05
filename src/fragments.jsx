@@ -30,16 +30,15 @@ module.exports.Buttons = React.createClass({
     }
 
     return <nav className='bar bar-tab'>
-      <Link className={buttonClassName('authors')} to='authors'>
+      <Link className={buttonClassName('authors')} to='/authors'>
         <span className='icon icon-person'></span>
         <span className='tab-label'>Authors</span>
       </Link>
-      <Link className={buttonClassName('question')} to='question' params={{id: nextNumber}}
-            onClick={function() { self.onChange(); }}>
+      <Link className={buttonClassName('question')} to={'/question/' + nextNumber} onClick={function() { self.onChange(); }}>
         <span className='icon icon-refresh'></span>
         <span className='tab-label'>Random</span>
       </Link>
-      <Link className={buttonClassName('about')} to='about'>
+      <Link className={buttonClassName('about')} to='/about'>
         <span className='icon icon-info'></span>
         <span className='tab-label'>About</span>
       </Link>

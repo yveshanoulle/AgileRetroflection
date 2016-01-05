@@ -23,7 +23,7 @@ module.exports.QuestionPage = fragments.questionListenerTemplate({
         <h3 className='question'>{current.question}</h3>
 
         <p className='author'>
-          <fragments.Twitterlink authors={current.authornameToArray(current.author)}/>
+          <fragments.Twitterlink authors={this.state.authornameToArray(current.author)}/>
           (#{current.id} - {current.date})
         </p>
       </div>

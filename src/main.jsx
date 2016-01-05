@@ -1,15 +1,19 @@
 /*global retroflectionVersion */
+/*eslint no-unused-vars: 0 */
+
 'use strict';
 
 var React = require('react');
 var Router = require('react-router');
-var PureRenderMixin = require('react/addons').addons.PureRenderMixin;
+var render = require('react-dom').render;
+var PureRenderMixin = require('react-addons-pure-render-mixin');
 var QuestionPage = require('./questions.jsx').QuestionPage;
 var authors = require('./authors.jsx');
 var fragments = require('./fragments.jsx');
 var appMechanics = require('./appMechanics');
 var questionsStore = require('./questionsStore').store;
 var currentAuthorStore = require('./currentAuthorStore');
+var Route = Router.Route;
 
 appMechanics.initQuestions();
 
@@ -63,23 +67,24 @@ var About = React.createClass({
   }
 });
 
-var app = React.createClass({
+var App = React.createClass({
   render: function () {
-    return <Router.RouteHandler/>;
+    return <div>
+      {this.props.children}
+    </div>;
   }
 });
 
-var routes =
-  <Router.Route handler={app}>
-    <Router.Route name="question" path="/question/:id" handler={QuestionPage}/>
-    <Router.Route name="random" handler={QuestionPage}/>
-    <Router.Route name="authors" handler={authors.AuthorsPage}/>
-    <Router.Route name="author" path="authors/:name" handler={authors.AuthorPage}/>
-    <Router.Route name="about" handler={About}/>
-    <Router.DefaultRoute handler={QuestionPage}/>
-  </Router.Route>;
+render((
+  <Router.Router history={Router.browserHistory}>
+    <Route path="/" component={App}>
+      <Router.IndexRoute component={QuestionPage}/>
+      <Route path="question/:id" name="question" component={QuestionPage}/>
+      <Route name="random" component={QuestionPage}/>
+      <Route path="authors" name="authors" component={authors.AuthorsPage}/>
+      <Route path="authors/:name" name="author" component={authors.AuthorPage}/>
+      <Route path="about" component={About}/>
+    </Route>
+  </Router.Router>
+), document.getElementById('retroflection'));
 
-Router.run(routes, function (Handler) {
-  /*eslint no-unused-vars: 0 */
-  React.render(<Handler />, document.body);
-});
