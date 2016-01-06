@@ -1,29 +1,25 @@
-'use strict';
+import { EventEmitter } from 'events';
 
-var EventEmitter = require('events').EventEmitter;
+import { dispatcher, actionTypes } from './appMechanics';
+import questionsRepository from './questionsRepository';
 
-var appMechanics = require('./appMechanics');
-var appDispatcher = appMechanics.dispatcher;
-var questionsRepository = require('./questionsRepository');
-var questionsService = questionsRepository('[]');
+let questionsService = questionsRepository('[]');
 
-var CHANGE_EVENT = 'change';
+const CHANGE_EVENT = 'change';
 
-var questionsEE = new EventEmitter();
+const questionsEE = new EventEmitter();
 
-var dispatchToken = appDispatcher.register(function (action) {
-  if (action.type === appMechanics.actionTypes.QUESTIONS_LOADED) {
+const dispatchToken = dispatcher.register((action) => {
+  if (action.type === actionTypes.QUESTIONS_LOADED) {
     questionsService = questionsRepository(action.rawQuestions);
     questionsEE.emit(CHANGE_EVENT);
   }
 });
 
-var store = {
+export const store = {
   addChangeListener: function (callback) { questionsEE.on(CHANGE_EVENT, callback); },
   removeChangeListener: function (callback) { questionsEE.removeListener(CHANGE_EVENT, callback); },
   dispatchToken: dispatchToken,
   service: function service() { return questionsService; },
-  authorNamed: function (name) { return questionsService.authorNamed(name); }
+  authorNamed: function (name) { return questionsService.authorNamed(decodeURIComponent(name)) || {questions: []}; }
 };
-
-module.exports.store = store;

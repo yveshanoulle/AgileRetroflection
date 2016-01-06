@@ -1,14 +1,10 @@
 /*eslint no-unused-vars: 0 */
-'use strict';
 
-var _ = require('lodash');
-var React = require('react');
-var Link = require('react-router').Link;
-var store = require('./questionsStore').store;
+import React from 'react';
+import { Link } from 'react-router';
+import { store } from './questionsStore';
 
-var nextNumber = 0;
-
-class RetroPage extends React.Component {
+export class RetroPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = store.service();
@@ -22,8 +18,16 @@ class RetroPage extends React.Component {
   onChange() { this.setState(store.service()); }
 }
 
-class Buttons extends RetroPage {
-  onChange() { super.onChange(); nextNumber = this.state.next(); }
+export class Buttons extends RetroPage {
+  constructor(props) {
+    super(props);
+    this.nextNumber = 0;
+  }
+
+  onChange() {
+    super.onChange();
+    this.nextNumber = this.state.next();
+  }
 
   render() {
     let self = this;
@@ -33,7 +37,8 @@ class Buttons extends RetroPage {
         <span className='icon icon-person'></span>
         <span className='tab-label'>Authors</span>
       </Link>
-      <Link className={'tab-item' + (self.props.for === 'question' ? ' active' : '')} to={`/question/${nextNumber}`}
+      <Link className={'tab-item' + (self.props.for === 'question' ? ' active' : '')}
+            to={`/question/${this.nextNumber}`}
             onClick={function() { self.onChange(); }}>
         <span className='icon icon-refresh'></span>
         <span className='tab-label'>Random</span>
@@ -48,7 +53,7 @@ class Buttons extends RetroPage {
 Buttons.propTypes = {for: React.PropTypes.string.isRequired};
 
 
-class Twitterlink extends React.Component {
+export class Twitterlink extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -66,7 +71,7 @@ class Twitterlink extends React.Component {
 }
 Twitterlink.propTypes = {authors: React.PropTypes.array.isRequired};
 
-function mailtoForCorrection(question) {
+export function mailtoForCorrection(question) {
   return question ? 'mailto:retroflections@hanoulle.be?subject=Retroflection corrected question&body=' +
   encodeURI('I have a proposal on improving the spelling of retroflection question ' +
     question.id + ': \n' + '"' + question.question + '" by ' + question.author) +
@@ -75,15 +80,9 @@ function mailtoForCorrection(question) {
     '\nand is sent via the retroflection app available at http://retroflection.org') : '#';
 }
 
-function mailtoForQuestion(question) {
+export function mailtoForQuestion(question) {
   return question ? 'mailto:?subject=Retroflection Question ' + question.id + '&body=' +
   encodeURI('"' + question.question + '"' + ' by ' + question.author) +
   encodeURIComponent('\n\n---\nThis retroflection was originally twittered by @retroflection' +
     '\nand is sent via the retroflection app available at http://retroflection.org') : '#';
 }
-
-module.exports.RetroPage = RetroPage;
-module.exports.Buttons = Buttons;
-module.exports.Twitterlink = Twitterlink;
-module.exports.mailtoForCorrection = mailtoForCorrection;
-module.exports.mailtoForQuestion = mailtoForQuestion;

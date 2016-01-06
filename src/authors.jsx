@@ -1,12 +1,9 @@
 /*eslint no-unused-vars: 0 */
 
-'use strict';
-var _ = require('lodash');
-var React = require('react');
-var Link = require('react-router').Link;
-var fragments = require('./fragments.jsx');
-var store = require('./questionsStore').store;
-var currentAuthorStore = require('./currentAuthorStore');
+import React from 'react';
+import { Link } from 'react-router';
+import { RetroPage, Buttons, mailtoForCorrection } from './fragments.jsx';
+import { store } from './questionsStore';
 
 class AuthorLi extends React.Component {
   render() {
@@ -29,7 +26,7 @@ class Header extends React.Component {
 }
 Header.propTypes = {title: React.PropTypes.string.isRequired};
 
-class AuthorsPage extends fragments.RetroPage {
+export class AuthorsPage extends RetroPage {
   render() {
     return <div>
       <Header title='Authors'/>
@@ -41,34 +38,31 @@ class AuthorsPage extends fragments.RetroPage {
           })}
         </ul>
       </div>
-      <fragments.Buttons for='authors'/>
+      <Buttons for='authors'/>
     </div>;
   }
 }
 
-class AuthorPage extends fragments.RetroPage {
+export class AuthorPage extends RetroPage {
   render() {
-    let author = currentAuthorStore.authorNamed(this.props.params.name);
+    let author = store.authorNamed(this.props.params.name);
     return <div>
       <Header title={author.name || ''}/>
 
       <div className='content'>
         <ul className='table-view'>
-          {author.questions.map(function (question) {
+          {author.questions.map((question) => {
             return <li key={question.id} className='table-view-cell'>
               {question.question} <Link style={{display: 'inline'}} to='question' params={{id: question.id}}>
               <small>(#{question.id})</small>
             </Link>
-              <a href={fragments.mailtoForCorrection(question)} className='btn icon icon-edit'
+              <a href={mailtoForCorrection(question)} className='btn icon icon-edit'
                  style={{padding: '0px'}}/>
             </li>;
           })}
         </ul>
       </div>
-      <fragments.Buttons for='authors'/>
+      <Buttons for='authors'/>
     </div>;
   }
 }
-
-module.exports.AuthorsPage = AuthorsPage;
-module.exports.AuthorPage = AuthorPage;

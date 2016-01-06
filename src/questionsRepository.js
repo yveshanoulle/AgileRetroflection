@@ -1,4 +1,4 @@
-'use strict';
+// do not convert to import until node.js fully supports modules
 
 var _ = require('lodash');
 

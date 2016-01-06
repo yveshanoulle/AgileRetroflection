@@ -1,23 +1,17 @@
 /*global retroflectionVersion */
 /*eslint no-unused-vars: 0 */
 
-'use strict';
+import React from 'react';
+import { Route, Router, IndexRoute, browserHistory } from 'react-router';
+import { render } from 'react-dom';
+import { QuestionPage } from './questions.jsx';
+import { AuthorsPage, AuthorPage } from './authors.jsx';
+import { Buttons, RetroPage } from './fragments.jsx';
+import { initQuestions } from './appMechanics';
 
-var React = require('react');
-var ReactRouter = require('react-router');
-var render = require('react-dom').render;
-var QuestionPage = require('./questions.jsx').QuestionPage;
-var authors = require('./authors.jsx');
-var fragments = require('./fragments.jsx');
-var appMechanics = require('./appMechanics');
+initQuestions();
 
-var Route = ReactRouter.Route;
-var Router = ReactRouter.Router;
-var IndexRoute = ReactRouter.IndexRoute;
-
-appMechanics.initQuestions();
-
-class About extends fragments.RetroPage {
+class About extends RetroPage {
   render() {
     var questions = this.state;
 
@@ -49,7 +43,7 @@ class About extends fragments.RetroPage {
             by {questions.authors.distinctCount()} distinct authors.</p>
         </div>
       </div>
-      <fragments.Buttons for="about"/>
+      <Buttons for="about"/>
     </div>;
   }
 }
@@ -63,13 +57,13 @@ class App extends React.Component {
 }
 
 render((
-  <Router history={ReactRouter.browserHistory}>
+  <Router history={browserHistory}>
     <Route path="/" component={App}>
       <IndexRoute component={QuestionPage}/>
       <Route path="question/:id" component={QuestionPage}/>
       <Route name="random" component={QuestionPage}/>
-      <Route path="authors" component={authors.AuthorsPage}/>
-      <Route path="authors/:name" component={authors.AuthorPage}/>
+      <Route path="authors" component={AuthorsPage}/>
+      <Route path="authors/:name" component={AuthorPage}/>
       <Route path="about" component={About}/>
     </Route>
   </Router>
