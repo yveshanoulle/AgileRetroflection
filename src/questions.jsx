@@ -6,12 +6,20 @@ var React = require('react');
 var fragments = require('./fragments.jsx');
 var store = require('./questionsStore').store;
 
-module.exports.QuestionPage = React.createClass({
-  getInitialState: function () { return store.service(); },
-  componentDidMount: function () { store.addChangeListener(this.onChange); },
-  componentWillUnmount: function () { store.removeChangeListener(this.onChange); },
-  onChange: function () { this.setState(store.service()); },
-  render: function () {
+class QuestionPage extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = store.service();
+    this.listener = this.onChange.bind(this);
+  }
+
+  componentDidMount() { store.addChangeListener(this.listener); }
+
+  componentWillUnmount() { store.removeChangeListener(this.listener); }
+
+  onChange() { this.setState(store.service()); }
+
+  render() {
     var current = this.state.questionFor(this.props.params.id);
 
     return <div>
@@ -35,4 +43,5 @@ module.exports.QuestionPage = React.createClass({
       <fragments.Buttons for='question'/>
     </div>;
   }
-});
+}
+module.exports.QuestionPage = QuestionPage;
