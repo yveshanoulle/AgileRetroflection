@@ -9,6 +9,7 @@
   "dependencies": {
     "async": "1.5.1",
     "babelify": "7.2.0",
+    "babel-preset-es2015": "6.3.13",
     "babel-preset-react": "6.3.13",
     "compression": "1.6.0",
     "edit-google-spreadsheet": "0.2.21",

@@ -25,20 +25,17 @@ module.exports.Buttons = React.createClass({
   render: function () {
     var self = this;
 
-    function buttonClassName(buttonname) {
-      return 'tab-item' + (self.props.for === buttonname ? ' active' : '');
-    }
-
     return <nav className='bar bar-tab'>
-      <Link className={buttonClassName('authors')} to='/authors'>
+      <Link className='tab-item' to='/authors' activeClassName="active">
         <span className='icon icon-person'></span>
         <span className='tab-label'>Authors</span>
       </Link>
-      <Link className={buttonClassName('question')} to={'/question/' + nextNumber} onClick={function() { self.onChange(); }}>
+      <Link className={'tab-item' + (self.props.for === 'question' ? ' active' : '')} to={`/question/${nextNumber}`}
+            onClick={function() { self.onChange(); }}>
         <span className='icon icon-refresh'></span>
         <span className='tab-label'>Random</span>
       </Link>
-      <Link className={buttonClassName('about')} to='/about'>
+      <Link className='tab-item' to='/about' activeClassName="active">
         <span className='icon icon-info'></span>
         <span className='tab-label'>About</span>
       </Link>
