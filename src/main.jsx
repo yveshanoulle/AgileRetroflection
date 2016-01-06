@@ -9,7 +9,7 @@ var render = require('react-dom').render;
 var PureRenderMixin = require('react-addons-pure-render-mixin');
 var QuestionPage = require('./questions.jsx').QuestionPage;
 var authors = require('./authors.jsx');
-var Buttons = require('./fragments.jsx').Buttons;
+var fragments = require('./fragments.jsx');
 var appMechanics = require('./appMechanics');
 var store = require('./questionsStore').store;
 var currentAuthorStore = require('./currentAuthorStore');
@@ -17,18 +17,7 @@ var Route = Router.Route;
 
 appMechanics.initQuestions();
 
-class About extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = store.service();
-  }
-
-  componentDidMount() { store.addChangeListener(this.onChange); }
-
-  componentWillUnmount() { store.removeChangeListener(this.onChange); }
-
-  onChange() { this.state = store.service(); }
-
+class About extends fragments.RetroPage {
   render() {
     var questions = this.state;
 
@@ -60,7 +49,7 @@ class About extends React.Component {
             by {questions.authors.distinctCount()} distinct authors.</p>
         </div>
       </div>
-      <Buttons for="about"/>
+      <fragments.Buttons for="about"/>
     </div>;
   }
 }

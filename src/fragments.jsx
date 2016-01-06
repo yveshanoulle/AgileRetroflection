@@ -8,12 +8,22 @@ var store = require('./questionsStore').store;
 
 var nextNumber = 0;
 
-class Buttons extends React.Component {
-  componentDidMount() { store.addChangeListener(this.onChange); }
+class RetroPage extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = store.service();
+    this.listener = this.onChange.bind(this);
+  }
 
-  componentWillUnmount() { store.removeChangeListener(this.onChange); }
+  componentDidMount() { store.addChangeListener(this.listener); }
 
-  onChange() { nextNumber = store.service().next(); }
+  componentWillUnmount() { store.removeChangeListener(this.listener); }
+
+  onChange() { this.setState(store.service()); }
+}
+
+class Buttons extends RetroPage {
+  onChange() { super.onChange(); nextNumber = this.state.next(); }
 
   render() {
     let self = this;
@@ -56,7 +66,7 @@ class Twitterlink extends React.Component {
 }
 Twitterlink.propTypes = {authors: React.PropTypes.array.isRequired};
 
-function mailtoForCorrection (question) {
+function mailtoForCorrection(question) {
   return question ? 'mailto:retroflections@hanoulle.be?subject=Retroflection corrected question&body=' +
   encodeURI('I have a proposal on improving the spelling of retroflection question ' +
     question.id + ': \n' + '"' + question.question + '" by ' + question.author) +
@@ -65,13 +75,14 @@ function mailtoForCorrection (question) {
     '\nand is sent via the retroflection app available at http://retroflection.org') : '#';
 }
 
-function mailtoForQuestion (question) {
+function mailtoForQuestion(question) {
   return question ? 'mailto:?subject=Retroflection Question ' + question.id + '&body=' +
   encodeURI('"' + question.question + '"' + ' by ' + question.author) +
   encodeURIComponent('\n\n---\nThis retroflection was originally twittered by @retroflection' +
     '\nand is sent via the retroflection app available at http://retroflection.org') : '#';
 }
 
+module.exports.RetroPage = RetroPage;
 module.exports.Buttons = Buttons;
 module.exports.Twitterlink = Twitterlink;
 module.exports.mailtoForCorrection = mailtoForCorrection;

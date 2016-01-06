@@ -4,21 +4,8 @@
 var _ = require('lodash');
 var React = require('react');
 var fragments = require('./fragments.jsx');
-var store = require('./questionsStore').store;
 
-class QuestionPage extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = store.service();
-    this.listener = this.onChange.bind(this);
-  }
-
-  componentDidMount() { store.addChangeListener(this.listener); }
-
-  componentWillUnmount() { store.removeChangeListener(this.listener); }
-
-  onChange() { this.setState(store.service()); }
-
+class QuestionPage extends fragments.RetroPage {
   render() {
     var current = this.state.questionFor(this.props.params.id);
 

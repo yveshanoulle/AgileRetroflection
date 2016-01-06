@@ -29,19 +29,7 @@ class Header extends React.Component {
 }
 Header.propTypes = {title: React.PropTypes.string.isRequired};
 
-class AuthorsPage extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = store.service();
-    this.listener = this.onChange.bind(this);
-  }
-
-  componentDidMount() { store.addChangeListener(this.listener); }
-
-  componentWillUnmount() { store.removeChangeListener(this.listener); }
-
-  onChange() { this.setState(store.service()); }
-
+class AuthorsPage extends fragments.RetroPage {
   render() {
     return <div>
       <Header title='Authors'/>
@@ -58,19 +46,7 @@ class AuthorsPage extends React.Component {
   }
 }
 
-class AuthorPage extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = store.service();
-    this.listener = this.onChange.bind(this);
-  }
-
-  componentDidMount() { currentAuthorStore.addChangeListener(this.listener); }
-
-  componentWillUnmount() { currentAuthorStore.removeChangeListener(this.listener); }
-
-  onChange() { this.setState(store.service()); }
-
+class AuthorPage extends fragments.RetroPage {
   render() {
     let author = currentAuthorStore.authorNamed(this.props.params.name);
     return <div>
