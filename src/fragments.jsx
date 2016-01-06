@@ -19,7 +19,7 @@ class Buttons extends React.Component {
     let self = this;
 
     return <nav className='bar bar-tab'>
-      <Link className='tab-item' to='/authors' activeClassName="active">
+      <Link className={'tab-item' + (self.props.for === 'authors' ? ' active' : '')} to='/authors'>
         <span className='icon icon-person'></span>
         <span className='tab-label'>Authors</span>
       </Link>
