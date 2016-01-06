@@ -4,8 +4,13 @@
 var _ = require('lodash');
 var React = require('react');
 var fragments = require('./fragments.jsx');
+var store = require('./questionsStore').store;
 
-module.exports.QuestionPage = fragments.questionListenerTemplate({
+module.exports.QuestionPage = React.createClass({
+  getInitialState: function () { return store.service(); },
+  componentDidMount: function () { store.addChangeListener(this.onChange); },
+  componentWillUnmount: function () { store.removeChangeListener(this.onChange); },
+  onChange: function () { this.setState(store.service()); },
   render: function () {
     var current = this.state.questionFor(this.props.params.id);
 

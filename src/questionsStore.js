@@ -26,14 +26,4 @@ var store = {
   authorNamed: function (name) { return questionsService.authorNamed(name); }
 };
 
-function template() {
-  return {
-    getInitialState: function () { return store.service(); },
-    componentDidMount: function () { store.addChangeListener(this.onChange); },
-    componentWillUnmount: function () { store.removeChangeListener(this.onChange); },
-    onChange: function () { this.setState(store.service()); }
-  };
-}
-
 module.exports.store = store;
-module.exports.template = template;

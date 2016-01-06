@@ -4,26 +4,19 @@
 var _ = require('lodash');
 var React = require('react');
 var Link = require('react-router').Link;
-var questionsStore = require('./questionsStore').store;
-var questionsTemplate = require('./questionsStore').template;
+var store = require('./questionsStore').store;
 
 var nextNumber = 0;
 
-function questionListenerTemplate(configuration) {
-  return React.createClass(_.assign(configuration, questionsTemplate()));
-}
+class Buttons extends React.Component {
+  componentDidMount() { store.addChangeListener(this.onChange); }
 
-module.exports.questionListenerTemplate = questionListenerTemplate;
+  componentWillUnmount() { store.removeChangeListener(this.onChange); }
 
-module.exports.Buttons = React.createClass({
-  componentDidMount: function () { questionsStore.addChangeListener(this.onChange); },
-  componentWillUnmount: function () { questionsStore.removeChangeListener(this.onChange); },
-  onChange: function () {
-    nextNumber = questionsStore.service().next();
-  },
-  propTypes: {for: React.PropTypes.string.isRequired},
-  render: function () {
-    var self = this;
+  onChange() { nextNumber = store.service().next(); }
+
+  render() {
+    let self = this;
 
     return <nav className='bar bar-tab'>
       <Link className='tab-item' to='/authors' activeClassName="active">
@@ -41,11 +34,16 @@ module.exports.Buttons = React.createClass({
       </Link>
     </nav>;
   }
-});
+}
+Buttons.propTypes = {for: React.PropTypes.string.isRequired};
 
-module.exports.Twitterlink = React.createClass({
-  propTypes: {authors: React.PropTypes.array.isRequired},
-  render: function () {
+
+class Twitterlink extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
     var lastauthor = this.props.authors[this.props.authors.length - 1];
     return <span>
         {this.props.authors.map(function (author) {
@@ -55,20 +53,26 @@ module.exports.Twitterlink = React.createClass({
         })}
       </span>;
   }
-});
+}
+Twitterlink.propTypes = {authors: React.PropTypes.array.isRequired};
 
-module.exports.mailtoForCorrection = function (question) {
+function mailtoForCorrection (question) {
   return question ? 'mailto:retroflections@hanoulle.be?subject=Retroflection corrected question&body=' +
   encodeURI('I have a proposal on improving the spelling of retroflection question ' +
     question.id + ': \n' + '"' + question.question + '" by ' + question.author) +
   encodeURIComponent('\n\nI would write it as follows:\n\n\n---\n' +
     'This retroflection was originally twittered by @retroflection' +
     '\nand is sent via the retroflection app available at http://retroflection.org') : '#';
-};
+}
 
-module.exports.mailtoForQuestion = function (question) {
+function mailtoForQuestion (question) {
   return question ? 'mailto:?subject=Retroflection Question ' + question.id + '&body=' +
   encodeURI('"' + question.question + '"' + ' by ' + question.author) +
   encodeURIComponent('\n\n---\nThis retroflection was originally twittered by @retroflection' +
     '\nand is sent via the retroflection app available at http://retroflection.org') : '#';
-};
+}
+
+module.exports.Buttons = Buttons;
+module.exports.Twitterlink = Twitterlink;
+module.exports.mailtoForCorrection = mailtoForCorrection;
+module.exports.mailtoForQuestion = mailtoForQuestion;

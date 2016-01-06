@@ -9,29 +9,27 @@ var render = require('react-dom').render;
 var PureRenderMixin = require('react-addons-pure-render-mixin');
 var QuestionPage = require('./questions.jsx').QuestionPage;
 var authors = require('./authors.jsx');
-var fragments = require('./fragments.jsx');
+var Buttons = require('./fragments.jsx').Buttons;
 var appMechanics = require('./appMechanics');
-var questionsStore = require('./questionsStore').store;
+var store = require('./questionsStore').store;
 var currentAuthorStore = require('./currentAuthorStore');
 var Route = Router.Route;
 
 appMechanics.initQuestions();
 
-var About = React.createClass({
-  mixins: [PureRenderMixin],
-  getInitialState: function () {
-    return questionsStore.service();
-  },
-  componentDidMount: function () {
-    questionsStore.addChangeListener(this.onChange);
-  },
-  componentWillUnmount: function () {
-    questionsStore.removeChangeListener(this.onChange);
-  },
-  onChange: function () {
-    this.setState(questionsStore.service());
-  },
-  render: function () {
+class About extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = store.service();
+  }
+
+  componentDidMount() { store.addChangeListener(this.onChange); }
+
+  componentWillUnmount() { store.removeChangeListener(this.onChange); }
+
+  onChange() { this.state = store.service(); }
+
+  render() {
     var questions = this.state;
 
     return <div>
@@ -62,18 +60,18 @@ var About = React.createClass({
             by {questions.authors.distinctCount()} distinct authors.</p>
         </div>
       </div>
-      <fragments.Buttons for="about"/>
+      <Buttons for="about"/>
     </div>;
   }
-});
+}
 
-var App = React.createClass({
-  render: function () {
+class App extends React.Component {
+  render () {
     return <div>
       {this.props.children}
     </div>;
   }
-});
+}
 
 render((
   <Router.Router history={Router.browserHistory}>

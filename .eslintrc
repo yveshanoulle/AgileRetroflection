@@ -5,7 +5,8 @@
     "es6": true
   },
   "ecmaFeatures": {
-    "jsx": true
+    "jsx": true,
+    "classes": true
   },
   "rules": {
     "quotes": [ 2, "single"],
