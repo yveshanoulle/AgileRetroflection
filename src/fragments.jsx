@@ -30,16 +30,13 @@ export class Buttons extends RetroPage {
   }
 
   render() {
-    let self = this;
-
     return <nav className='bar bar-tab'>
-      <Link className={'tab-item' + (self.props.for === 'authors' ? ' active' : '')} to='/authors'>
+      <Link className={'tab-item' + (this.props.for === 'authors' ? ' active' : '')} to='/authors'>
         <span className='icon icon-person'></span>
         <span className='tab-label'>Authors</span>
       </Link>
-      <Link className={'tab-item' + (self.props.for === 'question' ? ' active' : '')}
-            to={`/question/${this.nextNumber || ''}`}
-            onClick={function() { self.onChange(); }}>
+      <Link className={'tab-item' + (this.props.for === 'question' ? ' active' : '')}
+            to={`/question/${this.nextNumber || ''}`} onClick={this.listener}>
         <span className='icon icon-refresh'></span>
         <span className='tab-label'>Random</span>
       </Link>
@@ -54,10 +51,6 @@ Buttons.propTypes = {for: React.PropTypes.string.isRequired};
 
 
 export class Twitterlink extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     var lastauthor = this.props.authors[this.props.authors.length - 1];
     return <span>

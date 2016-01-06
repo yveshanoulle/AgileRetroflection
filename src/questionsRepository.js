@@ -18,9 +18,7 @@ function authorsService(questions) {
 
   _.each(questions, (question) => { getAuthorNamed(question.author).questions.push(question); });
 
-  internal.sort((a, b) => {
-    return a.name.localeCompare(b.name);
-  });
+  internal.sort((a, b) => { return a.name.localeCompare(b.name); });
 
   return {
     all: internal,
