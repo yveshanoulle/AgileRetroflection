@@ -13,6 +13,7 @@ var appMechanics = require('./appMechanics');
 
 var Route = ReactRouter.Route;
 var Router = ReactRouter.Router;
+var IndexRoute = ReactRouter.IndexRoute;
 
 appMechanics.initQuestions();
 
@@ -64,7 +65,7 @@ class App extends React.Component {
 render((
   <Router history={ReactRouter.browserHistory}>
     <Route path="/" component={App}>
-      <Router.IndexRoute component={QuestionPage}/>
+      <IndexRoute component={QuestionPage}/>
       <Route path="question/:id" component={QuestionPage}/>
       <Route name="random" component={QuestionPage}/>
       <Route path="authors" component={authors.AuthorsPage}/>
