@@ -21,7 +21,7 @@ export class RetroPage extends React.Component {
 export class Buttons extends RetroPage {
   constructor(props) {
     super(props);
-    this.nextNumber = 0;
+    this.nextNumber = this.state.next();
   }
 
   onChange() {
@@ -38,7 +38,7 @@ export class Buttons extends RetroPage {
         <span className='tab-label'>Authors</span>
       </Link>
       <Link className={'tab-item' + (self.props.for === 'question' ? ' active' : '')}
-            to={`/question/${this.nextNumber}`}
+            to={`/question/${this.nextNumber || ''}`}
             onClick={function() { self.onChange(); }}>
         <span className='icon icon-refresh'></span>
         <span className='tab-label'>Random</span>

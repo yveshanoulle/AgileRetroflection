@@ -7,23 +7,18 @@ function authornameToArray(name) { return name.match(/@(\w+)/g) || []; }
 function authorsService(questions) {
   var internal = [];
 
-  function addAuthor(author) {
-    internal.push({name: author, questions: []});
-  }
-
   function getAuthorNamed(name) {
-    return _.find(internal, {name: name});
+    var result = _.find(internal, {name: name});
+    if (!result) {
+      result = {name: name, questions: []};
+      internal.push(result);
+    }
+    return result;
   }
 
-  _.each(questions, function (question) {
-    var name = question.author;
-    if (!getAuthorNamed(name)) {
-      addAuthor(name);
-    }
-    getAuthorNamed(name).questions.push(question);
-  });
+  _.each(questions, (question) => { getAuthorNamed(question.author).questions.push(question); });
 
-  internal.sort(function (a, b) {
+  internal.sort((a, b) => {
     return a.name.localeCompare(b.name);
   });
 
