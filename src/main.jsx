@@ -4,16 +4,15 @@
 'use strict';
 
 var React = require('react');
-var Router = require('react-router');
+var ReactRouter = require('react-router');
 var render = require('react-dom').render;
-var PureRenderMixin = require('react-addons-pure-render-mixin');
 var QuestionPage = require('./questions.jsx').QuestionPage;
 var authors = require('./authors.jsx');
 var fragments = require('./fragments.jsx');
 var appMechanics = require('./appMechanics');
-var store = require('./questionsStore').store;
-var currentAuthorStore = require('./currentAuthorStore');
-var Route = Router.Route;
+
+var Route = ReactRouter.Route;
+var Router = ReactRouter.Router;
 
 appMechanics.initQuestions();
 
@@ -63,15 +62,15 @@ class App extends React.Component {
 }
 
 render((
-  <Router.Router history={Router.browserHistory}>
+  <Router history={ReactRouter.browserHistory}>
     <Route path="/" component={App}>
       <Router.IndexRoute component={QuestionPage}/>
-      <Route path="question/:id" name="question" component={QuestionPage}/>
+      <Route path="question/:id" component={QuestionPage}/>
       <Route name="random" component={QuestionPage}/>
-      <Route path="authors" name="authors" component={authors.AuthorsPage}/>
-      <Route path="authors/:name" name="author" component={authors.AuthorPage}/>
+      <Route path="authors" component={authors.AuthorsPage}/>
+      <Route path="authors/:name" component={authors.AuthorPage}/>
       <Route path="about" component={About}/>
     </Route>
-  </Router.Router>
+  </Router>
 ), document.getElementById('retroflection'));
 
