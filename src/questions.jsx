@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { Buttons, RetroPage, Twitterlink, mailtoForCorrection, mailtoForQuestion } from './fragments.jsx';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 export class QuestionPage extends RetroPage {
   render() {
@@ -17,14 +18,16 @@ export class QuestionPage extends RetroPage {
         </button>
         <h1 className='title'>Retroflection</h1>
       </header>
-      <div className='content'>
-        <h3 className='question'>{current.question}</h3>
-
-        <p className='author'>
-          <Twitterlink authors={this.state.authornameToArray(current.author)}/>
-          (#{current.id} - {current.date})
-        </p>
-      </div>
+      <ReactCSSTransitionGroup transitionName="retro-left" transitionAppear={true}
+                               transitionAppearTimeout={500} transitionEnterTimeout={500} transitionLeaveTimeout={500}>
+        <div className='content' key={current.id}>
+          <h3 className='question'>{current.question}</h3>
+          <p className='author'>
+            <Twitterlink authors={this.state.authornameToArray(current.author)}/>
+            (#{current.id} - {current.date})
+          </p>
+        </div>
+      </ReactCSSTransitionGroup>
       <Buttons for='question'/>
     </div>;
   }

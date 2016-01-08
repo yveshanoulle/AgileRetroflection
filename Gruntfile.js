@@ -4,7 +4,6 @@ module.exports = function (grunt) {
 
   var filesToJoin = {
     'public/js/global.js': [
-//      'src/ratchet.js',
       'build/app.js'
     ]
   };

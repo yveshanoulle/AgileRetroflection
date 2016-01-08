@@ -31,6 +31,14 @@ app.get('/online', function (req, res) {
   res.render('index-online');
 });
 
+app.get('/online/*', function (req, res) {
+  res.render('index-online');
+});
+
+app.get('*', function (req, res){
+  res.render('index');
+});
+
 app.start = function (port, done) {
   server = require('http').createServer(this);
   server.listen(port || process.env.PORT || 5000, function () {
