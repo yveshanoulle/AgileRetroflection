@@ -2,20 +2,20 @@
 
 import React from 'react';
 import { Link } from 'react-router';
-import { store } from './questionsStore';
+import { service, addChangeListener, removeChangeListener } from './questionsStore';
 
 export class RetroPage extends React.Component {
   constructor(props) {
     super(props);
-    this.state = store.service();
+    this.state = service();
     this.listener = this.onChange.bind(this);
   }
 
-  componentDidMount() { store.addChangeListener(this.listener); }
+  componentDidMount() { addChangeListener(this.listener); }
 
-  componentWillUnmount() { store.removeChangeListener(this.listener); }
+  componentWillUnmount() { removeChangeListener(this.listener); }
 
-  onChange() { this.setState(store.service()); }
+  onChange() { this.setState(service()); }
 }
 
 export class Buttons extends RetroPage {

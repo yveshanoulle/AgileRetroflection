@@ -35,8 +35,6 @@ function questionsStore(questionstring) {
     questionjson = JSON.parse(questionstring),
     authors = authorsService(questionjson);
 
-  _.each(questionjson, function (each) { each.authornameToArray = authornameToArray; });
-
   function next() { return Math.floor(Math.random() * questionjson.length); }
 
   function questionFor(idString) {

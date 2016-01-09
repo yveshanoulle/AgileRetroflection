@@ -17,13 +17,21 @@ dispatcher.register((action) => {
   }
 });
 
-export const store = {
-  addChangeListener: function (callback) { questionsEE.on(CHANGE_EVENT, callback); },
-  removeChangeListener: function (callback) { questionsEE.removeListener(CHANGE_EVENT, callback); },
-  service: function service() { return questionsService; },
-  authorNamed: function (name) { return questionsService.authorNamed(decodeURIComponent(name)) || {questions: []}; }
-};
+export function addChangeListener(callback) {
+  questionsEE.on(CHANGE_EVENT, callback);
+}
 
+export function removeChangeListener(callback) {
+  questionsEE.removeListener(CHANGE_EVENT, callback);
+}
+
+export function service() {
+  return questionsService;
+}
+
+export function authorNamed(name) {
+  return service.authorNamed(decodeURIComponent(name)) || {questions: []};
+}
 
 export function initQuestions() {
 // trying to update the questions from server, fallback is local storage

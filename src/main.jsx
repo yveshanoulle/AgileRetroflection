@@ -7,7 +7,7 @@ import { render } from 'react-dom';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import { Buttons, RetroPage, Header, Twitterlink, mailtoForCorrection, mailtoForQuestion } from './fragments.jsx';
-import { store, initQuestions } from './questionsStore';
+import { authorNamed, initQuestions } from './questionsStore';
 
 initQuestions();
 
@@ -61,7 +61,7 @@ class QuestionPage extends RetroPage {
         </button>
         <h1 className='title'>Retroflection</h1>
       </header>
-      <ReactCSSTransitionGroup transitionName="retro-left" transitionAppear={true}
+      <ReactCSSTransitionGroup transitionName="retro-right" transitionAppear={true}
                                transitionAppearTimeout={500} transitionEnterTimeout={500} transitionLeaveTimeout={500}>
         <div className='content' key={current.id}>
           <h3 className='question'>{current.question}</h3>
@@ -124,7 +124,7 @@ QuestionLi.propTypes = {question: React.PropTypes.object.isRequired};
 
 export class AuthorPage extends RetroPage {
   render() {
-    let author = store.authorNamed(this.props.params.name);
+    let author = authorNamed(this.props.params.name);
     return <div>
       <Header title={author.name || ''}/>
       <ReactCSSTransitionGroup transitionName='retro-right' transitionAppear={true}

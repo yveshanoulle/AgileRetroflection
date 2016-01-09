@@ -24,7 +24,7 @@
     margin-bottom: 40px;
 }
 
-.retro-left-enter, .retro-left-leave, .retro-left-appear, .retro-right-enter, .retro-right-leave, .retro-right-appear {
+.retro-right-enter, .retro-right-leave, .retro-right-appear {
     -webkit-transition: left 300ms ease-out;
     -moz-transition: left 300ms ease-out;
     -ms-transition: left 300ms ease-out;
@@ -32,17 +32,17 @@
     transition: left 300ms ease-out;
 }
 
-.retro-left-enter, .retro-left-appear, .retro-right-leave.retro-right-leave-active {
+.retro-right-leave.retro-right-leave-active {
     left: -100%;
     width: 100%;
 }
 
-.retro-left-enter.retro-left-enter-active, .retro-left-appear.retro-left-appear-active, .retro-right-enter.retro-right-enter-active, .retro-right-appear.retro-right-appear-active {
+.retro-right-enter.retro-right-enter-active, .retro-right-appear.retro-right-appear-active {
     left: 0;
     width: 100%;
 }
 
-.retro-left-leave.retro-left-leave-active, .retro-right-enter, .retro-right-appear {
+.retro-right-enter, .retro-right-appear {
     left: 200%;
     width: 100%;
 }
