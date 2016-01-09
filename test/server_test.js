@@ -1,22 +1,22 @@
 'use strict';
-var expect = require('must');
-var httpRequest = require('request');
-var port = 5001;
-var baseUri = 'http://localhost:' + port;
+const expect = require('must');
+const httpRequest = require('request');
+const port = 5001;
+const baseUri = 'http://localhost:' + port;
 
-var app = require('../server/server');
+const app = require('../server/server');
 
 describe('Retroflection server', function () {
-  beforeEach(function (done) {
+  beforeEach((done) => {
     app.start(port, done);
   });
 
-  afterEach(function (done) {
+  afterEach((done) => {
     app.stop(done);
   });
 
-  it('responds on a GET for the standard home page indicating appcaching', function (done) {
-    httpRequest({uri: baseUri}, function (req, resp) {
+  it('responds on a GET for the standard home page indicating appcaching', (done) => {
+    httpRequest({uri: baseUri}, (req, resp) => {
       expect(resp).to.exist();
       expect(resp.statusCode).to.equal(200);
       expect(resp.body).to.contain('<body><div id="retroflection"></div><script src="/js/global.js"></script></body>');
@@ -25,8 +25,8 @@ describe('Retroflection server', function () {
     });
   });
 
-  it('serves the app no matter what URL', function (done) {
-    httpRequest({uri: baseUri + '/somethingWeird'}, function (req, resp) {
+  it('serves the app no matter what URL', (done) => {
+    httpRequest({uri: baseUri + '/somethingWeird'}, (req, resp) => {
       expect(resp).to.exist();
       expect(resp.statusCode).to.equal(200);
       expect(resp.body).to.contain('<body><div id="retroflection"></div><script src="/js/global.js"></script></body>');
@@ -35,8 +35,8 @@ describe('Retroflection server', function () {
     });
   });
 
-  it('responds on a GET for the online home page indicating NO appcaching', function (done) {
-    httpRequest({uri: baseUri + '/online'}, function (req, resp) {
+  it('responds on a GET for the online home page indicating NO appcaching', (done) => {
+    httpRequest({uri: baseUri + '/online'}, (req, resp) => {
       expect(resp).to.exist();
       expect(resp.statusCode).to.equal(200);
       expect(resp.body).to.contain('<body><div id="retroflection"></div><script src="/js/global.js"></script></body>');
@@ -45,8 +45,8 @@ describe('Retroflection server', function () {
     });
   });
 
-  it('serves the online app no matter what suffix', function (done) {
-    httpRequest({uri: baseUri + '/online/somethingWeird'}, function (req, resp) {
+  it('serves the online app no matter what suffix', (done) => {
+    httpRequest({uri: baseUri + '/online/somethingWeird'}, (req, resp) => {
       expect(resp).to.exist();
       expect(resp.statusCode).to.equal(200);
       expect(resp.body).to.contain('<body><div id="retroflection"></div><script src="/js/global.js"></script></body>');

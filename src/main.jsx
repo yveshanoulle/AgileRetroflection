@@ -1,8 +1,7 @@
 /*global retroflectionVersion */
-/*eslint no-unused-vars: 0 */
 
 import React from 'react';
-import { Route, Router, Redirect, Link, IndexRoute, browserHistory } from 'react-router';
+import { Route, Router, Link, IndexRoute, browserHistory } from 'react-router';
 import { render } from 'react-dom';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
@@ -13,7 +12,7 @@ initQuestions();
 
 class AboutPage extends RetroPage {
   render() {
-    var questions = this.state;
+    const questions = this.state;
 
     return <div>
       <Header title='About'/>
@@ -49,7 +48,7 @@ class AboutPage extends RetroPage {
 
 class QuestionPage extends RetroPage {
   render() {
-    var current = this.state.questionFor(this.props.params.id);
+    const current = this.state.questionFor(this.props.params.id);
 
     return <div>
       <header className='bar bar-nav'>
@@ -97,9 +96,7 @@ class AuthorsPage extends RetroPage {
         <div className='content' key='authors'>
           <div className='dummy22'>&nbsp;</div>
           <ul className='table-view'>
-            {this.state.authors.all.map((author) => {
-              return <AuthorLi key={author.name} author={author}/>;
-            })}
+            {this.state.authors.all.map(author => <AuthorLi key={author.name} author={author}/>)}
           </ul>
         </div>
       </ReactCSSTransitionGroup>
@@ -132,9 +129,7 @@ export class AuthorPage extends RetroPage {
         <div className='content' key={author.name}>
           <div className='dummy22'>&nbsp;</div>
           <ul className='table-view'>
-            {author.questions.map((question) => {
-              return <QuestionLi key={question.id} question={question}/>;
-            })}
+            {author.questions.map(question => <QuestionLi key={question.id} question={question}/>)}
           </ul>
         </div>
       </ReactCSSTransitionGroup>

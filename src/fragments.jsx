@@ -1,5 +1,3 @@
-/*eslint no-unused-vars: 0 */
-
 import React from 'react';
 import { Link } from 'react-router';
 import { service, addChangeListener, removeChangeListener } from './questionsStore';
@@ -15,7 +13,9 @@ export class RetroPage extends React.Component {
 
   componentWillUnmount() { removeChangeListener(this.listener); }
 
-  onChange() { this.setState(service()); }
+  onChange() {
+    let partialState = service();
+    this.setState(partialState); }
 }
 
 export class Buttons extends RetroPage {
@@ -60,13 +60,13 @@ Header.propTypes = {title: React.PropTypes.string.isRequired};
 
 export class Twitterlink extends React.Component {
   render() {
-    var lastauthor = this.props.authors[this.props.authors.length - 1];
+    const lastauthor = this.props.authors[this.props.authors.length - 1];
     return <span>
-        {this.props.authors.map(function (author) {
-          return <span key={author}>
+        {this.props.authors.map(author =>
+          <span key={author}>
             <a href={'http://twitter.com/' + author.substr(1)}>{author}</a> {lastauthor !== author ? ' & ' : ''}
-          </span>;
-        })}
+          </span>
+        )}
       </span>;
   }
 }

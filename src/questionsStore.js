@@ -1,18 +1,18 @@
 import { EventEmitter } from 'events';
 
-import questionsStore from './questionsRepository';
+import Questions from './repo/questionsRepository';
 import { Dispatcher } from 'flux';
 
 const QUESTIONS_LOADED = 'questionsLoaded';
 const CHANGE_EVENT = 'change';
 const questionsEE = new EventEmitter();
 
-let questionsService = questionsStore('[]');
+let questionsService = new Questions('[]');
 
 const dispatcher = new Dispatcher();
 dispatcher.register((action) => {
   if (action.type === QUESTIONS_LOADED) {
-    questionsService = questionsStore(action.rawQuestions);
+    questionsService = new Questions(action.rawQuestions);
     questionsEE.emit(CHANGE_EVENT);
   }
 });
@@ -30,23 +30,20 @@ export function service() {
 }
 
 export function authorNamed(name) {
-  return service.authorNamed(decodeURIComponent(name)) || {questions: []};
+  return service().authorNamed(decodeURIComponent(name)) || {questions: []};
 }
 
 export function initQuestions() {
 // trying to update the questions from server, fallback is local storage
-  var xmlhttp = new XMLHttpRequest();
+  const xmlhttp = new XMLHttpRequest();
   xmlhttp.onreadystatechange = () => {
-    function questionsLoaded(rawQuestions) {
-      dispatcher.dispatch({type: QUESTIONS_LOADED, rawQuestions: rawQuestions});
-    }
 
     const localStorageKey = 'questions';
     if (xmlhttp.readyState === XMLHttpRequest.DONE) {
       if (xmlhttp.status === 200) {
         localStorage.setItem(localStorageKey, xmlhttp.response);
       }
-      questionsLoaded(localStorage.getItem(localStorageKey));
+      dispatcher.dispatch({type: QUESTIONS_LOADED, rawQuestions: localStorage.getItem(localStorageKey)});
     }
   };
   xmlhttp.open('GET', '/questions.json', true);
