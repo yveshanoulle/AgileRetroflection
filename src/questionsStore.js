@@ -3,13 +3,13 @@ import { EventEmitter } from 'events';
 import Questions from './repo/questionsRepository';
 import { Dispatcher } from 'flux';
 
-const QUESTIONS_LOADED = 'questionsLoaded';
+export const QUESTIONS_LOADED = 'questionsLoaded'; // for test
 const CHANGE_EVENT = 'change';
 const questionsEE = new EventEmitter();
 
 let questionsService = new Questions('[]');
 
-const dispatcher = new Dispatcher();
+export const dispatcher = new Dispatcher(); // for test
 dispatcher.register((action) => {
   if (action.type === QUESTIONS_LOADED) {
     questionsService = new Questions(action.rawQuestions);
@@ -30,7 +30,7 @@ export function service() {
 }
 
 export function authorNamed(name) {
-  return service().authorNamed(decodeURIComponent(name)) || {questions: []};
+  return service().authorNamed(decodeURIComponent(name)) || {name: '', questions: []};
 }
 
 export function initQuestions() {
