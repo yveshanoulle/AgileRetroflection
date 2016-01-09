@@ -16,29 +16,34 @@
     right: 10px;
 }
 
-.fade-left.ng-enter, .fade-right.ng-enter, .fade-left-right.ng-enter, .fade-left-right.ng-leave {
-    -webkit-transition: 300ms ease-out all;
-    -moz-transition: 300ms ease-out all;
-    -ms-transition: 300ms ease-out all;
-    -o-transition: 300ms ease-out all;
-    transition: 300ms ease-out all;
+.dummy22 {
+    margin-bottom: 22px;
 }
 
-.fade-left.ng-enter, .fade-right.ng-leave.fade-right.ng-leave-active,
-.fade-left-right.ng-enter, .fade-left-right.ng-leave.fade-left-right.ng-leave-active {
-    left: 100%;
+.dummy40 {
+    margin-bottom: 40px;
+}
+
+.retro-right-enter, .retro-right-leave, .retro-right-appear {
+    -webkit-transition: left 300ms ease-out;
+    -moz-transition: left 300ms ease-out;
+    -ms-transition: left 300ms ease-out;
+    -o-transition: left 300ms ease-out;
+    transition: left 300ms ease-out;
+}
+
+.retro-right-leave.retro-right-leave-active {
+    left: -100%;
     width: 100%;
 }
 
-.fade-left.ng-enter.fade-left.ng-enter-active, .fade-left.ng-leave,
-.fade-left-right.ng-enter.fade-left-right.ng-enter-active, .fade-left-right.ng-leave,
-.fade-right.ng-enter.fade-right.ng-enter-active, .fade-right.ng-leave {
+.retro-right-enter.retro-right-enter-active, .retro-right-appear.retro-right-appear-active {
     left: 0;
     width: 100%;
 }
 
-.fade-left.ng-leave.fade-left.ng-leave-active, .fade-right.ng-enter {
-    left: -100%;
+.retro-right-enter, .retro-right-appear {
+    left: 200%;
     width: 100%;
 }
 
@@ -50,3 +55,22 @@
 .content {
     padding-bottom: 50px;
 }
+
+.standard-enter, .standard-appear {
+    opacity: 0.01;
+    transition: opacity .5s ease-in;
+}
+
+.standard-enter.standard-enter-active, .standard-appear.standard-appear-active {
+    opacity: 1;
+}
+
+.standard-leave {
+    opacity: 1;
+    transition: opacity .2s ease-in;
+}
+
+.standard-leave.standard-leave-active {
+    opacity: 0;
+}
+

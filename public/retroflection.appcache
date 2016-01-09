@@ -1,13 +1,12 @@
 CACHE MANIFEST
 
-# Updated: 2016-01-04
+# Updated: 2015-01-08
 #   
 CACHE:
 js/global.js
 css/ratchet.min.css
 css/ratchet-theme-android.min.css
 css/ratchet-theme-ios.min.css
-css/ratchet.min.css
 css/retroflection.css
 images/Default.png
 images/favicon.ico

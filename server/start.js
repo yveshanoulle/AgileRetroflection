@@ -1,19 +1,19 @@
 'use strict';
 
-var app = require('./server');
-var retrieveQuestions = require('./retrieve-questions');
-var fs = require('fs');
+const app = require('./server');
+const retrieveQuestions = require('./retrieve-questions');
+const fs = require('fs');
 
-var server = require('http').createServer(app);
+const server = require('http').createServer(app);
 
-server.listen(process.env.PORT || 5000, function () {
+server.listen(process.env.PORT || 5000, () => {
   /* eslint no-console: 0 */
   console.log('Server running');
 });
 retrieveQuestions();
 setInterval(retrieveQuestions, 1000 * 60 * 60 * 24);
-setInterval(function () {
-  fs.exists('public/questions.json', function (exists) {
+setInterval(() => {
+  fs.exists('public/questions.json', (exists) => {
     if (!exists) { retrieveQuestions(); }
   });
 }, 1000 * 60); // check every minute if questions.json exists

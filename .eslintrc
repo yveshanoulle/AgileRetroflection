@@ -1,8 +1,14 @@
 {
   "extends": "eslint:recommended",
   "env": {
-    "node": true
+    "node": true,
+    "es6": true
   },
+  "ecmaFeatures": {
+    "jsx": true,
+    "classes": true
+  },
+  "plugins": ["react"],
   "rules": {
     "quotes": [ 2, "single"],
     "no-sync": 2,
@@ -59,6 +65,7 @@
     "space-return-throw-case": 2,
     "space-unary-ops": [2, { "words": true, "nonwords": false }],
     "strict": [2, "global"],
-    "yoda": [2, "never"]
+    "yoda": [2, "never"],
+    "react/jsx-uses-vars": 2
   }
 }

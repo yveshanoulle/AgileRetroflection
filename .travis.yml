@@ -1,10 +1,10 @@
 language: node_js
 
-before_script:
-  - npm install -g grunt-cli
-
 node_js:
   - "4"
+
+before_script:
+  - npm install -g grunt-cli
 
 # Use faster Docker architecture on Travis. (http://blog.travis-ci.com/2014-12-17-faster-builds-with-container-based-infrastructure/)
 sudo: false

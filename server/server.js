@@ -1,14 +1,14 @@
 'use strict';
 /* eslint no-console: 0 */
 
-var express = require('express');
-var path = require('path');
-var app = express();
-var useragent = require('useragent');
-var favicon = require('serve-favicon');
-var compress = require('compression');
-var serveStatic = require('serve-static');
-var server;
+const express = require('express');
+const path = require('path');
+const app = express();
+const useragent = require('useragent');
+const favicon = require('serve-favicon');
+const compress = require('compression');
+const serveStatic = require('serve-static');
+let server;
 
 function detectBrowser(req, res, next) {
   res.locals.ios = !!useragent.parse(req.headers['user-agent']).os.family.match(/iOS|iPhone|iPad|iPod/);
@@ -23,24 +23,32 @@ app.use(detectBrowser);
 app.use(compress());
 app.use(serveStatic(path.join(__dirname, '../public')));
 
-app.get('/', function (req, res) {
+app.get('/', (req, res) => {
   res.render('index');
 });
 
-app.get('/online', function (req, res) {
+app.get('/online', (req, res) => {
   res.render('index-online');
+});
+
+app.get('/online/*', (req, res) => {
+  res.render('index-online');
+});
+
+app.get('*', (req, res) => {
+  res.render('index');
 });
 
 app.start = function (port, done) {
   server = require('http').createServer(this);
-  server.listen(port || process.env.PORT || 5000, function () {
+  server.listen(port || process.env.PORT || 5000, () => {
     console.log('Server started');
     if (done) { done(); }
   });
 };
 
 app.stop = function (done) {
-  server.close(function () {
+  server.close(() => {
     console.log('Server stopped');
     if (done) { done(); }
   });
