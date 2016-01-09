@@ -9,7 +9,6 @@ module.exports = function (grunt) {
       'node_modules/angular-animate/angular-animate.js',
       'node_modules/angular-touch/angular-touch.js',
       'node_modules/angular-ui-router/release/angular-ui-router.js',
-      'bower_components/ratchet/dist/js/ratchet.js',
       'src/questionstore.js',
       'src/templates.js',
       'src/app.js'
