@@ -49,6 +49,14 @@ export class Buttons extends RetroPage {
 }
 Buttons.propTypes = {for: React.PropTypes.string.isRequired};
 
+export class Header extends React.Component {
+  render() {
+    return <header className='bar bar-nav'>
+      <h1 className='title'>{this.props.title}</h1>
+    </header>;
+  }
+}
+Header.propTypes = {title: React.PropTypes.string.isRequired};
 
 export class Twitterlink extends React.Component {
   render() {

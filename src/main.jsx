@@ -2,24 +2,21 @@
 /*eslint no-unused-vars: 0 */
 
 import React from 'react';
-import { Route, Router, Redirect, IndexRoute, browserHistory } from 'react-router';
+import { Route, Router, Redirect, Link, IndexRoute, browserHistory } from 'react-router';
 import { render } from 'react-dom';
-import { QuestionPage } from './questions.jsx';
-import { AuthorsPage, AuthorPage } from './authors.jsx';
-import { Buttons, RetroPage } from './fragments.jsx';
-import { initQuestions } from './appMechanics';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+
+import { Buttons, RetroPage, Header, Twitterlink, mailtoForCorrection, mailtoForQuestion } from './fragments.jsx';
+import { store, initQuestions } from './questionsStore';
 
 initQuestions();
 
-class About extends RetroPage {
+class AboutPage extends RetroPage {
   render() {
     var questions = this.state;
 
     return <div>
-      <header className='bar bar-nav'>
-        <h1 className='title'>About</h1>
-      </header>
+      <Header title='About'/>
       <ReactCSSTransitionGroup transitionName='standard' transitionAppear={true}
                                transitionAppearTimeout={500} transitionEnterTimeout={500} transitionLeaveTimeout={500}>
         <div className='content' key='about'>
@@ -50,6 +47,102 @@ class About extends RetroPage {
   }
 }
 
+class QuestionPage extends RetroPage {
+  render() {
+    var current = this.state.questionFor(this.props.params.id);
+
+    return <div>
+      <header className='bar bar-nav'>
+        <button className='btn btn-link btn-nav pull-left'>
+          <a href={mailtoForCorrection(current)}> <span className='icon icon-edit'></span> Correct It </a>
+        </button>
+        <button className='btn btn-link btn-nav pull-right'>
+          <a href={mailtoForQuestion(current)}> Mail <span className='icon icon-compose'></span> </a>
+        </button>
+        <h1 className='title'>Retroflection</h1>
+      </header>
+      <ReactCSSTransitionGroup transitionName="retro-left" transitionAppear={true}
+                               transitionAppearTimeout={500} transitionEnterTimeout={500} transitionLeaveTimeout={500}>
+        <div className='content' key={current.id}>
+          <h3 className='question'>{current.question}</h3>
+          <p className='author'>
+            <Twitterlink authors={this.state.authornameToArray(current.author)}/>
+            (#{current.id} - {current.date})
+          </p>
+        </div>
+      </ReactCSSTransitionGroup>
+      <Buttons for='question'/>
+    </div>;
+  }
+}
+
+class AuthorLi extends React.Component {
+  render() {
+    let author = this.props.author;
+    return <li className='table-view-cell'>
+      <Link className='navigate-right' to={`/authors/${encodeURIComponent(author.name)}`}>
+        <span className='badge'>{author.questions.length}</span> {author.name}
+      </Link>
+    </li>;
+  }
+}
+AuthorLi.propTypes = {author: React.PropTypes.object.isRequired};
+
+class AuthorsPage extends RetroPage {
+  render() {
+    return <div>
+      <Header title='Authors'/>
+      <ReactCSSTransitionGroup transitionName='standard' transitionAppear={true}
+                               transitionAppearTimeout={500} transitionEnterTimeout={500} transitionLeaveTimeout={500}>
+        <div className='content' key='authors'>
+          <div className='dummy22'>&nbsp;</div>
+          <ul className='table-view'>
+            {this.state.authors.all.map((author) => {
+              return <AuthorLi key={author.name} author={author}/>;
+            })}
+          </ul>
+        </div>
+      </ReactCSSTransitionGroup>
+      <Buttons for='authors'/>
+    </div>;
+  }
+}
+
+class QuestionLi extends React.Component {
+  render() {
+    let question = this.props.question;
+    return <li className='table-view-cell'>
+      {question.question} <Link style={{display: 'inline'}} to='question' params={{id: question.id}}>
+      <small>(#{question.id})</small>
+    </Link>
+      <a href={mailtoForCorrection(question)} className='btn icon icon-edit'
+         style={{padding: '0px'}}/>
+    </li>;
+  }
+}
+QuestionLi.propTypes = {question: React.PropTypes.object.isRequired};
+
+export class AuthorPage extends RetroPage {
+  render() {
+    let author = store.authorNamed(this.props.params.name);
+    return <div>
+      <Header title={author.name || ''}/>
+      <ReactCSSTransitionGroup transitionName='retro-right' transitionAppear={true}
+                               transitionAppearTimeout={500} transitionEnterTimeout={500} transitionLeaveTimeout={500}>
+        <div className='content' key={author.name}>
+          <div className='dummy22'>&nbsp;</div>
+          <ul className='table-view'>
+            {author.questions.map((question) => {
+              return <QuestionLi key={question.id} question={question}/>;
+            })}
+          </ul>
+        </div>
+      </ReactCSSTransitionGroup>
+      <Buttons for='authors'/>
+    </div>;
+  }
+}
+
 class App extends React.Component {
   render() {
     return <div>
@@ -65,7 +158,7 @@ render((
       <Route path='question/:id' component={QuestionPage}/>
       <Route path='authors' component={AuthorsPage}/>
       <Route path='authors/:name' component={AuthorPage}/>
-      <Route path='about' component={About}/>
+      <Route path='about' component={AboutPage}/>
     </Route>
   </Router>
 ), document.getElementById('retroflection'));

@@ -6,7 +6,7 @@ var baseUri = 'http://localhost:' + port;
 
 var app = require('../server/server');
 
-describe('SWK Plattform server', function () {
+describe('Retroflection server', function () {
   beforeEach(function (done) {
     app.start(port, done);
   });
