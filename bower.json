@@ -1,7 +1,0 @@
-{
-  "name": "retroflection-bower",
-  "version": "1.0.0",
-  "dependencies": {
-    "ratchet": "2.0.2"
-  }
-}

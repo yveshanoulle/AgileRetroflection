@@ -6,7 +6,7 @@ const baseUri = 'http://localhost:' + port;
 
 const app = require('../server/server');
 
-describe('Retroflection server', function () {
+describe('Retroflection server', () => {
   beforeEach((done) => {
     app.start(port, done);
   });
