@@ -119,7 +119,7 @@ class QuestionLi extends React.Component {
 }
 QuestionLi.propTypes = {question: React.PropTypes.object.isRequired};
 
-export class AuthorPage extends RetroPage {
+class AuthorPage extends RetroPage {
   render() {
     let author = authorNamed(this.props.params.name);
     return <div>
