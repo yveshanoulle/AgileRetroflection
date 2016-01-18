@@ -5,10 +5,7 @@
 
 const Spreadsheet = require('edit-google-spreadsheet');
 
-const nconf = require('nconf');
-nconf.argv();
-nconf.env();
-nconf.file({ file: 'config/emailAndKey.json' });
+const nconf = require('./init-nconf');
 
 function loadSheet(worksheetId) {
   const key = nconf.get('GOOGLE_PEM');

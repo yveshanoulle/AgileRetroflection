@@ -18,9 +18,12 @@ class Authors {
       }
       return result;
     };
-    this.distinctCount = () => {
-      return new Set(flatten(this.all.map(each => each.name).map(authornameToArray))).size;
+
+    this.distinctAuthors = () => {
+      return new Set(flatten(this.all.map(each => each.name).map(authornameToArray)));
     };
+
+    this.distinctCount = () => this.distinctAuthors().size;
 
     questions.forEach(question => this.authorNamed(question.author).questions.push(question));
     this.all.sort((a, b) => { return a.name.localeCompare(b.name); });

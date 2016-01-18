@@ -2,7 +2,8 @@
 .idea/
 node_modules/
 questions.json
-emailAndKey.json
+twitterImages.json
+config/
 coverage
 global.js
 public/fonts/ratchicons*

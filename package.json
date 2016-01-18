@@ -36,6 +36,7 @@
     "react-addons-css-transition-group": "0.14.6",
     "serve-favicon": "2.3.0",
     "serve-static": "1.10.0",
+    "twitter-node-client": "0.0.6",
     "useragent": "2.1.8"
   },
   "devDependencies": {

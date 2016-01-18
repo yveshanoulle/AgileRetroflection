@@ -6,10 +6,9 @@ const fs = require('fs');
 const moment = require('moment');
 const async = require('async');
 
-const nconf = require('nconf');
-nconf.argv();
-nconf.env();
-nconf.file({file: 'config/emailAndKey.json'});
+const nconf = require('./init-nconf');
+const twitteravatar = require('./twitteravatar');
+const twitterAPI = require('./twitterAPI');
 
 function loadSheet(worksheetId, idCol, questionCol, authorCol, dateCol, callback) {
   const key = nconf.get('GOOGLE_PEM');
@@ -68,17 +67,23 @@ module.exports = () => {
       }
     ],
     (err, questions) => {
-      if (err) {
-        return err;
-      }
+      if (err) { return err; }
+
       let sortedQuestions = _.flatten(questions).sort((question1, question2) => {
         return parseInt(question1.id, 10) - parseInt(question2.id, 10);
       });
-      fs.writeFile('public/questions.json', JSON.stringify(sortedQuestions), (err1) => {
+      const stringifiedQuestions = JSON.stringify(sortedQuestions);
+      fs.writeFile('public/questions.json', stringifiedQuestions, (err1) => {
         /* eslint no-console: 0 */
-        if (err1) {
-          return console.log(err1);
-        }
+        if (err1) { return console.log(err1); }
+
+        twitteravatar(twitterAPI, stringifiedQuestions).retrieveImageURLs((err2, urls) => {
+          if (err2) { return console.log(err2); }
+
+          fs.writeFile('public/twitterImages.json', JSON.stringify(urls), (err3) => {
+            if (err3) { return console.log(err3); }
+          });
+        });
         console.log('questions updated');
       });
     }
