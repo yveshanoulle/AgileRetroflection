@@ -1,11 +1,10 @@
 /*global retroflectionVersion */
-
 import React from 'react';
 import { Route, Router, Link, IndexRoute, browserHistory } from 'react-router';
 import { render } from 'react-dom';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
-import { Buttons, RetroPage, Header, Twitterlink, mailtoForCorrection, mailtoForQuestion } from './fragments.jsx';
+import { Buttons, RetroPage, Header, Twitterlink, mailtoForCorrection } from './fragments.jsx';
 import { authorNamed, initQuestions, initAuthorImages } from './questionsStore';
 
 initQuestions();
@@ -16,7 +15,7 @@ class AboutPage extends RetroPage {
     const questions = this.state;
 
     return <div>
-      <Header title='About'/>
+      <Header title='About' noForward='true'/>
       <ReactCSSTransitionGroup transitionName='standard' transitionAppear={true}
                                transitionAppearTimeout={500} transitionEnterTimeout={500} transitionLeaveTimeout={500}>
         <div className='content' key='about'>
@@ -52,15 +51,7 @@ class QuestionPage extends RetroPage {
     const current = this.state.questionFor(this.props.params.id);
 
     return <div>
-      <header className='bar bar-nav'>
-        <button className='btn btn-link btn-nav pull-left'>
-          <a href={mailtoForCorrection(current)}> <span className='icon icon-edit'></span> Correct It </a>
-        </button>
-        <button className='btn btn-link btn-nav pull-right'>
-          <a href={mailtoForQuestion(current)}> Mail <span className='icon icon-compose'></span> </a>
-        </button>
-        <h1 className='title'>Retroflection</h1>
-      </header>
+      <Header title='Retroflection'/>
       <ReactCSSTransitionGroup transitionName="retro-right" transitionAppear={true}
                                transitionAppearTimeout={500} transitionEnterTimeout={500} transitionLeaveTimeout={500}>
         <div className='content' key={current.id}>
@@ -98,7 +89,7 @@ AuthorLi.propTypes = {author: React.PropTypes.object.isRequired};
 class AuthorsPage extends RetroPage {
   render() {
     return <div>
-      <Header title='Authors'/>
+      <Header title='Authors' noForward='true'/>
       <ReactCSSTransitionGroup transitionName='standard' transitionAppear={true}
                                transitionAppearTimeout={500} transitionEnterTimeout={500} transitionLeaveTimeout={500}>
         <div className='content' key='authors'>
@@ -132,7 +123,7 @@ class AuthorPage extends RetroPage {
   render() {
     let author = authorNamed(this.props.params.name);
     return <div>
-      <Header title={author.name || ''}/>
+      <Header title={author.realname || ''} noForward='true'/>
       <ReactCSSTransitionGroup transitionName='retro-right' transitionAppear={true}
                                transitionAppearTimeout={500} transitionEnterTimeout={500} transitionLeaveTimeout={500}>
         <div className='content' key={author.name}>

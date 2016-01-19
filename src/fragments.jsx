@@ -15,7 +15,8 @@ export class RetroPage extends React.Component {
 
   onChange() {
     let partialState = questionsService;
-    this.setState(partialState); }
+    this.setState(partialState);
+  }
 }
 
 export class Buttons extends RetroPage {
@@ -50,8 +51,19 @@ export class Buttons extends RetroPage {
 Buttons.propTypes = {for: React.PropTypes.string.isRequired};
 
 export class Header extends React.Component {
+  goBack() { window.history.back(); }
+  goForward() { window.history.forward(); }
+
   render() {
     return <header className='bar bar-nav'>
+      { !this.props.noBack &&
+      <button className='btn btn-link btn-nav pull-left' onClick={this.goBack}>
+        <span className='icon icon-left-nav'/> back
+      </button>}
+      { !this.props.noForward &&
+      <button className='btn btn-link btn-nav pull-right' onClick={this.goForward}>
+        next <span className='icon icon-right-nav'/>
+      </button>}
       <h1 className='title'>{this.props.title}</h1>
     </header>;
   }
