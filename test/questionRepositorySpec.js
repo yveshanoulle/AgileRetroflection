@@ -71,5 +71,6 @@ describe('authors function', () => {
   it('augments an author pair with the imageURL of the first', () => {
     let author = service.authorNamed('@yveshanoulle & @vinylbaustein');
     expect(author.imageURL).to.be('http://pbs.twimg.com/profile_images/604221243/3949464231_7c7531f034_normal.jpg');
+    expect(author.realname).to.be('Multiple Persons');
   });
 });

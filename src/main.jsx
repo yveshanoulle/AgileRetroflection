@@ -85,6 +85,7 @@ class AuthorLi extends React.Component {
           <img src={this.props.image}/>
         </div>
         <div className='media-body authorname-in-list'>
+          <b>{author.realname}</b><br/>
           {author.name}
         </div>
         <span className='badge'>{author.questions.length}</span>

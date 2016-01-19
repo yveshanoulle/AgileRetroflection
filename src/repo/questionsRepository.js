@@ -41,9 +41,14 @@ class Authors {
     this.addImageURLsToAuthors = () => {
       if (!this.imagesAlreadyAdded && this.all.length > 0 && Object.keys(this.authorImages).length > 0) {
         this.all.forEach(each => {
-          let firstOfNames = authornameToArray(each.name)[0].toLowerCase();
+          const authors = authornameToArray(each.name);
+          let firstOfNames = authors[0].toLowerCase();
           each.imageURL = (this.authorImages[firstOfNames] || {}).imageURL;
-          each.realname = (this.authorImages[firstOfNames] || {}).realname;
+          if (authors.length > 1) {
+            each.realname = 'Multiple Persons';
+          } else {
+            each.realname = (this.authorImages[firstOfNames] || {}).realname;
+          }
         });
       }
     };
