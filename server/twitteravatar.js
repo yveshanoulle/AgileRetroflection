@@ -6,16 +6,14 @@ const Questions = require('../src/repo/questionsRepository');
 
 module.exports = function (twitterAPIInjected, questionString) {
   const twitterAPI = twitterAPIInjected || require('./twitterAPI');
-  const allQuestions = new Questions(questionString).authors.distinctAuthors();
+  const allQuestions = new Questions().initQuestions(questionString).authors.distinctAuthors();
   const names = Array.from(allQuestions).map(each => each.replace('@', '')).toString();
 
   function extractUrlsFromRaw(data, callback) {
     const profiles = JSON.parse(data);
-    const urls = profiles.map(each => {
-      return {
-        name: each.screen_name,
-        image: each.profile_image_url
-      };
+    const urls = {};
+    profiles.forEach(each => {
+      urls['@' + each.screen_name.toLowerCase()] = {imageURL: each.profile_image_url, realname: each.name};
     });
 
     callback(null, urls);
@@ -29,7 +27,7 @@ module.exports = function (twitterAPIInjected, questionString) {
   }
 
   return {
-    extractUrlsFromRaw: extractUrlsFromRaw,
+    extractUrlsFromRaw: extractUrlsFromRaw, // public for test
     retrieveImageURLs: retrieveImageURLs
   };
 };

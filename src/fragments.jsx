@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router';
-import { service, addChangeListener, removeChangeListener } from './questionsStore';
+import { questionsService, addChangeListener, removeChangeListener } from './questionsStore';
 
 export class RetroPage extends React.Component {
   constructor(props) {
     super(props);
-    this.state = service();
+    this.state = questionsService;
     this.listener = this.onChange.bind(this);
   }
 
@@ -14,7 +14,7 @@ export class RetroPage extends React.Component {
   componentWillUnmount() { removeChangeListener(this.listener); }
 
   onChange() {
-    let partialState = service();
+    let partialState = questionsService;
     this.setState(partialState); }
 }
 

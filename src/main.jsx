@@ -6,9 +6,10 @@ import { render } from 'react-dom';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import { Buttons, RetroPage, Header, Twitterlink, mailtoForCorrection, mailtoForQuestion } from './fragments.jsx';
-import { authorNamed, initQuestions } from './questionsStore';
+import { authorNamed, initQuestions, initAuthorImages } from './questionsStore';
 
 initQuestions();
+initAuthorImages();
 
 class AboutPage extends RetroPage {
   render() {
@@ -78,9 +79,15 @@ class QuestionPage extends RetroPage {
 class AuthorLi extends React.Component {
   render() {
     let author = this.props.author;
-    return <li className='table-view-cell'>
+    return <li className='table-view-cell media'>
       <Link className='navigate-right' to={`/authors/${encodeURIComponent(author.name)}`}>
-        <span className='badge'>{author.questions.length}</span> {author.name}
+        <div className='media-object pull-left avatar'>
+          <img src={this.props.image}/>
+        </div>
+        <div className='media-body authorname-in-list'>
+          {author.name}
+        </div>
+        <span className='badge'>{author.questions.length}</span>
       </Link>
     </li>;
   }
@@ -96,7 +103,8 @@ class AuthorsPage extends RetroPage {
         <div className='content' key='authors'>
           <div className='dummy22'>&nbsp;</div>
           <ul className='table-view'>
-            {this.state.authors.all.map(author => <AuthorLi key={author.name} author={author}/>)}
+            {this.state.authors.all.map(author => <AuthorLi key={author.name} author={author}
+                                                            image={author.imageURL}/>)}
           </ul>
         </div>
       </ReactCSSTransitionGroup>
