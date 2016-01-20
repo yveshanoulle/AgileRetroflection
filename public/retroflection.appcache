@@ -1,6 +1,6 @@
 CACHE MANIFEST
 
-# Updated: 2015-01-08
+# Updated: 2015-01-20
 #   
 CACHE:
 js/global.js
@@ -22,6 +22,8 @@ fonts/ratchicons.woff
 #   
 NETWORK:
 questions.json
+twitterImages.json
+*
 
 #
 SETTINGS:
