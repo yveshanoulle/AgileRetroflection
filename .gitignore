@@ -6,6 +6,5 @@ twitterImages.json
 config/
 coverage
 global.js
-public/fonts/ratchicons*
 build
 npm-debug.log
