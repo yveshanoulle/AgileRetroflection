@@ -9,13 +9,17 @@ const twitteravatar = require('../server/twitteravatar');
 
 describe('the twitteravatar module', () => {
 
-  it('collects the names for the twitter query', () => {
+  it('collects the names for the twitter query (integration)', (done) => {
     const twitterAPI = {
-      getUserInfos: names => {
+      getUserInfos: (names, callback) => {
         expect(names).to.eql('Deborahh,didierkoc,k_ravlani,mfloryan,philagile,vinylbaustein,yveshanoulle');
+        callback(null, JSON.stringify(twitterusers));
       }
     };
-    twitteravatar(twitterAPI, JSON.stringify(questions));
+    twitteravatar(twitterAPI, JSON.stringify(questions)).retrieveImageURLs((err, results) => {
+      expect(results).to.eql(twitterImages);
+      done(err);
+    });
   });
 
   it('parses the result from twitter correctly', (done) => {
