@@ -96,7 +96,7 @@ class AuthorsPage extends RetroPage {
           <div className='dummy22'>&nbsp;</div>
           <ul className='table-view'>
             {this.state.authors.all.map(author => <AuthorLi key={author.name} author={author}
-                                                            image={author.imageURL}/>)}
+                                                            image={author.image}/>)}
           </ul>
         </div>
       </ReactCSSTransitionGroup>

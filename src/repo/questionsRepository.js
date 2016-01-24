@@ -43,12 +43,9 @@ class Authors {
         this.all.forEach(each => {
           const authors = authornameToArray(each.name);
           let firstOfNames = authors[0].toLowerCase();
-          each.imageURL = (this.authorImages[firstOfNames] || {}).imageURL;
-          if (authors.length > 1) {
-            each.realname = 'Multiple Persons';
-          } else {
-            each.realname = (this.authorImages[firstOfNames] || {}).realname;
-          }
+          const firstAuthor = (this.authorImages[firstOfNames] || {});
+          each.image = firstAuthor.image;
+          each.realname = authors.length > 1 ? 'Multiple Persons' : firstAuthor.realname;
         });
       }
     };

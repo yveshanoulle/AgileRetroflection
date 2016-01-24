@@ -56,21 +56,21 @@ describe('authors function', () => {
     });
   });
 
-  it('augments an author with his imageURL and realname', () => {
+  it('augments an author with his image and realname', () => {
     let author = service.authorNamed('@yveshanoulle');
-    expect(author.imageURL).to.be('http://pbs.twimg.com/profile_images/604221243/3949464231_7c7531f034_normal.jpg');
+    expect(author.image).to.match('data:image\/jpeg;base64,\/9j\/4AAQSkZJRgABAQEASABIAAD\/2wBDAAEBAQEBAQEB');
     expect(author.realname).to.be('Retro Retro');
   });
 
-  it('augments an author with his imageURL (ignoring case in name)', () => {
+  it('augments an author with his image (ignoring case in name)', () => {
     let author = service.authorNamed('@Deborahh');
-    expect(author.imageURL).to.be('http://pbs.twimg.com/profile_images/1788222780/AndreasPlayfulWithRibbon_normal.jpg');
+    expect(author.image).to.match('data:image\/jpeg;base64,\/9j\/4AAQSkZJRgABAQEBLAEsAAD\/4RqORXhpZgAATU0A');
     expect(author.realname).to.be('Leider\'s real name');
   });
 
-  it('augments an author pair with the imageURL of the first', () => {
+  it('augments an author pair with the image of the first', () => {
     let author = service.authorNamed('@yveshanoulle & @vinylbaustein');
-    expect(author.imageURL).to.be('http://pbs.twimg.com/profile_images/604221243/3949464231_7c7531f034_normal.jpg');
+    expect(author.image).to.match('data:image\/jpeg;base64,\/9j\/4AAQSkZJRgABAQEASABIAAD\/2wBDAAEBAQEBAQEB');
     expect(author.realname).to.be('Multiple Persons');
   });
 });
