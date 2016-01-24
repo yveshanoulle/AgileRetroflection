@@ -1,6 +1,6 @@
 /*eslint camelcase: [0] */
 'use strict';
-module.exports = function (grunt) {
+module.exports = grunt => {
 
   var filesToJoin = {
     'public/js/global.js': [
@@ -39,12 +39,12 @@ module.exports = function (grunt) {
       }
     },
     eslint: {
-      target: ['*.js', 'server/*.js', 'src/*.js*', 'test/*.js', '!src/ratchet.js' ]
+      target: ['*.js', 'server/*.js', 'src/*.js*', 'test/*.js', '!src/ratchet.js']
     },
     browserify: {
       options: {
         banner: 'var retroflectionVersion = \'<%= pkg.version %>\';\n',
-        transform: [[ {presets: ['es2015', 'babel-preset-react']}, require('babelify')]]
+        transform: [[{presets: ['es2015', 'babel-preset-react']}, require('babelify')]]
       },
       app: {
         src: ['src/main.jsx'],
