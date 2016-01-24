@@ -75,7 +75,12 @@ class Questions {
 
     this.questionFor = idString => {
       const id = idString || this.next().toString();
-      return this.all.find(each => each.id === id) || {question: '', author: '', id: '', date: ''};
+      const potentialResult = this.all.find(each => each.id === id);
+      if (potentialResult) {
+        return potentialResult;
+      }
+      const nextLowerId = parseInt(id, 10) - 1;
+      return nextLowerId === 0 ? { question: '', author: '', id: '', date: ''} : this.questionFor(nextLowerId.toString());
     };
   }
 }

@@ -6,14 +6,14 @@ const fs = require('fs');
 
 const server = require('http').createServer(app);
 
-server.listen(process.env.PORT || 5000, () => {
+const port = process.env.PORT || 5000;
+
   /* eslint no-console: 0 */
-  console.log('Server running');
-});
+server.listen(port, () => console.log('Server running on port ' + port));
 retrieveQuestions();
 setInterval(retrieveQuestions, 1000 * 60 * 60 * 24);
 setInterval(() => {
-  fs.exists('public/questions.json', (exists) => {
+  fs.exists('public/questions.json', exists => {
     if (!exists) { retrieveQuestions(); }
   });
 }, 1000 * 60); // check every minute if questions.json exists

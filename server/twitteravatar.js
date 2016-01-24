@@ -13,13 +13,7 @@ module.exports = function (twitterAPIInjected, questionString) {
 
   function loadImage(twitterdata, callback) {
     const url = twitterdata.profile_image_url;
-    const req = http.request(url, function (res) {
-      res
-        .pipe(base64.encode())
-        .pipe(concat(data => {
-          callback(null, data.toString());
-        }));
-    });
+    const req = http.request(url, res => res.pipe(base64.encode()).pipe(concat(data => callback(null, data.toString()))));
     req.on('error', callback);
     req.end();
   }
@@ -29,9 +23,7 @@ module.exports = function (twitterAPIInjected, questionString) {
     const urls = {};
     async.each(profiles, (each, callback1) => {
       loadImage(each, (err, base64encodedImage) => {
-        if (err) { /* eslint no-console: 0 */
-          console.log(err);
-        } //silent
+        if (err) { return callback1(err); }
         urls['@' + each.screen_name.toLowerCase()] = {
           realname: each.name,
           image: 'data:image/jpeg;base64,' + base64encodedImage
@@ -44,7 +36,7 @@ module.exports = function (twitterAPIInjected, questionString) {
   }
 
   function retrieveImageURLs(callback) {
-    twitterAPI.getUserInfos(names, function (err, data) {
+    twitterAPI.getUserInfos(names, (err, data) => {
       if (err) { return callback(err);}
       extractUrlsFromRaw(data, callback);
     });

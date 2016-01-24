@@ -23,34 +23,28 @@ app.use(detectBrowser);
 app.use(compress());
 app.use(serveStatic(path.join(__dirname, '../public')));
 
-app.get('/', (req, res) => {
-  res.render('index');
-});
+app.get('/', (req, res) => res.render('index'));
 
-app.get('/online', (req, res) => {
-  res.render('index-online');
-});
+app.get('/online', (req, res) => res.render('index-online'));
 
-app.get('/online/*', (req, res) => {
-  res.render('index-online');
-});
+app.get('/online/*', (req, res) => res.render('index-online'));
 
-app.get('*', (req, res) => {
-  res.render('index');
-});
+app.get('*', (req, res) => res.render('index'));
+
 
 app.start = function (port, done) {
   server = require('http').createServer(this);
-  server.listen(port || process.env.PORT || 5000, () => {
-    console.log('Server started');
-    if (done) { done(); }
+  const realPort = port || process.env.PORT || 5000;
+  server.listen(realPort, () => {
+    console.log('Server started on port: ' + realPort);
+    done();
   });
 };
 
-app.stop = function (done) {
+app.stop = done => {
   server.close(() => {
-    console.log('Server stopped');
-    if (done) { done(); }
+    console.log(' Server stopped\n');
+    done();
   });
 };
 

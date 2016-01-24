@@ -12,10 +12,10 @@ var config = {
 const Twitter = require('twitter-node-client').Twitter;
 const twitter = new Twitter(config);
 
-function getUserInfos(names, callback) {
-  twitter.getCustomApiCall('/users/lookup.json', {'screen_name': names},
-    err => callback(err),
-    data => callback(null, data));
-}
-
-module.exports = {getUserInfos: getUserInfos};
+module.exports = {
+  getUserInfos: (names, callback) => {
+    twitter.getCustomApiCall('/users/lookup.json', {'screen_name': names},
+      err => callback(err),
+      data => callback(null, data));
+  }
+};

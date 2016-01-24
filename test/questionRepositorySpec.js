@@ -14,8 +14,12 @@ describe('questions function', () => {
     expect(service.questionFor('11')).to.eql({question: 'Q11 with \"escapes\"', author: '@yveshanoulle', id: '11'});
   });
 
-  it('gives an empty question when id provided is not found', () => {
-    expect(service.questionFor(23)).to.eql({question: '', author: '', id: '', date: ''});
+  it('returns the next existing question below if id provided is not found', () => {
+    expect(service.questionFor('23')).to.eql({question: 'Q15', author: '@k_ravlani', id: '16'});
+  });
+
+  it('returns an empty question below if there are no questions at all', () => {
+    expect(new Questions().questionFor('2222')).to.eql({question: '', author: '', id: '', date: ''});
   });
 });
 
