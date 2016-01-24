@@ -1,3 +1,5 @@
+'use strict';
+
 const React = require('react');
 const Link = require('react-router').Link;
 const questionsStore = require('./questionsStore');
@@ -17,8 +19,7 @@ class RetroPage extends React.Component {
   componentWillUnmount() { removeChangeListener(this.listener); }
 
   onChange() {
-    let partialState = questionsService;
-    this.setState(partialState);
+    this.setState(questionsService);
   }
 }
 

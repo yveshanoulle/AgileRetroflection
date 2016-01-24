@@ -1,4 +1,6 @@
 /*global retroflectionVersion */
+'use strict';
+
 const React = require('react');
 const reactRouter = require('react-router');
 const Route = reactRouter.Route;

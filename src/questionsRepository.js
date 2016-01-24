@@ -1,4 +1,3 @@
-// do not convert to import until node.js fully supports modules
 'use strict';
 
 const flatten = require('lodash/array/flatten');

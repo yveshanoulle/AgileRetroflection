@@ -4,7 +4,7 @@ const base64 = require('base64-stream');
 const concat = require('concat-stream');
 const async = require('async');
 
-const Questions = require('../src/repo/questionsRepository');
+const Questions = require('../src/questionsRepository');
 
 module.exports = function (twitterAPIInjected, questionString) {
   const twitterAPI = twitterAPIInjected || require('./twitterAPI');

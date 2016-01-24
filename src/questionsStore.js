@@ -1,20 +1,26 @@
+'use strict';
+
 const EventEmitter = require('events');
 
-const Questions = require('./repo/questionsRepository');
+const Questions = require('./questionsRepository');
 
 const CHANGE_EVENT = 'change';
 const questionsEE = new EventEmitter();
 
 const questionsService = new Questions();
 
+function fireChange() {
+  questionsEE.emit(CHANGE_EVENT);
+}
+
 const dispatcher = {  // exported for test
   questionsLoaded: (rawQuestions) => {
     questionsService.initQuestions(rawQuestions);
-    questionsEE.emit(CHANGE_EVENT);
+    fireChange();
   },
   imagesLoaded: (rawAuthorImages) => {
     questionsService.initAuthorImages(rawAuthorImages);
-    questionsEE.emit(CHANGE_EVENT);
+    fireChange();
   }
 };
 

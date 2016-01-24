@@ -2,7 +2,7 @@
 
 const expect = require('must');
 
-const Questions = require('../src/repo/questionsRepository');
+const Questions = require('../src/questionsRepository');
 const testQuestions = require('./dummydata/test-questions.json');
 const testTwitterImages = require('./dummydata/test-twitterImages.json');
 
