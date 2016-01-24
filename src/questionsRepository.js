@@ -10,7 +10,11 @@ class Authors {
     this.authorImages = [];
 
     this.initQuestions = questions => {
-      questions.forEach(question => this.authorNamed(question.author).questions.push(question));
+      function pushToAllAuthors(question) {
+        authornameToArray(question.author).forEach(author => this.authorNamed(author).questions.push(question));
+      }
+
+      questions.forEach(question => pushToAllAuthors.call(this, question));
       this.all.sort((a, b) => { return a.name.localeCompare(b.name); });
       this.addImageURLsToAuthors();
       return this;

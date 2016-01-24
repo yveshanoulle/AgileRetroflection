@@ -3,11 +3,13 @@
 
 const React = require('react');
 const reactRouter = require('react-router');
+
 const Route = reactRouter.Route;
 const Router = reactRouter.Router;
 const Link = reactRouter.Link;
 const IndexRoute = reactRouter.IndexRoute;
 const browserHistory = reactRouter.browserHistory;
+
 const render = require('react-dom').render;
 const ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 
@@ -17,13 +19,11 @@ const RetroPage = fragments.RetroPage;
 const Header = fragments.Header;
 const Twitterlink = fragments.Twitterlink;
 const mailtoForCorrection = fragments.mailtoForCorrection;
-const questionsStore = require('./questionsStore');
-const authorNamed = questionsStore.authorNamed;
-const initQuestions = questionsStore.initQuestions;
-const initAuthorImages = questionsStore.initAuthorImages;
 
-initQuestions();
-initAuthorImages();
+const questionsStore = require('./questionsStore');
+
+questionsStore.initQuestions();
+questionsStore.initAuthorImages();
 
 class AboutPage extends RetroPage {
   render() {
@@ -136,7 +136,7 @@ QuestionLi.propTypes = {question: React.PropTypes.object.isRequired};
 
 class AuthorPage extends RetroPage {
   render() {
-    let author = authorNamed(this.props.params.name);
+    let author = questionsStore.authorNamed(this.props.params.name);
     return <div>
       <Header title={author.realname || ''} noForward='true'/>
       <ReactCSSTransitionGroup transitionName='retro-right' transitionAppear={true}

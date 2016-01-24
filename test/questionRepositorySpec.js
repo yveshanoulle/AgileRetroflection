@@ -27,8 +27,8 @@ describe('authors function', () => {
   const service = new Questions().initQuestions(JSON.stringify(testQuestions)).authors;
   service.initAuthorImages(testTwitterImages);
 
-  it('parses the test_questions to 8 distinct authors strings', () => {
-    expect(service.all.length).to.be(8);
+  it('parses the test_questions to 7 distinct authors strings', () => {
+    expect(service.all.length).to.be(7);
   });
 
   it('parses the test_questions to 7 distinct authors', () => {
@@ -38,14 +38,22 @@ describe('authors function', () => {
   it('contains Yves with 5 test_questions (even though his name is in different cases)', () => {
     service.all.forEach((question) => {
       if (question.name === '@yveshanoulle') {
+        expect(question.questions.length).to.be(5);
+      }
+    });
+  });
+
+  it('contains Yves with 4 test_questions (even though his name is in different cases)', () => {
+    service.all.forEach(question => {
+      if (question.name === '@yveshAnouLLe') {
         expect(question.questions.length).to.be(4);
       }
     });
   });
 
-  it('contains Yves with 5 test_questions (even though his name is in different cases)', () => {
+  it('contains vinylbaustein with 4 test_questions (even though he is only co-author in one)', () => {
     service.all.forEach((question) => {
-      if (question.name === '@yveshAnouLLe') {
+      if (question.name === '@vinylbaustein') {
         expect(question.questions.length).to.be(4);
       }
     });
@@ -70,11 +78,5 @@ describe('authors function', () => {
     let author = service.authorNamed('@Deborahh');
     expect(author.image).to.match('data:image\/jpeg;base64,\/9j\/4AAQSkZJRgABAQEBLAEsAAD\/4RqORXhpZgAATU0A');
     expect(author.realname).to.be('Leider\'s real name');
-  });
-
-  it('augments an author pair with the image of the first', () => {
-    let author = service.authorNamed('@yveshanoulle & @vinylbaustein');
-    expect(author.image).to.match('data:image\/jpeg;base64,\/9j\/4AAQSkZJRgABAQEASABIAAD\/2wBDAAEBAQEBAQEB');
-    expect(author.realname).to.be('Multiple Persons');
   });
 });
