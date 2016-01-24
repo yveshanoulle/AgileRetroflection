@@ -1,7 +1,5 @@
 'use strict';
 
-const flatten = require('lodash/array/flatten');
-
 function authornameToArray(name) { return name.match(/@(\w+)/g) || []; }
 
 class Authors {
@@ -35,25 +33,18 @@ class Authors {
       return result;
     };
 
-    this.distinctAuthors = () => {
-      return new Set(flatten(this.all.map(each => each.name).map(authornameToArray)));
-    };
-
-    this.distinctCount = () => { return this.distinctAuthors().size; };
+    this.distinctAuthors = () => this.all.map(each => each.name);
 
     this.addImageURLsToAuthors = () => {
       if (!this.imagesAlreadyAdded && this.all.length > 0 && Object.keys(this.authorImages).length > 0) {
-        this.all.forEach(each => {
-          const authors = authornameToArray(each.name);
-          let firstOfNames = authors[0].toLowerCase();
-          const firstAuthor = (this.authorImages[firstOfNames] || {});
-          each.image = firstAuthor.image;
-          each.realname = authors.length > 1 ? 'Multiple Persons' : firstAuthor.realname;
+        this.all.forEach(author => {
+          const firstAuthor = (this.authorImages[author.name.toLowerCase()] || {});
+          author.image = firstAuthor.image;
+          author.realname = firstAuthor.realname;
         });
       }
     };
   }
-
 }
 
 class Questions {
@@ -84,7 +75,7 @@ class Questions {
         return potentialResult;
       }
       const nextLowerId = parseInt(id, 10) - 1;
-      return nextLowerId < 1 ? { question: '', author: '', id: '', date: ''} : this.questionFor(nextLowerId.toString());
+      return nextLowerId < 1 ? {question: '', author: '', id: '', date: ''} : this.questionFor(nextLowerId.toString());
     };
   }
 }

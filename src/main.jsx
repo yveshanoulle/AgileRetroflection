@@ -52,7 +52,7 @@ class AboutPage extends RetroPage {
             <p>Site by <a href='http://www.twitter.com/leiderleider'>@leiderleider</a></p>
             <p>Version: {retroflectionVersion}</p>
             <p>We currently feature {questions.all.length} different questions
-              by {questions.authors.distinctCount()} distinct authors.</p>
+              by {questions.authors.distinctAuthors().length} distinct authors.</p>
           </div>
         </div>
       </ReactCSSTransitionGroup>

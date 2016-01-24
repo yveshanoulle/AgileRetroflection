@@ -36,7 +36,7 @@ describe('authors function', () => {
   });
 
   it('parses the test_questions to 7 distinct authors', () => {
-    expect(service.distinctCount()).to.be(7);
+    expect(service.distinctAuthors().length).to.be(7);
   });
 
   it('contains Yves with 5 test_questions (even though his name is in different cases)', () => {
