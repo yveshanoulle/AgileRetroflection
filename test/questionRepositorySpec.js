@@ -21,6 +21,10 @@ describe('questions function', () => {
   it('returns an empty question below if there are no questions at all', () => {
     expect(new Questions().questionFor('2222')).to.eql({question: '', author: '', id: '', date: ''});
   });
+
+  it('returns an empty question below if there is no number given', () => {
+    expect(new Questions().questionFor()).to.eql({question: '', author: '', id: '', date: ''});
+  });
 });
 
 describe('authors function', () => {

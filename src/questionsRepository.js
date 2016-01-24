@@ -84,7 +84,7 @@ class Questions {
         return potentialResult;
       }
       const nextLowerId = parseInt(id, 10) - 1;
-      return nextLowerId === 0 ? { question: '', author: '', id: '', date: ''} : this.questionFor(nextLowerId.toString());
+      return nextLowerId < 1 ? { question: '', author: '', id: '', date: ''} : this.questionFor(nextLowerId.toString());
     };
   }
 }
