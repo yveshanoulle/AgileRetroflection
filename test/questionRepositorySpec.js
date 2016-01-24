@@ -3,8 +3,8 @@
 const expect = require('must');
 
 const Questions = require('../src/repo/questionsRepository');
-const testQuestions = require('./test-questions.json');
-const testTwitterImages = require('./test-twitterImages.json');
+const testQuestions = require('./dummydata/test-questions.json');
+const testTwitterImages = require('./dummydata/test-twitterImages.json');
 
 describe('questions function', () => {
   const service = new Questions().initQuestions(JSON.stringify(testQuestions));

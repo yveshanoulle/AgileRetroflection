@@ -4,7 +4,7 @@ jest.dontMock('../test/test-questions.json');
 
 describe('the questionStore', () => {
   const questionsStore = require('../src/questionsStore');
-  const rawQuestions = JSON.stringify(require('../test/test-questions.json'));
+  const rawQuestions = JSON.stringify(require('../test/dummydata/test-questions.json'));
   const noQuestions = '[]';
 
   it('inits the store with the received questions', () => {

@@ -2,8 +2,8 @@
 const expect = require('must');
 const fs = require('fs');
 
-const questions = require('./test-questions.json');
-const twitterusers = require('./test-twitterusers.json');
+const questions = require('./dummydata/test-questions.json');
+const twitterusers = require('./dummydata/test-twitterusers.json');
 const twitteravatar = require('../server/twitteravatar');
 
 describe('the twitteravatar module', () => {
@@ -39,7 +39,7 @@ describe('the twitteravatar module', () => {
     const leiderleider = twitterusers[0];
     twitteravatar(twitterAPI, '[]').loadImage(leiderleider, (err, result) => {
       expect(result).to.match('4AAQSkZJRgABAQEBLAEsAAD');
-      fs.readFile('test/AndreasPlayfulWithRibbon_normal.jpg', function (err1, data) {
+      fs.readFile('test/dummydata/AndreasPlayfulWithRibbon_normal.jpg', function (err1, data) {
         expect(result).to.eql(new Buffer(data).toString('base64'));
         done(err);
       });
