@@ -1,9 +1,0 @@
-{
-  "env": {
-    "jest": true
-  },
-  "ecmaFeatures": {
-    "jsx": true,
-    "modules": true
-  }
-}

@@ -41,13 +41,12 @@
     "useragent": "2.1.8"
   },
   "devDependencies": {
-    "babel-jest": "6.0.1",
     "grunt-mocha-istanbul": "3.0.1",
     "istanbul": "0.4.1",
-    "jest-cli": "^0.7.0",
     "mocha": "2.3.4",
     "must": "0.13.1",
-    "request": "2.67.0"
+    "request": "2.67.0",
+    "sinon": "1.17.2"
   },
   "engines": {
     "node": "4.x"

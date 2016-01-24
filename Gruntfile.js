@@ -57,7 +57,6 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-eslint');
-  grunt.loadNpmTasks('grunt-jest');
   grunt.loadNpmTasks('grunt-mocha-istanbul');
 
   grunt.registerTask('prepare', ['clean', 'eslint', 'browserify']);
@@ -65,6 +64,6 @@ module.exports = function (grunt) {
   grunt.registerTask('deployProduction', ['prepare', 'uglify:production']);
   grunt.registerTask('deployDevelopment', ['prepare', 'uglify:development']);
 
-  grunt.registerTask('default', ['deployProduction', 'mocha_istanbul', 'jest']);
+  grunt.registerTask('default', ['deployProduction', 'mocha_istanbul']);
   grunt.registerTask('travis', ['default']);
 };
