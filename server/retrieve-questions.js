@@ -1,7 +1,6 @@
 'use strict';
 
 const Spreadsheet = require('edit-google-spreadsheet');
-const _ = require('lodash');
 const fs = require('fs');
 const moment = require('moment');
 const async = require('async');
@@ -20,9 +19,11 @@ function loadSheet(worksheetId, idCol, questionCol, authorCol, dateCol, callback
     oauth: {email: email, key: key}
   }, (err, spreadsheet) => {
     if (err) { return callback(err); }
-    spreadsheet.receive({getValues: true}, (err1, rows) => {
+    spreadsheet.receive({getValues: true}, (err1, rowsObject) => {
+      console.log(JSON.stringify(rowsObject));
       if (err1) { return callback(err1); }
-      callback(null, _(rows)
+      let rowsArray = Object.keys(rowsObject).map(k => rowsObject[k]);
+      callback(null, rowsArray
         .filter(row => !!row[dateCol] && moment(row[dateCol], 'M/D/YYYY').add(1, 'days').isBefore(moment()))
         .map(row => {
           const questionrow = {};
@@ -32,8 +33,7 @@ function loadSheet(worksheetId, idCol, questionCol, authorCol, dateCol, callback
           questionrow.date = row[dateCol];
           return questionrow;
         })
-        .filter(row => !!row.author && row.author.match(/^@/))
-        .value());
+        .filter(row => !!row.author && row.author.match(/^@/)));
     });
   });
 }
@@ -50,7 +50,7 @@ module.exports = () => {
     ],
     (err, questions) => {
       if (err) { return err; }
-      let sortedQuestions = _.flatten(questions).sort((question1, question2) => (parseInt(question1.id, 10) - parseInt(question2.id, 10)));
+      let sortedQuestions = questions.reduce((a, b) => a.concat(b)).sort((question1, question2) => (parseInt(question1.id, 10) - parseInt(question2.id, 10)));
       const stringifiedQuestions = JSON.stringify(sortedQuestions);
       fs.writeFile('public/questions.json', stringifiedQuestions, err1 => {
         /* eslint no-console: 0 */
