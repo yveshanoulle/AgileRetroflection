@@ -20,7 +20,6 @@ function loadSheet(worksheetId, idCol, questionCol, authorCol, dateCol, callback
   }, (err, spreadsheet) => {
     if (err) { return callback(err); }
     spreadsheet.receive({getValues: true}, (err1, rowsObject) => {
-      console.log(JSON.stringify(rowsObject));
       if (err1) { return callback(err1); }
       let rowsArray = Object.keys(rowsObject).map(k => rowsObject[k]);
       callback(null, rowsArray
