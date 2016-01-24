@@ -1,8 +1,11 @@
-import React from 'react';
-import { Link } from 'react-router';
-import { questionsService, addChangeListener, removeChangeListener } from './questionsStore';
+const React = require('react');
+const Link = require('react-router').Link;
+const questionsStore = require('./questionsStore');
+const questionsService = questionsStore.questionsService;
+const addChangeListener = questionsStore.addChangeListener;
+const removeChangeListener = questionsStore.removeChangeListener;
 
-export class RetroPage extends React.Component {
+class RetroPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = questionsService;
@@ -19,7 +22,7 @@ export class RetroPage extends React.Component {
   }
 }
 
-export class Buttons extends RetroPage {
+class Buttons extends RetroPage {
   constructor(props) {
     super(props);
     this.nextNumber = this.state.next();
@@ -50,8 +53,9 @@ export class Buttons extends RetroPage {
 }
 Buttons.propTypes = {for: React.PropTypes.string.isRequired};
 
-export class Header extends React.Component {
+class Header extends React.Component {
   goBack() { window.history.back(); }
+
   goForward() { window.history.forward(); }
 
   render() {
@@ -70,7 +74,7 @@ export class Header extends React.Component {
 }
 Header.propTypes = {title: React.PropTypes.string.isRequired};
 
-export class Twitterlink extends React.Component {
+class Twitterlink extends React.Component {
   render() {
     const lastauthor = this.props.authors[this.props.authors.length - 1];
     return <span>
@@ -84,7 +88,7 @@ export class Twitterlink extends React.Component {
 }
 Twitterlink.propTypes = {authors: React.PropTypes.array.isRequired};
 
-export function mailtoForCorrection(question) {
+function mailtoForCorrection(question) {
   return question ? 'mailto:retroflections@hanoulle.be?subject=Retroflection corrected question&body=' +
   encodeURI('I have a proposal on improving the spelling of retroflection question ' +
     question.id + ': \n' + '"' + question.question + '" by ' + question.author) +
@@ -93,9 +97,18 @@ export function mailtoForCorrection(question) {
     '\nand is sent via the retroflection app available at http://retroflection.org') : '#';
 }
 
-export function mailtoForQuestion(question) {
+function mailtoForQuestion(question) {
   return question ? 'mailto:?subject=Retroflection Question ' + question.id + '&body=' +
   encodeURI('"' + question.question + '"' + ' by ' + question.author) +
   encodeURIComponent('\n\n---\nThis retroflection was originally twittered by @retroflection' +
     '\nand is sent via the retroflection app available at http://retroflection.org') : '#';
 }
+
+module.exports = {
+  RetroPage: RetroPage,
+  Buttons: Buttons,
+  Header: Header,
+  Twitterlink: Twitterlink,
+  mailtoForCorrection: mailtoForCorrection,
+  mailtoForQuestion: mailtoForQuestion
+};

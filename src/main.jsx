@@ -1,11 +1,24 @@
 /*global retroflectionVersion */
-import React from 'react';
-import { Route, Router, Link, IndexRoute, browserHistory } from 'react-router';
-import { render } from 'react-dom';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+const React = require('react');
+const reactRouter = require('react-router');
+const Route = reactRouter.Route;
+const Router = reactRouter.Router;
+const Link = reactRouter.Link;
+const IndexRoute = reactRouter.IndexRoute;
+const browserHistory = reactRouter.browserHistory;
+const render = require('react-dom').render;
+const ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 
-import { Buttons, RetroPage, Header, Twitterlink, mailtoForCorrection } from './fragments.jsx';
-import { authorNamed, initQuestions, initAuthorImages } from './questionsStore';
+const fragments = require('./fragments.jsx');
+const Buttons = fragments.Buttons;
+const RetroPage = fragments.RetroPage;
+const Header = fragments.Header;
+const Twitterlink = fragments.Twitterlink;
+const mailtoForCorrection = fragments.mailtoForCorrection;
+const questionsStore = require('./questionsStore');
+const authorNamed = questionsStore.authorNamed;
+const initQuestions = questionsStore.initQuestions;
+const initAuthorImages = questionsStore.initAuthorImages;
 
 initQuestions();
 initAuthorImages();
