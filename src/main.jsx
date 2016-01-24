@@ -2,23 +2,12 @@
 'use strict';
 
 const React = require('react');
-const reactRouter = require('react-router');
-
-const Route = reactRouter.Route;
-const Router = reactRouter.Router;
-const Link = reactRouter.Link;
-const IndexRoute = reactRouter.IndexRoute;
-const browserHistory = reactRouter.browserHistory;
+const {Route, Router, Link, IndexRoute, browserHistory} = require('react-router');
 
 const render = require('react-dom').render;
 const ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 
-const fragments = require('./fragments.jsx');
-const Buttons = fragments.Buttons;
-const RetroPage = fragments.RetroPage;
-const Header = fragments.Header;
-const Twitterlink = fragments.Twitterlink;
-const mailtoForCorrection = fragments.mailtoForCorrection;
+const {Buttons, RetroPage, Header, Twitterlink, Realnames, mailtoForCorrection} = require('./fragments.jsx');
 
 const questionsStore = require('./questionsStore');
 
@@ -64,7 +53,8 @@ class AboutPage extends RetroPage {
 class QuestionPage extends RetroPage {
   render() {
     const current = this.state.questionFor(this.props.params.id);
-
+    const authors = this.state.authornameToArray(current.author);
+    const realnames = authors.map(author => this.state.authorNamed(author).realname);
     return <div>
       <Header title='Retroflection'/>
       <ReactCSSTransitionGroup transitionName="retro-right" transitionAppear={true}
@@ -72,8 +62,8 @@ class QuestionPage extends RetroPage {
         <div className='content' key={current.id}>
           <h3 className='question'>{current.question}</h3>
           <p className='author'>
-            <Twitterlink authors={this.state.authornameToArray(current.author)}/>
-            (#{current.id} - {current.date})
+            <b><Realnames authors={realnames}/>({current.date})</b><br/>
+            <Twitterlink authors={authors}/> (#{current.id})
           </p>
         </div>
       </ReactCSSTransitionGroup>

@@ -2,10 +2,7 @@
 
 const React = require('react');
 const Link = require('react-router').Link;
-const questionsStore = require('./questionsStore');
-const questionsService = questionsStore.questionsService;
-const addChangeListener = questionsStore.addChangeListener;
-const removeChangeListener = questionsStore.removeChangeListener;
+const {questionsService, addChangeListener, removeChangeListener} = require('./questionsStore');
 
 class RetroPage extends React.Component {
   constructor(props) {
@@ -89,6 +86,20 @@ class Twitterlink extends React.Component {
 }
 Twitterlink.propTypes = {authors: React.PropTypes.array.isRequired};
 
+class Realnames extends React.Component {
+  render() {
+    const lastauthor = this.props.authors[this.props.authors.length - 1];
+    return <span>
+        {this.props.authors.map(author =>
+          <span key={author}>
+            {author} {lastauthor !== author ? ' & ' : ' '}
+          </span>
+        )}
+      </span>;
+  }
+}
+Realnames.propTypes = {authors: React.PropTypes.array.isRequired};
+
 function mailtoForCorrection(question) {
   return question ? 'mailto:retroflections@hanoulle.be?subject=Retroflection corrected question&body=' +
   encodeURI('I have a proposal on improving the spelling of retroflection question ' +
@@ -110,6 +121,7 @@ module.exports = {
   Buttons: Buttons,
   Header: Header,
   Twitterlink: Twitterlink,
+  Realnames: Realnames,
   mailtoForCorrection: mailtoForCorrection,
   mailtoForQuestion: mailtoForQuestion
 };
