@@ -8,11 +8,13 @@ class Authors {
     this.authorImages = [];
 
     this.initQuestions = questions => {
-      function pushToAllAuthors(question) {
-        authornameToArray(question.author).forEach(author => this.authorNamed(author).questions.push(question));
-      }
-
-      questions.forEach(question => pushToAllAuthors.call(this, question));
+      const addQuestionToAuthor = (question, author) => {
+        const authorsQuestions = this.authorNamed(author).questions;
+        if (authorsQuestions.map(q => q.id).indexOf(question.id) < 0) {
+          authorsQuestions.push(question);
+        }
+      };
+      questions.forEach(question => authornameToArray(question.author).forEach(author => addQuestionToAuthor(question, author)));
       this.all.sort((a, b) => { return a.name.localeCompare(b.name); });
       this.addImageURLsToAuthors();
       return this;

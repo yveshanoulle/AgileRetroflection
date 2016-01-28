@@ -42,6 +42,8 @@ function authorNamed(name) {
 
 function ajaxCall(localStorageKey, url, dispatcherFunction) {
 // trying to update the data from server, fallback is local storage
+  dispatcherFunction(localStorage.getItem(localStorageKey) || '[]');
+
   const xmlhttp = new XMLHttpRequest();
   xmlhttp.onreadystatechange = () => {
 
