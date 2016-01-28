@@ -30,10 +30,10 @@
     "jade": "1.11.0",
     "moment": "2.11.1",
     "nconf": "0.8.2",
-    "react": "0.14.6",
-    "react-dom": "0.14.6",
+    "react": "0.14.7",
+    "react-addons-css-transition-group": "0.14.7",
+    "react-dom": "0.14.7",
     "react-router": "1.0.3",
-    "react-addons-css-transition-group": "0.14.6",
     "serve-favicon": "2.3.0",
     "serve-static": "1.10.2",
     "twitter-node-client": "0.0.6",
@@ -42,10 +42,10 @@
   "devDependencies": {
     "grunt-mocha-istanbul": "3.0.1",
     "istanbul": "0.4.2",
-    "mocha": "2.3.4",
+    "mocha": "2.4.4",
     "must": "0.13.1",
-    "request": "2.67.0",
-    "sinon": "1.17.2"
+    "request": "2.69.0",
+    "sinon": "1.17.3"
   },
   "engines": {
     "node": "4.x"
