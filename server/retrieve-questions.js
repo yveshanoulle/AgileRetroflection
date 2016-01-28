@@ -45,7 +45,8 @@ module.exports = () => {
       callback => loadSheet('odb', '2', '4', '5', '9', callback),
       callback => loadSheet('ocx', '1', '3', '4', '8', callback),
       callback => loadSheet('od6', '1', '3', '4', '7', callback),
-      callback => loadSheet('od0', '1', '3', '4', '7', callback)
+      callback => loadSheet('od0', '1', '3', '4', '7', callback),
+      callback => loadSheet('okwimwu', '1', '3', '4', '7', callback)
     ],
     (err, questions) => {
       if (err) { return err; }
