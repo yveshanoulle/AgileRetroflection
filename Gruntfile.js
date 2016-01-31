@@ -50,6 +50,23 @@ module.exports = grunt => {
         src: ['src/main.jsx'],
         dest: 'build/app.js'
       }
+    },
+    replace: {
+      dist: {
+        options: {
+          patterns: [
+            {
+              match: 'version', // placeholder's name
+              replacement: '<%= pkg.version %>' // replace with this value
+            }
+          ]
+        },
+        files: [
+          {
+            expand: true, flatten: true, src: 'server/retroflection.appcache', dest: 'public'
+          }
+        ]
+      }
     }
   });
 
@@ -58,8 +75,9 @@ module.exports = grunt => {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-eslint');
   grunt.loadNpmTasks('grunt-mocha-istanbul');
+  grunt.loadNpmTasks('grunt-replace');
 
-  grunt.registerTask('prepare', ['clean', 'eslint', 'browserify']);
+  grunt.registerTask('prepare', ['replace', 'clean', 'eslint', 'browserify']);
 
   grunt.registerTask('deployProduction', ['prepare', 'uglify:production']);
   grunt.registerTask('deployDevelopment', ['prepare', 'uglify:development']);

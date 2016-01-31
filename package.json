@@ -41,8 +41,9 @@
   },
   "devDependencies": {
     "grunt-mocha-istanbul": "3.0.1",
+    "grunt-replace": "0.11.0",
     "istanbul": "0.4.2",
-    "mocha": "2.4.4",
+    "mocha": "2.4.5",
     "must": "0.13.1",
     "request": "2.69.0",
     "sinon": "1.17.3"
