@@ -48,16 +48,25 @@ function authorNamed(name) {
 
 function ajaxCall(localStorageKey, url, dispatcherFunction) {
 // trying to update the data from server, fallback is local storage
-  dispatcherFunction(localStorage.getItem(localStorageKey) || '[]');
+  try {
+    dispatcherFunction(localStorage.getItem(localStorageKey) || '[]');
+  } catch (e) {
+    dispatcherFunction('[]');
+  }
 
   const xmlhttp = new XMLHttpRequest();
   xmlhttp.onreadystatechange = () => {
 
     if (xmlhttp.readyState === XMLHttpRequest.DONE) {
       if (xmlhttp.status === 200) {
-        localStorage.setItem(localStorageKey, xmlhttp.response);
+        try {
+          JSON.stringify(xmlhttp.response);
+          localStorage.setItem(localStorageKey, xmlhttp.response);
+          dispatcherFunction(localStorage.getItem(localStorageKey));
+        } catch (e) {
+          // do nothing
+        }
       }
-      dispatcherFunction(localStorage.getItem(localStorageKey));
     }
   };
   xmlhttp.open('GET', url, true);
