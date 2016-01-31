@@ -8,3 +8,4 @@ coverage
 global.js
 build
 npm-debug.log
+public/retroflection.appcache
