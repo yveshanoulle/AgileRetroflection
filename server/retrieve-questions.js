@@ -28,7 +28,7 @@ function loadSheet(worksheetId, idCol, questionCol, authorCol, dateCol, callback
           const questionrow = {};
           questionrow.id = row[idCol] ? row[idCol].toString() : '';
           questionrow.question = row[questionCol];
-          questionrow.author = row[authorCol];
+          questionrow.author = row[authorCol].replace(/scrumphOny/i, 'marcloeffler').replace(/paulklipp/i, 'kanbanery');
           questionrow.date = row[dateCol];
           return questionrow;
         })
