@@ -39,7 +39,7 @@ module.exports = grunt => {
       }
     },
     eslint: {
-      target: ['*.js', 'server/*.js', 'src/*.js*', 'test/*.js', '!src/ratchet.js']
+      target: ['*.js', 'server/*.js', 'src/*.js*', 'test/*.js']
     },
     browserify: {
       options: {
@@ -61,11 +61,11 @@ module.exports = grunt => {
             }
           ]
         },
-        files: [
-          {
-            expand: true, flatten: true, src: 'server/retroflection.appcache', dest: 'public'
-          }
-        ]
+        files: {
+          'public/retroflection.appcache': [
+            'server/retroflection.appcache'
+          ]
+        }
       }
     }
   });
