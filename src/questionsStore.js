@@ -15,12 +15,18 @@ function fireChange() {
 
 const dispatcher = {  // exported for test
   questionsLoaded: (rawQuestions) => {
+    const needsUpdate = questionsService.all.length === 0;
     questionsService.initQuestions(rawQuestions);
-    fireChange();
+    if (needsUpdate) {
+      fireChange();
+    }
   },
   imagesLoaded: (rawAuthorImages) => {
+    const needsUpdate = questionsService.authors.authorImages.length === 0;
     questionsService.initAuthorImages(rawAuthorImages);
-    fireChange();
+    if (needsUpdate) {
+      fireChange();
+    }
   }
 };
 
