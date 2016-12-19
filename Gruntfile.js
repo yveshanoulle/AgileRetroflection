@@ -46,9 +46,8 @@ module.exports = grunt => {
         banner: 'var retroflectionVersion = \'<%= pkg.version %>\';\n',
         transform: [[{presets: ['es2015', 'babel-preset-react']}, require('babelify')]]
       },
-      app: {
-        src: ['src/main.jsx'],
-        dest: 'build/app.js'
+      files: {
+        'build/app.js': ['src/main.jsx']
       }
     },
     replace: {

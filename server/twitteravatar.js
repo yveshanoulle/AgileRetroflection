@@ -28,7 +28,7 @@ module.exports = function (twitterAPIInjected, questionString) {
           realname: each.name,
           image: 'data:image/jpeg;base64,' + base64encodedImage
         };
-        callback1();
+        return callback1();
       });
     }, () => {
       callback(null, urls);
@@ -38,7 +38,7 @@ module.exports = function (twitterAPIInjected, questionString) {
   function retrieveImageURLs(callback) {
     twitterAPI.getUserInfos(names, (err, data) => {
       if (err) { return callback(err);}
-      extractUrlsFromRaw(data, callback);
+      return extractUrlsFromRaw(data, callback);
     });
   }
 
