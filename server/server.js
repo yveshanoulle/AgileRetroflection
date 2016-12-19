@@ -16,7 +16,7 @@ function detectBrowser(req, res, next) {
   next();
 }
 
-app.set('view engine', 'jade');
+app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
 app.use(favicon(path.join(__dirname, '../public/images/favicon.ico')));
 app.use(detectBrowser);
