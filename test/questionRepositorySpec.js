@@ -1,5 +1,3 @@
-'use strict';
-
 const expect = require('must');
 
 const Questions = require('../src/questionsRepository');

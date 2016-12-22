@@ -1,4 +1,3 @@
-'use strict';
 /*
  * Use this file to retrieve metadata for new pages in the spreadsheet and then transfer the info to retrieve-questions.js
  */

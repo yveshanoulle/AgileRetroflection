@@ -1,4 +1,3 @@
-'use strict';
 const http = require('http');
 const base64 = require('base64-stream');
 const concat = require('concat-stream');

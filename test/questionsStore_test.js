@@ -1,4 +1,3 @@
-'use strict';
 const expect = require('must');
 const sinon = require('sinon');
 

@@ -1,8 +1,7 @@
 /*eslint camelcase: [0] */
-'use strict';
 module.exports = grunt => {
 
-  var filesToJoin = {
+  const filesToJoin = {
     'public/js/global.js': [
       'build/app.js'
     ]
@@ -10,7 +9,7 @@ module.exports = grunt => {
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
-    clean: ['coverage'],
+    clean: ['coverage', 'build'],
     mocha_istanbul: {
       test: {
         src: 'test',

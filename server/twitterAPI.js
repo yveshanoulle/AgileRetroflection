@@ -1,4 +1,3 @@
-'use strict';
 const nconf = require('./init-nconf');
 
 var config = {

@@ -1,5 +1,3 @@
-'use strict';
-
 function authornameToArray(name) { return name.match(/@(\w+)/g) || []; }
 
 class Authors {

@@ -1,5 +1,3 @@
-'use strict';
-
 const nconf = require('nconf');
 nconf.argv();
 nconf.env();

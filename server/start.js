@@ -1,5 +1,3 @@
-'use strict';
-
 const app = require('./server');
 const retrieveQuestions = require('./retrieve-questions');
 const fs = require('fs');

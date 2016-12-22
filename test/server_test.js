@@ -1,4 +1,3 @@
-'use strict';
 const expect = require('must');
 const httpRequest = require('request');
 const port = 5001;
