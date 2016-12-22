@@ -42,13 +42,15 @@ module.exports = grunt => {
       target: ['*.js', 'server/*.js', 'src/*.js*', 'test/*.js']
     },
     browserify: {
+      dist: {
       options: {
         banner: 'var retroflectionVersion = \'<%= pkg.version %>\';\n',
-        transform: [[{presets: ['es2015', 'babel-preset-react']}, require('babelify')]]
+        transform: [['babelify', {presets: [ 'es2015', 'react' ]}]]
       },
       files: {
         'build/app.js': ['src/main.jsx']
       }
+    }
     },
     replace: {
       dist: {

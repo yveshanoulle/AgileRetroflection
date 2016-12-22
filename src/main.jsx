@@ -153,7 +153,7 @@ class App extends React.Component {
 
 render((
   <Router history={browserHistory}>
-    <Route path='/' component={App}>
+    <Route path='/(online)' component={App}>
       <IndexRoute component={QuestionPage}/>
       <Route path='question/:id' component={QuestionPage}/>
       <Route path='authors' component={AuthorsPage}/>

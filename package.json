@@ -1,6 +1,6 @@
 {
   "name": "retroflection",
-  "version": "3.2.2",
+  "version": "3.3.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/yveshanoulle/AgileRetroflection"
@@ -57,8 +57,8 @@
     "moduleFileExtensions": ["js", "jsx"]
   },
   "scripts": {
-    "postinstall": "grunt deployProduction && node server/retrieve-questions-runner",
-    "start": "node server/start",
+    "postinstall": "NODE_ENV=production grunt deployProduction && node server/retrieve-questions-runner",
+    "start": "NODE_ENV=production node server/start",
     "test": "grunt travis"
   }
 }
