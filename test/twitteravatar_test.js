@@ -29,15 +29,4 @@ describe('the twitteravatar module', () => {
     });
   });
 
-  it('encodes retrieved jpgs with base64', (done) => {
-    const twitterAPI = {getUserInfos: () => {}};
-    const leiderleider = twitterusers[0];
-    twitteravatar(twitterAPI, '[]').loadImage(leiderleider, (err, result) => {
-      expect(result).to.match('4AAQSkZJRgABAQEBLAEsAAD');
-      fs.readFile('test/dummydata/AndreasPlayfulWithRibbon_normal.jpg', function (err1, data) {
-        expect(result).to.eql(new Buffer(data).toString('base64'));
-        done(err);
-      });
-    });
-  });
 });

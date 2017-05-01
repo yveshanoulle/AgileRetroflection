@@ -76,7 +76,7 @@ describe('authors function', () => {
 
   it('augments an author with his image (ignoring case in name)', () => {
     const author = service.authorNamed('@Deborahh');
-    expect(author.image).to.match('data:image\/jpeg;base64,\/9j\/4AAQSkZJRgABAQEBLAEsAAD\/4RqORXhpZgAATU0A');
+    expect(author.image).to.match('data:image\/jpeg;base64,\/9j\/4AAQSkZJRgABAQAAAQABAAD/4gKgSUNDX1BST0ZJTEU');
     expect(author.realname).to.be('Leider\'s real name');
   });
 
