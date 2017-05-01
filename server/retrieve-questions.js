@@ -21,7 +21,11 @@ function loadSheet(worksheetId, idCol, questionCol, authorCol, dateCol, callback
       if (err1) { return callback(err1); }
       let rowsArray = Object.keys(rowsObject).map(k => rowsObject[k]);
       return callback(null, rowsArray
-        .filter(row => !!row[dateCol] && moment(row[dateCol], 'M/D/YYYY').add(1, 'days').isBefore(moment()))
+        .filter(row => {
+          return !!row[dateCol]
+            && (moment(row[dateCol], 'M/D/YYYY').add(1, 'days').isBefore(moment())
+            || (moment(row[dateCol], 'YYYY/M/D').add(1, 'days').isBefore(moment())));
+        })
         .map(row => {
           const questionrow = {};
           questionrow.id = row[idCol] ? row[idCol].toString() : '';
@@ -42,9 +46,10 @@ module.exports = () => {
       callback => loadSheet('od8', '2', '4', '5', '9', callback),
       callback => loadSheet('odb', '2', '4', '5', '9', callback),
       callback => loadSheet('ocx', '1', '3', '4', '8', callback),
-      callback => loadSheet('od6', '1', '3', '4', '7', callback),
       callback => loadSheet('od0', '1', '3', '4', '7', callback),
-      callback => loadSheet('okwimwu', '1', '3', '4', '7', callback)
+      callback => loadSheet('okwimwu', '1', '3', '4', '7', callback),
+      callback => loadSheet('oiypvbg', '1', '3', '4', '7', callback),
+      callback => loadSheet('od6', '1', '3', '4', '7', callback)
     ],
     (err, questions) => {
       if (err) { return err; }
