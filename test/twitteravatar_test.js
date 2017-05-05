@@ -1,5 +1,4 @@
 const expect = require('must');
-const fs = require('fs');
 
 const questions = require('./dummydata/test-questions.json');
 const twitterusers = require('./dummydata/test-twitterusers.json');
