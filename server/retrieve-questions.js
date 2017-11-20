@@ -49,7 +49,7 @@ module.exports = () => {
       callback => loadSheet('od0', '1', '3', '4', '7', callback),
       callback => loadSheet('okwimwu', '1', '3', '4', '7', callback),
       callback => loadSheet('oiypvbg', '1', '3', '4', '7', callback),
-      callback => loadSheet('od6', '1', '3', '4', '7', callback)
+      callback => loadSheet('od6', '1', '4', '5', '8', callback)
     ],
     (err, questions) => {
       if (err) { return err; }
