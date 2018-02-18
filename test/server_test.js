@@ -34,24 +34,4 @@ describe('Retroflection server', () => {
     });
   });
 
-  it('responds on a GET for the online home page indicating NO appcaching', (done) => {
-    httpRequest({uri: baseUri + '/online'}, (req, resp) => {
-      expect(resp).to.exist();
-      expect(resp.statusCode).to.equal(200);
-      expect(resp.body).to.contain('<body><div id="retroflection"></div><script src="/js/global.js"></script></body>');
-      expect(resp.body).to.contain('<html>');
-      done(); // without error check
-    });
-  });
-
-  it('serves the online app no matter what suffix', (done) => {
-    httpRequest({uri: baseUri + '/online/somethingWeird'}, (req, resp) => {
-      expect(resp).to.exist();
-      expect(resp.statusCode).to.equal(200);
-      expect(resp.body).to.contain('<body><div id="retroflection"></div><script src="/js/global.js"></script></body>');
-      expect(resp.body).to.contain('<html>');
-      done(); // without error check
-    });
-  });
-
 });
