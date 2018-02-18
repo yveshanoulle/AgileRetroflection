@@ -1,4 +1,23 @@
 doctype html
-include retroflection
 html(manifest="retroflection.appcache")
-  +retroflection
+    head
+        title Retroflection
+        meta(charset="utf-8")
+        meta(name="viewport", content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui")
+        meta(name="apple-mobile-web-app-capable", content="yes")
+        meta(name="apple-mobile-web-app-status-bar-style", content="black")
+        link(rel="apple-touch-startup-image", href="/images/Default.png")
+        link(rel="apple-touch-icon", sizes="144x144", href="/images/Icon-72@2x.png")
+        link(rel="apple-touch-icon", sizes="114x114", href="/images/Icon@2x.png")
+        link(rel="apple-touch-icon", sizes="72x72", href="/images/Icon-72.png")
+        link(rel="apple-touch-icon", href="/images/Icon.png")
+        link(rel="stylesheet", href="/css/ratchet.min.css")
+        if (ios)
+            link(rel="stylesheet", href="/css/ratchet-theme-ios.min.css")
+        if (android)
+            link(rel="stylesheet", href="/css/ratchet-theme-android.min.css")
+        link(rel="stylesheet", href="/css/retroflection.css")
+    body
+        #retroflection
+        script(src="/js/global.js")
+  

@@ -1,21 +1,13 @@
 const React = require('react');
 const Link = require('react-router').Link;
-const {questionsService, addChangeListener, removeChangeListener} = require('./questionsStore');
+const {questionsService} = require('./questionsStore');
 
 class RetroPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = questionsService;
-    this.listener = this.onChange.bind(this);
   }
 
-  componentDidMount() { addChangeListener(this.listener); }
-
-  componentWillUnmount() { removeChangeListener(this.listener); }
-
-  onChange() {
-    this.setState(questionsService);
-  }
 }
 
 class Buttons extends RetroPage {
@@ -107,19 +99,11 @@ function mailtoForCorrection(question) {
     '\nand is sent via the retroflection app available at http://retroflection.org') : '#';
 }
 
-function mailtoForQuestion(question) {
-  return question ? 'mailto:?subject=Retroflection Question ' + question.id + '&body=' +
-  encodeURI('"' + question.question + '"' + ' by ' + question.author) +
-  encodeURIComponent('\n\n---\nThis retroflection was originally twittered by @retroflection' +
-    '\nand is sent via the retroflection app available at http://retroflection.org') : '#';
-}
-
 module.exports = {
   RetroPage: RetroPage,
   Buttons: Buttons,
   Header: Header,
   Twitterlink: Twitterlink,
   Realnames: Realnames,
-  mailtoForCorrection: mailtoForCorrection,
-  mailtoForQuestion: mailtoForQuestion
+  mailtoForCorrection: mailtoForCorrection
 };

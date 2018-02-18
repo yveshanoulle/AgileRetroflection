@@ -24,10 +24,6 @@ app.use(serveStatic(path.join(__dirname, '../public')));
 
 app.get('/', (req, res) => res.render('index'));
 
-app.get('/online', (req, res) => res.render('index-online'));
-
-app.get('/online/*', (req, res) => res.render('index-online'));
-
 app.get('*', (req, res) => res.render('index'));
 
 

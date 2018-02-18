@@ -1,3 +1,6 @@
+const allQuestions = require('../json/questions.json');
+const allImages = require('../json/twitterImages.json');
+
 function authornameToArray(name) { return name.match(/@(\w+)/g) || []; }
 
 class Authors {
@@ -49,22 +52,13 @@ class Authors {
 
 class Questions {
   constructor() {
-    this.all = [];
+    this.all = allQuestions;
     this.authors = new Authors();
     this.authorNamed = this.authors.authorNamed;
     this.authornameToArray = authornameToArray;
+    this.authors.initQuestions(this.all);
+    this.authors.initAuthorImages(allImages);
 
-    // react throws away type info therefor we have to declare the functions as properties
-    this.initQuestions = questionstring => {
-      this.all = JSON.parse(questionstring);
-      this.authors.initQuestions(this.all);
-      return this;
-    };
-
-    this.initAuthorImages = authorimagesstring => {
-      this.authors.initAuthorImages(JSON.parse(authorimagesstring));
-      return this;
-    };
 
     this.next = () => { return Math.floor(Math.random() * this.all.length); };
 

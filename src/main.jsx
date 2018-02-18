@@ -10,9 +10,6 @@ const {Buttons, RetroPage, Header, Twitterlink, Realnames, mailtoForCorrection} 
 
 const questionsStore = require('./questionsStore');
 
-questionsStore.initQuestions();
-questionsStore.initAuthorImages();
-
 class AboutPage extends RetroPage {
   render() {
     const questions = this.state;
@@ -39,7 +36,7 @@ class AboutPage extends RetroPage {
             <p>Originally tweeted by <a href='http://twitter.com/retroflection'>@Retroflection</a></p>
             <p>Site by <a href='http://www.twitter.com/leiderleider'>@leiderleider</a></p>
             <p>Version: {retroflectionVersion}</p>
-            <p>We currently feature {questions.all.length} different questions
+            <p>We feature {questions.all.length} different questions
               by {questions.authors.distinctAuthors().length} distinct authors.</p>
           </div>
         </div>
