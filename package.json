@@ -57,7 +57,7 @@
     "moduleFileExtensions": ["js", "jsx"]
   },
   "scripts": {
-    "postinstall": "NODE_ENV=production grunt deployProduction && node server/retrieve-questions-runner",
+    "postinstall": "NODE_ENV=production grunt deployProduction",
     "start": "NODE_ENV=production node server/start",
     "test": "grunt travis"
   }
