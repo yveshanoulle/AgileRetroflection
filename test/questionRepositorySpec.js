@@ -9,6 +9,14 @@ describe('questions function', () => {
     expect(service.questionFor('1')).to.eql({question: 'If you could change 1 thing today what would it be?', author: '@YvesHanoulle', id: '1', date: '1/1/2010'});
   });
 
+  it('gives a new random question each time', () => {
+    const first = service.next();
+    const second = service.next();
+    const third = service.next();
+    expect(first).to.not.eql(second);
+    expect(second).to.not.eql(third);
+  });
+
   it('is re-entrant', () => {
     expect(service.all).to.have.length(2910);
     const serviceAgain = new Questions();

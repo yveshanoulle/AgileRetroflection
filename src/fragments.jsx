@@ -1,13 +1,21 @@
 const React = require('react');
 const Link = require('react-router').Link;
-const {questionsService} = require('./questionsStore');
+const {questionsService, addChangeListener, removeChangeListener} = require('./questionsStore');
 
 class RetroPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = questionsService;
+    this.listener = this.onChange.bind(this);
   }
 
+  componentDidMount() { addChangeListener(this.listener); }
+
+  componentWillUnmount() { removeChangeListener(this.listener); }
+
+  onChange() {
+    this.setState(questionsService);
+  }
 }
 
 class Buttons extends RetroPage {
