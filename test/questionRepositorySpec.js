@@ -58,7 +58,7 @@ describe('authors function', () => {
 
   it('augments an author with his image and realname', () => {
     const author = service.authorNamed('@yveshanoulle');
-    expect(author.image).to.match('data:image\/jpeg;base64,\/9j/4AAQSkZJRgABAQEASABIAAD\/2wBDAAgGBgcGBQgHBwcJCQgKDBQ');
+    expect(author.image).to.match('data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQ');
     expect(author.realname).to.be('Yves Hanoulle');
   });
 

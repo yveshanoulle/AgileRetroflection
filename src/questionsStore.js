@@ -11,7 +11,7 @@ function fireChange() {
   questionsEE.emit(CHANGE_EVENT);
 }
 
-const dispatcher = {  // exported for test
+const dispatcher = {
   questionsLoaded: (rawQuestions) => {
     const needsUpdate = questionsService.all.length === 0;
     questionsService.initQuestions(rawQuestions);

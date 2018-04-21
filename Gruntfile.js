@@ -21,7 +21,8 @@ module.exports = grunt => {
             lines: 80,
             statements: 80,
             functions: 80
-          }
+          },
+          mochaOptions: ['--exit']
         }
       }
     },

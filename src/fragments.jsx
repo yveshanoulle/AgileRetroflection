@@ -1,5 +1,6 @@
 const React = require('react');
 const Link = require('react-router').Link;
+const PropTypes = require('prop-types');
 const {questionsService, addChangeListener, removeChangeListener} = require('./questionsStore');
 
 class RetroPage extends React.Component {
@@ -47,7 +48,7 @@ class Buttons extends RetroPage {
     </nav>;
   }
 }
-Buttons.propTypes = {for: React.PropTypes.string.isRequired};
+Buttons.propTypes = {for: PropTypes.string.isRequired};
 
 class Header extends React.Component {
   goBack() { window.history.back(); }
@@ -56,10 +57,9 @@ class Header extends React.Component {
 
   render() {
     return <header className='bar bar-nav'>
-      { !this.props.noBack &&
       <button className='btn btn-link btn-nav pull-left' onClick={this.goBack}>
         <span className='icon icon-left-nav'/> back
-      </button>}
+      </button>
       { !this.props.noForward &&
       <button className='btn btn-link btn-nav pull-right' onClick={this.goForward}>
         next <span className='icon icon-right-nav'/>
@@ -68,7 +68,7 @@ class Header extends React.Component {
     </header>;
   }
 }
-Header.propTypes = {title: React.PropTypes.string.isRequired};
+Header.propTypes = {title: PropTypes.string.isRequired, noForward: PropTypes.bool};
 
 class Twitterlink extends React.Component {
   render() {
@@ -82,7 +82,7 @@ class Twitterlink extends React.Component {
       </span>;
   }
 }
-Twitterlink.propTypes = {authors: React.PropTypes.array.isRequired};
+Twitterlink.propTypes = {authors: PropTypes.array.isRequired};
 
 class Realnames extends React.Component {
   render() {
@@ -96,7 +96,7 @@ class Realnames extends React.Component {
       </span>;
   }
 }
-Realnames.propTypes = {authors: React.PropTypes.array.isRequired};
+Realnames.propTypes = {authors: PropTypes.array.isRequired};
 
 function mailtoForCorrection(question) {
   return question ? 'mailto:retroflections@hanoulle.be?subject=Retroflection corrected question&body=' +

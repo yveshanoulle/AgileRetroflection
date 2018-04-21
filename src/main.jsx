@@ -2,6 +2,7 @@
 
 const React = require('react');
 const {Route, Router, Link, IndexRoute, browserHistory} = require('react-router');
+const PropTypes = require('prop-types');
 
 const render = require('react-dom').render;
 const ReactCSSTransitionGroup = require('react-addons-css-transition-group');
@@ -23,12 +24,8 @@ class AboutPage extends RetroPage {
           <div className='content-padded'>
             <h4>Please support us by:</h4>
             <ul style={{fontSize: '14px'}}>
-              <li>Adding questions on the <a
-                href='https://docs.google.com/spreadsheet/viewform?formkey=dFg2aXdNbE5qdzlzNjBmM1pKaFJFYkE6MQ'
-                target='_blank'>google doc</a>.
-              </li>
               <li>Contributing to the code on <a href='https://github.com/yveshanoulle/AgileRetroflection'
-                                                 target='_blank'>github</a></li>
+                                                 target='_blank' rel='noopener noreferrer'>github</a></li>
               <li>Correcting the spelling of the questions. Just leave us a note by clicking on this icon <a
                 className='icon icon-edit' style={{fontSize: 'inherit'}}></a> inside the app.
               </li>
@@ -85,7 +82,7 @@ class AuthorLi extends React.Component {
     </li>;
   }
 }
-AuthorLi.propTypes = {author: React.PropTypes.object.isRequired};
+AuthorLi.propTypes = {author: PropTypes.object.isRequired, image: PropTypes.string};
 
 class AuthorsPage extends RetroPage {
   render() {
@@ -118,7 +115,7 @@ class QuestionLi extends React.Component {
     </li>;
   }
 }
-QuestionLi.propTypes = {question: React.PropTypes.object.isRequired};
+QuestionLi.propTypes = {question: PropTypes.object.isRequired};
 
 class AuthorPage extends RetroPage {
   render() {
@@ -146,6 +143,8 @@ class App extends React.Component {
     </div>;
   }
 }
+
+App.propTypes = {children: PropTypes.array.isRequired};
 
 render((
   <Router history={browserHistory}>
